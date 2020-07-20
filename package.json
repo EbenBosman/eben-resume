@@ -1,8 +1,21 @@
 {
   "name": "eben-resume",
   "version": "1.0.0",
-  "description": "resume for eben bosman",
+  "description": "This is the Resume for Eben Bosman",
   "main": "./src/app.js",
+  "author": "eben bosman",
+  "license": "MIT",
+  "engines": {
+    "node": "12.x"
+  },
+  "scripts": {
+    "server": "cross-env NODE_ENV=development babel-node server.babel.js",
+    "start": "cross-env NODE_ENV=development webpack-dev-server",
+    "lint": "eslint --fix --ext .js src",
+    "dll": "webpack --config ./webpack.dll.config.babel.js",
+    "heroku-postbuild": "webpack --config ./webpack.dll.config.babel.js",
+    "build": "cross-env NODE_ENV=production webpack"
+  },
   "dependencies": {
     "classnames": "^2.2.5",
     "html2canvas": "^0.5.0-beta4",
@@ -71,14 +84,5 @@
     "webpack-dev-middleware": "^3.4.0",
     "webpack-dev-server": "^3.11.0",
     "webpack-hot-middleware": "^2.24.2"
-  },
-  "scripts": {
-    "server": "cross-env NODE_ENV=development babel-node server.babel.js",
-    "start": "cross-env NODE_ENV=development webpack-dev-server",
-    "lint": "eslint --fix --ext .js src",
-    "dll": "webpack --config ./webpack.dll.config.babel.js",
-    "build": "cross-env NODE_ENV=production webpack"
-  },
-  "author": "eben bosman",
-  "license": "MIT"
+  }
 }
