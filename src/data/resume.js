@@ -65,8 +65,8 @@ export default {
                 'Mentor intermediate developer',
                 'Recruitment of new developers',
                 'Squash bugs',
-                'Optimize websites for speed (ask Andy Hadfield about this)',
-                'Optimize operation/running costs (again, ask Andy Hadfield about this)'
+                'Optimize websites for speed',
+                'Optimize operation/running costs'
             ]
         },
         {

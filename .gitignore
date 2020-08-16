@@ -1,25 +1,8 @@
-build/**
-assets/**
-src/assets/js/**
-src/*.hot-update.*
-.happypack/**
-.cache-loader/**
-manifest.json
+public/assets/**
 
 node_modules
-bower_components
-
-lib-cov
-*.seed
-*.log
-*.out
-*.pid
 npm-debug.log
 
 *~
 *#
 .DS_STORE
-.netbeans
-nbproject
-.idea
-.node_history

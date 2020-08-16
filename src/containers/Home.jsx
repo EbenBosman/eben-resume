@@ -1,11 +1,13 @@
-import React from 'react'
-import html2canvas from 'html2canvas'
-import jsPDF from 'jspdf'
-import { hot } from 'react-hot-loader'
-import SiderBar from '../components/siderbar'
-import Content from '../components/content'
-import Navbar from '../components/navbar'
-import resume from '../utils/resume'
+import React from 'react';
+import html2canvas from 'html2canvas';
+import jsPDF from 'jspdf';
+import { hot } from 'react-hot-loader';
+import SiderBar from '../components/siderbar';
+import Content from '../components/content';
+import Navbar from '../components/navbar';
+import resume from '../data/resume';
+
+import '../styles/_home.scss';
 
 class Main extends React.Component {
     componentDidMount() {
@@ -71,4 +73,4 @@ class Main extends React.Component {
     }
 }
 
-export default hot(module)(Main)
+export default hot(module)(Main);
