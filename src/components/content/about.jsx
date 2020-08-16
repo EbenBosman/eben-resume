@@ -6,14 +6,14 @@ const extractParagraphs = ({ content }) => {
     });
 }
 
-const about = ({ content }) => {
+const about = ({ content, renderHTMLtoPDF }) => {
     if (!content)
         return null;
 
     return <div className="container pt-2 pb-4" id="about">
         <h1 className="font-weight-light">Eben Bosman</h1>
         {extractParagraphs({ content })}
-        {/* <a role="button" className="btn btn-outline-dark align-center" href="#">Download PDF <i className="far fa-file-pdf fa-lg"></i></a> */}
+        <button role="button" className="btn btn-outline-dark align-center" onClick={renderHTMLtoPDF}>Download PDF <i className="far fa-file-pdf fa-lg"></i></button>
     </div>;
 }
 
