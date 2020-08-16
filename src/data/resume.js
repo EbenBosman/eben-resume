@@ -3,32 +3,18 @@ export default {
         'position': 'Fullstack Developer',
         'name': 'Eben Bosman',
         'gender': 'Male',
-        'age': '36',
+        'birthDate': '1984/01/19',
         'firstWorkYear': 2007,
-        'worklife': '13',
         'label': 'Developer. Enthusiast. Perfectionist.',
         'picture': 'https://media-exp1.licdn.com/dms/image/C4E03AQFMvGi1ZDAq5g/profile-displayphoto-shrink_200_200/0?e=1598486400&v=beta&t=jUtbwm4BHZLEoyq8JxsjPd_FX6kIOfGG5r_OiWzQopE',
         'email': 'eben@ataru.it',
         'phone': '+1.207.213.8525',
         'website': 'ebenbosman.com',
         'location': 'Brunswick, ME',
-        'profiles': [
-            {
-                'network': 'github',
-                'username': 'ebenbosman',
-                'url': 'https://github.com/ebenbosman'
-            },
-            // {
-            //     'network': 'stackoverflow',
-            //     'username': 'ebbs',
-            //     'url': 'https://stackoverflow.com/users/813689/ebbs'
-            // }
-        ],
-        'languages': [
-            {
-                'language': 'English, Afrikaans'
-            }
-        ],
+        'social': {
+            'github': 'https://github.com/ebenbosman',
+            'stackOverflow': 'https://stackoverflow.com/users/813689/ebbs'
+        }
     },
     'about': [
         'I am a self-taught, self-sufficient, motivated Full-Stack Web Developer. I strive to deliver the best quality, efficient and modern code possible.',
@@ -43,12 +29,15 @@ export default {
             'position': 'Freelance Fullstack Developer',
             'website': 'https://www.onepager.com',
             'startDate': '2018',
-            'endDate': 'Current',
+            'endDate': 'Present',
+            'location': 'Remote position. HQ in Denver, CO.',
             'summary': 'This is a remote contract position witht he aim of redesigning & rearchitecting the current OnePager Live site. (Cloud version of OnePager\'s desktop product, still in development.)',
             'highlights': [
-                '.Net Core (2 at first and then migrated to 3), REST, C#, VB.net, SQL',
+                '.Net Core (2 at first and then migrated to 3), REST, C#, VB.net',
+                'MS SQL',
                 'React-Redux, Sass, Webpack, Babel',
-                'Jenkins CICD'
+                'Jenkins CICD',
+                'Azure'
             ]
         },
         {
@@ -58,6 +47,7 @@ export default {
             'startDate': '2017',
             'endDate': '2018',
             'summary': '',
+            'location': 'Rosebank, Johannesburg, South Africa',
             'highlights': [
                 'Run small, Agile, Dev Team',
                 'Architect new features',
@@ -76,6 +66,7 @@ export default {
             'startDate': '2015',
             'endDate': '2017',
             'summary': '',
+            'location': 'Sandton, Johannesburg, South Africa',
             'highlights': [
                 'Research and implement new technologies to enhance code quality',
                 'Team lead on a major Regulatory project',
@@ -91,6 +82,7 @@ export default {
             'website': 'https://www.firsttech.digital',
             'startDate': '2014',
             'endDate': '2015',
+            'location': 'Midrand, Johannesburg, South Africa',
             'summary': 'Sub contracting to work with numerous clients which involved mostly web development, but also a small amount of Windows and Ionic mobile development',
             'highlights': [
                 'europcar.co.za (car booking module)',
@@ -105,6 +97,7 @@ export default {
             'website': 'https://www.contractcommunicator.com',
             'startDate': '2011',
             'endDate': '2014',
+            'location': 'Woodmead, Johannesburg, South Africa',
             'summary': 'Lead developer tasked with the ground up development of an enterprise grade solution to replace the outdated products. Responsible for the full development life cycle.',
             'highlights': []
         },
@@ -114,11 +107,22 @@ export default {
             'website': '',
             'startDate': '2007',
             'endDate': '2011',
+            'location': 'Various, Johannesburg, South Africa',
             'summary': 'These were my formative years as a web developer. Generallyspeaking, most jobs available at the time were for .Net. As such I got to learn VB.Net, C# and SQL. I also worked extensively with Web Forms and once it became available, MVC.',
             'highlights': []
         }
     ],
     'education': [
+        {
+            'what': 'Microsoft Certified Developer C#',
+            'where': 'Johannesburg, South Africa',
+            'when': 2014
+        },
+        {
+            'what': 'K2 Blackpearl Core',
+            'where': 'Johannesburg, South Africa',
+            'when': 2014
+        },
         {
             'what': 'Highschool',
             'where': 'Richards Bay, South Africa',
@@ -133,29 +137,46 @@ export default {
                 'Computer Programming',
                 'Art'
             ]
-        },
-        {
-            'what': 'K2 Blackpearl Core',
-            'where': 'Johannesburg, South Africa',
-            'when': 2014
-        },
-        {
-            'what': 'Microsoft Certified Developer C#',
-            'where': 'Johannesburg, South Africa',
-            'when': 2014
         }
     ],
     'skills': [
-        'C#',
-        'SQL Server',
-        'CosmosDB',
-        'React/Redux',
-        'Aurelia.js',
-        'MongoDB',
-        'Node.js',
-        'Webpack',
-        'SVG',
-        'CICD (Jenkins)'
+        {
+            'Title': 'Languages',
+            'Items': [
+                'C#',
+                'VB.Net',
+                'Javascript',
+                'HTML/CSSS',
+                'SQL'
+            ]
+        },
+        {
+            'Title': 'Framworks',
+            'Items': [
+                'React',
+                'Redux',
+                'jQuery',
+                'Sass',
+                'Node.js',
+                '.Net'
+            ]
+        },
+        {
+            'Title': 'IDEs & Tools',
+            'Items': [
+                'Visual Studio Professional',
+                'Visual Studio Code',
+                'Webpack',
+                'Jenkins'
+            ]
+        },
+        {
+            'Title': 'Platforms',
+            'Items': [
+                'Heroku',
+                'Micrsoft Azure'
+            ]
+        }
     ],
     'references': [
         {

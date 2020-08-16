@@ -4,33 +4,37 @@ const generateSkills = ({ skills }) => {
     if (!skills)
         return null;
 
-    return <div className="space-top labels">
-        {
-            skills.map((skill, key) => {
-                return <span key={key} className="label label-info">{skill}</span>
-            })
-        }
-    </div>;
+    return skills.map((skill, key) => {
+        return <p key={key}>{skill}</p>
+    });
 }
+
+const generateSkillSection = ({ skills }) => {
+    if (!skills)
+        return null;
+
+    return skills.map((skillset, key) => {
+        return <div key={key} className="col-lg col-md-6 py-3">
+            <h5>{skillset.Title}</h5>
+            {generateSkills({ skills: skillset.Items })}
+        </div>
+    });
+}
+
 
 const skills = ({ content }) => {
     if (!content)
         return null;
 
     return (
-        <div className="detail" id="skills">
-            <div className="icon">
-                <i className="fs-lg icon-tools"></i><span className="mobile-title">Skills</span>
-            </div>
-            <div className="info">
-                <h4 className="title text-uppercase">Skills</h4>
-                <div className="content">
-                    <div className="card card-nested">
-                        {generateSkills({ skills: content })}
-                    </div>
+        <section id="skills" className="bg-light">
+            <div className="container pt-4 pb-4">
+                <h2 className="text-center font-weight-light mb-5">Skills &amp; Favourite Tools</h2>
+                <div className="row text-center justify-content-center">
+                    {generateSkillSection({ skills: content })}
                 </div>
             </div>
-        </div>
+        </section>
     );
 }
 

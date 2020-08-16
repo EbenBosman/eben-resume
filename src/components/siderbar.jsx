@@ -1,71 +1,56 @@
 import React from 'react'
-import classNames from 'classnames'
 
-const calculateYearsExperience = yearStarted => {
-    return new Date().getFullYear() - yearStarted;
+const renderReferences = hideReferences => {
+    if (!hideReferences)
+        return <li className="nav-item">
+            <a className="nav-link" href="#references">References</a>
+        </li>;
+
+    return null;
 }
 
-const generateSocialProfiles = ({ profiles }) => {
-    return profiles.map((n, i) => {
-        const cls = classNames({
-            'iconfont': true,
-            'social-link': true,
-            [`iconfont-${n.network}`]: n.network,
-        })
-        return <a key={i} className={cls} href={n.url} target="_blank"></a>
-    });
-}
-
-const SiderBar = ({ basics }) => {
-    return (
-        <section className="col-md-3 card-wrapper profile-card-wrapper affix">
-            <div className="card profile-card">
-                <span className="profile-pic-container">
-                    <div className="profile-pic">
-                        <img className="media-object img-circle center-block" src={basics.picture} />
-                    </div>
-                    <div className="name-and-profession text-center">
-                        <h3><b>{basics.name}</b></h3>
-                        <h4><b>{basics.position}</b></h4>
-                        <h5 className="text-muted">{basics.label}</h5>
-                    </div>
-                </span>
-                <hr />
-                <div className="contact-details clearfix">
-                    <div className="detail">
-                        <span className="icon"><i className="icon fs-lg icon-profile"></i></span>
-                        <span className="info">{basics.age} years old {basics.gender} with {calculateYearsExperience(basics.firstWorkYear)} years of experience</span>
-                    </div>
-                    <div className="detail">
-                        <span className="icon"><i className="icon fs-lg icon-location"></i></span>
-                        <span className="info">{basics.location}</span>
-                    </div>
-                    <div className="detail">
-                        <span className="icon"><i className="icon fs-lg icon-phone"></i></span>
-                        <span className="info">{basics.phone}</span>
-                    </div>
-                    <div className="detail">
-                        <span className="icon"><i className="icon fs-lg icon-mail"></i></span>
-                        <span className="info"><a className="link-disguise" href={`mailto:${basics.email}`}>{basics.email}</a></span>
-                    </div>
-                    <div className="detail">
-                        <span className="icon"><i className="icon fs-lg icon-link"></i></span>
-                        <span className="info"><a href={basics.website} target="_blank">{basics.website}</a></span>
-                    </div>
-                    <div className="detail">
-                        <span className="icon" title="Languages I speak"><i className="icon fs-lg icon-language"></i></span>
-                        {basics.languages.map((n, i) => {
-                            return <span key={i} className="info">{n.language}</span>
-                        })}
-                    </div>
-                </div>
-                <hr />
-                <div className="social-links text-center">
-                    {generateSocialProfiles({ profiles: basics.profiles })}
-                </div>
+const SiderBar = ({ basics, hideReferences }) => {
+    return <div className="col-12 col-md-3 col-xl-2 p-0 bg-dark flex-shrink-1">
+        <nav className="navbar navbar-expand-md navbar-dark bg-dark flex-md-column flex-row align-items-center py-2 text-center sticky-top" id="sidebar">
+            <div className="text-center">
+                <img src={basics.picture} className="rounded-circle my-4 d-none d-md-block p-1 shadow" />
+                {/* <a className="navbar-brand mx-0 font-weight-bold text-nowrap" href="#about">{basics.name}</a> */}
+                {/* <h6 className="mx-0 text-nowrap"><b>{basics.position}</b></h6>
+                <h6 className="text-muted">{basics.label}</h6> */}
             </div>
-        </section>
-    )
+            <button className="navbar-toggler border-0 order-1" type="button" data-toggle="collapse" data-target="#nav" aria-controls="nav" aria-expanded="false" aria-label="Toggle navigation">
+                <span className="navbar-toggler-icon"></span>
+            </button>
+            <div className="collapse navbar-collapse order-last" id="nav">
+                <ul className="navbar-nav flex-column w-100 justify-content-center">
+                    <li className="nav-item">
+                        <a className="nav-link" href="#about">About</a>
+                    </li>
+                    <li className="nav-item">
+                        <a className="nav-link" href="#education">Education</a>
+                    </li>
+                    <li className="nav-item">
+                        <a className="nav-link" href="#experience">Experience</a>
+                    </li>
+                    <li className="nav-item">
+                        <a className="nav-link" href="#skills">Skills</a>
+                    </li>
+                    {renderReferences(hideReferences)}
+                </ul>
+            </div>
+            <ul className="nav justify-content-center">
+                <li className="nav-item">
+                    <a href={basics.social.github} className="nav-link text-white px-2"><i className="fab fa-github fa-lg"></i></a>
+                </li>
+                <li className="nav-item">
+                    <a href={basics.social.stackOverflow} className="nav-link text-white px-2"><i className="fab fa-stack-overflow fa-lg"></i></a>
+                </li>
+                <li className="nav-item">
+                    <a href={`mailto:${basics.email}`} className="nav-link text-white px-2"><i className="fa fa-envelope fa-lg"></i></a>
+                </li>
+            </ul>
+        </nav>
+    </div>;
 }
 
 export default SiderBar;

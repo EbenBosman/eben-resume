@@ -10,23 +10,11 @@ const about = ({ content }) => {
     if (!content)
         return null;
 
-    return (
-        <div className="detail" id="about">
-            <div className="icon">
-                <i className="fs-lg icon-board"></i><span className="mobile-title">About Me</span>
-            </div>
-            <div className="info">
-                <h4 className="title text-uppercase">About Me</h4>
-                <ul className="list-unstyled clear-margin">
-                    <li className="card card-nested clearfix">
-                        <div className="content mop-wrapper">
-                            {extractParagraphs({ content })}
-                        </div>
-                    </li>
-                </ul>
-            </div>
-        </div>
-    );
+    return <div className="container pt-2 pb-4" id="about">
+        <h1 className="font-weight-light">Eben Bosman</h1>
+        {extractParagraphs({ content })}
+        {/* <a role="button" className="btn btn-outline-dark align-center" href="#">Download PDF <i className="far fa-file-pdf fa-lg"></i></a> */}
+    </div>;
 }
 
 export default about;

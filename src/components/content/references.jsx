@@ -1,33 +1,28 @@
 import React from 'react';
 
-const references = ({ content }) => {
-    if (!content)
+const references = ({ content, hide }) => {
+    if (!content || hide)
         return null;
 
-    return (
-        <div className="detail" id="references">
-            <div className="icon">
-                <i className="fs-lg icon-thumbs-up"></i><span className="mobile-title">References</span>
-            </div>
-            <div className="info">
-                <h4 className="title text-uppercase">References</h4>
-                <div className="content">
-                    <ul className="list-unstyled clear-margin">
-                        {
-                            content.map((contact, key) => {
-                                return (
-                                    <li key={key} className="card card-nested">
-                                        <p>{contact.name}</p>
-                                        <small>{contact.reference}</small>
-                                    </li>
-                                )
-                            })
-                        }
-                    </ul>
-                </div>
-            </div>
-        </div>
-    );
+        return <section id="references" className="container pt-4 pb-4">
+            <h3 className="font-weight-light">References</h3>
+            {
+                content.map((contact, key) => {
+                    return (
+                        <div key={key} className="row no-gutters">
+                            <div className="col-md pt-2" data-aos="zoom-in">
+                                <div className="card border">
+                                    <div className="card-body">
+                                        <h4 className="card-title mb-0">{contact.name}</h4>
+                                        <div className="small font-italic">{contact.reference}</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    )
+                })
+            }
+        </section>;
 }
 
 export default references;
