@@ -14,7 +14,7 @@
     "build:dev": "webpack --progress -d --env=dev",
     "build:prod": "webpack --progress -p --env=prod",
     "dev-server": "webpack-dev-server --progress",
-    "build": "webpack --progress -p --env=prod",
+    "heroku-postinstall": "webpack --progress -p --env=prod",
     "heroku-postbuild": "http-server public/"
   },
   "dependencies": {
