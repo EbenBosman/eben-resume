@@ -15,11 +15,12 @@
     "build:prod": "webpack --progress -p --env=prod",
     "dev-server": "webpack-dev-server --progress",
     "heroku-postinstall": "webpack --progress -p --env=prod",
-    "heroku-postbuild": "http-server public/"
+    "heroku-postbuild": "node server.js"
   },
   "dependencies": {
     "@fortawesome/fontawesome-free": "^5.14.0",
     "bootstrap": "^4.5.2",
+    "express": "^4.17.1",
     "html2canvas": "^1.0.0-rc.7",
     "http-server": "^0.12.3",
     "jspdf": "^2.0.0",
