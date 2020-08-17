@@ -1,7 +1,7 @@
 //	Node.js does not support the "import { join } as 'path'"; syntax.
 //	Don't try and follow VSCode's recommendation.
 const path = require('path');
-const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
+const TerserPlugin = require('terser-webpack-plugin');
 const OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const WebpackBeforeBuildPlugin = require('before-build-webpack');
@@ -104,7 +104,7 @@ module.exports = (env) => {
 		},
 		optimization: {
 			minimize: isProduction,
-			minimizer: [new UglifyJsPlugin(), new OptimizeCssAssetsPlugin()]
+			minimizer: [new TerserPlugin(), new OptimizeCssAssetsPlugin()]
 		}
 	}
 }
