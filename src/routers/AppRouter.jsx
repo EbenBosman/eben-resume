@@ -2,14 +2,14 @@ import React, { Suspense } from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 
 import HomePage from '../containers/Home';
-import NotFoundPage from '../containers/NotFound';
+import PageNotFound from '../containers/PageNotFound';
 
-const AppRouter = (props) => (
+const AppRouter = props => (
     <Router>
         <Suspense>
             <Switch>
                 <Route path="/" component={HomePage} exact={true} />
-                <Route component={NotFoundPage} />
+                <Route component={PageNotFound} />
             </Switch>
         </Suspense>
     </Router>
