@@ -18,16 +18,16 @@ const generateSummaryHighlights = ({ highlights }) => {
 
 const generateHeader = ({ website, company, position }) => {
     return <div>
-        <span>{position}<small> at </small></span>
+        <span>{position}</span>
         {generateLink({ website, company })}
     </div>;
 }
 
 const generateLink = ({ website, company }) => {
     if (typeof website !== 'undefined' && website.includes('http'))
-        return <a href={website} target="_blank"><small>{company}</small></a>;
-    else
-        <span><small>{company}</small></span>;
+        return <span><small> at </small><a href={website} target="_blank"><small>{company}</small></a></span>;
+
+    return null;
 }
 
 const generateCard = (key, job) => {

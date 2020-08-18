@@ -108,7 +108,7 @@ export default {
             'startDate': '2007',
             'endDate': '2011',
             'location': 'Various, Johannesburg, South Africa',
-            'summary': 'These were my formative years as a web developer. Generallyspeaking, most jobs available at the time were for .Net. As such I got to learn VB.Net, C# and SQL. I also worked extensively with Web Forms and once it became available, MVC.',
+            'summary': 'These were my formative years as a web developer. Generally speaking, most jobs available at the time were for .Net. As such I got to learn VB.Net, C# and SQL. I also worked extensively with Web Forms and once it became available, MVC.',
             'highlights': []
         }
     ],
@@ -146,7 +146,7 @@ export default {
                 'C#',
                 'VB.Net',
                 'Javascript',
-                'HTML/CSSS',
+                'HTML/CSS',
                 'SQL'
             ]
         },
