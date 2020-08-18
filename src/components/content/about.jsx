@@ -13,7 +13,7 @@ const about = ({ content, renderHTMLtoPDF }) => {
     return <div className="container pt-2 pb-4" id="about">
         <h1 className="font-weight-light">Eben Bosman</h1>
         {extractParagraphs({ content })}
-        <button role="button" className="btn btn-outline-dark align-center" onClick={renderHTMLtoPDF}>Download PDF <i className="far fa-file-pdf fa-lg"></i></button>
+        {/* <button role="button" className="btn btn-outline-dark align-center" onClick={renderHTMLtoPDF}>Download PDF <i className="far fa-file-pdf fa-lg"></i></button> */}
     </div>;
 }
 

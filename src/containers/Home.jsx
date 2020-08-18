@@ -55,8 +55,8 @@ class Home extends React.Component {
     render() {        
         return <div className="container-fluid">
             <div className="row min-vh-100 flex-column flex-md-row">
-                <SiderBar {...resume} hideReferences={false} />
-                <Content {...resume} hideReferences={false} renderHTMLtoPDF={this.renderHTMLtoPDF} />
+                <SiderBar {...resume} hideReferences={true} />
+                <Content {...resume} hideReferences={true} renderHTMLtoPDF={this.renderHTMLtoPDF} />
             </div>
         </div>;
     }
