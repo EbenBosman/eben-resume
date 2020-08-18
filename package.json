@@ -21,6 +21,7 @@
     "bootstrap": "^4.5.2",
     "express": "^4.17.1",
     "html2canvas": "^1.0.0-rc.7",
+    "jquery": "^3.5.1",
     "jspdf": "^2.0.0",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
