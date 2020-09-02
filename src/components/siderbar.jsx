@@ -7,7 +7,7 @@ import profilePicture from '../images/eben-profile.jpg';
 const SiderBar = ({ basics }) => {
     return <div className="col-12 col-md-3 col-xl-2 p-0 bg-dark flex-shrink-1 nav-bar-texture">
         <nav id="sidebar"
-            className="navbar navbar-expand-md navbar-dark bg-dark flex-md-column flex-row align-items-center py-2 text-center sticky-top nav-bar-texture">
+            className="navbar navbar-expand-md navbar-dark bg-none flex-md-column flex-row align-items-center py-2 text-center sticky-top">
             <div className="text-center">
                 <img src={profilePicture} className="rounded-circle my-4 d-none d-md-block p-1 shadow profile-pic" />
                 {/* <a className="navbar-brand mx-0 font-weight-bold text-nowrap" href="#about">{basics.name}</a> */}
@@ -43,21 +43,16 @@ const SiderBar = ({ basics }) => {
                 <li className="nav-item">
                     <a href={`mailto:${basics.email}`} className="nav-link text-white px-2"><i className="fa fa-envelope fa-lg"></i></a>
                 </li>
-
+                <li className="nav-item">
+                    <div className="nav-link text-white px-2">
+                        <PDFDownloadLink className="text-white fa fa-file-pdf fa-lg" document={<MyDoc />} fileName="somename.pdf">
+                            {({ blob, url, loading, error }) => (loading ? '' : '')}
+                        </PDFDownloadLink>
+                    </div>
+                </li>
             </ul>
         </nav>
     </div>;
 }
 
 export default SiderBar;
-
-
-/*
-<li className="nav-item">
-    <div className="nav-link text-white px-2">
-        <PDFDownloadLink className="text-white fa fa-file-pdf fa-lg" document={<MyDoc />} fileName="somename.pdf">
-            {({ blob, url, loading, error }) => (loading ? '' : '')}
-        </PDFDownloadLink>
-    </div>
-</li>
-*/
