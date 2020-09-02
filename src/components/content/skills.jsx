@@ -5,7 +5,7 @@ const generateSkills = ({ skills }) => {
         return null;
 
     return skills.map((skill, key) => {
-        return <p key={key}>{skill}</p>
+        return <p className="p-0 m-0" key={key}>{skill}</p>
     });
 }
 
@@ -27,7 +27,7 @@ const skills = ({ content }) => {
         return null;
 
     return (
-        <section id="skills" className="bg-light">
+        <section id="skills" className="bg-light pb-5">
             <div className="container pt-4 pb-4">
                 <h2 className="text-center font-weight-light mb-5">Skills &amp; Favourite Tools</h2>
                 <div className="row text-center justify-content-center">

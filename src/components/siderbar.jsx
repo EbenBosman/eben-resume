@@ -1,19 +1,15 @@
-import React from 'react'
+import React from 'react';
+import { PDFDownloadLink, Document, Page } from '@react-pdf/renderer';
+import MyDoc from './pdfDocument';
 
-const renderReferences = hideReferences => {
-    if (!hideReferences)
-        return <li className="nav-item">
-            <a className="nav-link" href="#references">References</a>
-        </li>;
+import profilePicture from '../images/eben-profile.jpg';
 
-    return null;
-}
-
-const SiderBar = ({ basics, hideReferences }) => {
-    return <div className="col-12 col-md-3 col-xl-2 p-0 bg-dark flex-shrink-1">
-        <nav className="navbar navbar-expand-md navbar-dark bg-dark flex-md-column flex-row align-items-center py-2 text-center sticky-top" id="sidebar">
+const SiderBar = ({ basics }) => {
+    return <div className="col-12 col-md-3 col-xl-2 p-0 bg-dark flex-shrink-1 nav-bar-texture">
+        <nav id="sidebar"
+            className="navbar navbar-expand-md navbar-dark bg-dark flex-md-column flex-row align-items-center py-2 text-center sticky-top nav-bar-texture">
             <div className="text-center">
-                <img src={basics.picture} className="rounded-circle my-4 d-none d-md-block p-1 shadow" />
+                <img src={profilePicture} className="rounded-circle my-4 d-none d-md-block p-1 shadow profile-pic" />
                 {/* <a className="navbar-brand mx-0 font-weight-bold text-nowrap" href="#about">{basics.name}</a> */}
                 {/* <h6 className="mx-0 text-nowrap"><b>{basics.position}</b></h6>
                 <h6 className="text-muted">{basics.label}</h6> */}
@@ -21,7 +17,7 @@ const SiderBar = ({ basics, hideReferences }) => {
             <button className="navbar-toggler border-0 order-1" type="button" data-toggle="collapse" data-target="#nav" aria-controls="nav" aria-expanded="false" aria-label="Toggle navigation">
                 <span className="navbar-toggler-icon"></span>
             </button>
-            <div className="collapse navbar-collapse order-last" id="nav">
+            <div id="nav" className="collapse navbar-collapse order-last">
                 <ul className="navbar-nav flex-column w-100 justify-content-center">
                     <li className="nav-item">
                         <a className="nav-link" href="#about">About</a>
@@ -35,7 +31,6 @@ const SiderBar = ({ basics, hideReferences }) => {
                     <li className="nav-item">
                         <a className="nav-link" href="#skills">Skills</a>
                     </li>
-                    {renderReferences(hideReferences)}
                 </ul>
             </div>
             <ul className="nav justify-content-center">
@@ -48,9 +43,21 @@ const SiderBar = ({ basics, hideReferences }) => {
                 <li className="nav-item">
                     <a href={`mailto:${basics.email}`} className="nav-link text-white px-2"><i className="fa fa-envelope fa-lg"></i></a>
                 </li>
+
             </ul>
         </nav>
     </div>;
 }
 
 export default SiderBar;
+
+
+/*
+<li className="nav-item">
+    <div className="nav-link text-white px-2">
+        <PDFDownloadLink className="text-white fa fa-file-pdf fa-lg" document={<MyDoc />} fileName="somename.pdf">
+            {({ blob, url, loading, error }) => (loading ? '' : '')}
+        </PDFDownloadLink>
+    </div>
+</li>
+*/

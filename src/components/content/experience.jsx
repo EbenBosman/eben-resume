@@ -11,9 +11,13 @@ const generateSummaryHighlights = ({ highlights }) => {
     if (!highlights || highlights.length <= 0)
         return null;
 
-    return highlights.map((highlight, key) => {
-        return <p key={key} className="card-text">{highlight}</p>;
-    });
+    return <ul>
+        {
+            highlights.map((highlight, key) => {
+                return <li key={key} className="card-text"><span>{highlight}</span></li>;
+            })
+        }
+    </ul>;
 }
 
 const generateHeader = ({ website, company, position }) => {

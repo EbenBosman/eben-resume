@@ -3,15 +3,13 @@ import About from './content/about';
 import Education from './content/education';
 import Experience from './content/experience';
 import Skills from './content/skills';
-import References from './content/references';
 
-const Content = ({ about, work, education, skills, references, hideReferences, renderHTMLtoPDF }) => {
+const Content = ({ basics, about, work, education, skills }) => {
     return <div id="resume" className="col px-0 pt-3 flex-grow-1">
-        <About content={about} renderHTMLtoPDF={renderHTMLtoPDF} />
+        <About basics={basics} about={about} />
         <Education content={education} />
         <Experience content={work} />
         <Skills content={skills} />
-        <References content={references} hide={hideReferences} />
     </div>;
 }
 

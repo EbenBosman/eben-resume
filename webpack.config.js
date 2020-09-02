@@ -29,8 +29,7 @@ module.exports = (env) => {
 			publicPath: "/assets/"
 		},
 		module: {
-			rules: [
-				{
+			rules: [{
 					test: /\.(js|jsx)$/,
 					loader: 'babel-loader',
 					exclude: /node_modules/
@@ -41,8 +40,7 @@ module.exports = (env) => {
 				},
 				{
 					test: /\.s?css$/,
-					use: [
-						{
+					use: [{
 							loader: MiniCssExtractPlugin.loader,
 						},
 						{
@@ -58,6 +56,15 @@ module.exports = (env) => {
 							}
 						}
 					],
+				},
+				{
+					test: /\.(png|jpe?g)$/i,
+					use: [
+						'file-loader',
+						{
+							loader: 'image-webpack-loader'
+						}
+					]
 				}
 			]
 		},
@@ -71,7 +78,10 @@ module.exports = (env) => {
 
 				try {
 					if (fs.existsSync(pathToAssets)) {
-						rimraf(pathToAssets, function () { console.log("\x1b[32m", "\r\nsuccessfully deleted public/assets\r\ncontinuing build...\r\n"); callback(); });
+						rimraf(pathToAssets, function () {
+							console.log("\x1b[32m", "\r\nsuccessfully deleted public/assets\r\ncontinuing build...\r\n");
+							callback();
+						});
 					} else {
 						console.log("\x1b[33m", "\r\npublic/assets already cleared\r\ncontinuing build...\r\n");
 						callback();
@@ -91,7 +101,7 @@ module.exports = (env) => {
 		devServer: {
 			contentBase: path.join(__dirname, 'public'),
 			historyApiFallback: true,
-			https: true,	// https://diary-of-programmer.blogspot.com/2019/04/tips-using-ssl-locally-with-webpack-dev.html
+			https: true, // https://diary-of-programmer.blogspot.com/2019/04/tips-using-ssl-locally-with-webpack-dev.html
 			compress: true,
 			noInfo: false,
 			open: true,

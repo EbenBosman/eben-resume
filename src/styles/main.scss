@@ -4,3 +4,15 @@
 body {
     font-family: Helvetica, Roboto, Arial, sans-serif;
 }
+
+.profile-pic {
+    max-width: 200px;
+}
+
+$darkerStripe: #242424;
+$lighterStripe: #595959;
+
+.nav-bar-texture {
+    background-image: linear-gradient(45deg, $darkerStripe 37.50%, $lighterStripe 37.50%, $lighterStripe 50%, $darkerStripe 50%, $darkerStripe 87.50%, $lighterStripe 87.50%, $lighterStripe 100%);
+    background-size: 5.66px 5.66px;
+}

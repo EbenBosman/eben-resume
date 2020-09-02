@@ -1,12 +1,11 @@
 export default {
     'basics': {
-        'position': 'Fullstack Developer',
         'name': 'Eben Bosman',
+        'position': 'Fullstack Developer',
         'gender': 'Male',
         'birthDate': '1984/01/19',
         'firstWorkYear': 2007,
         'label': 'Developer. Enthusiast. Perfectionist.',
-        'picture': 'https://media-exp1.licdn.com/dms/image/C4E03AQFMvGi1ZDAq5g/profile-displayphoto-shrink_200_200/0?e=1598486400&v=beta&t=jUtbwm4BHZLEoyq8JxsjPd_FX6kIOfGG5r_OiWzQopE',
         'email': 'eben@ataru.it',
         'phone': '+1.207.213.8525',
         'website': 'ebenbosman.com',
