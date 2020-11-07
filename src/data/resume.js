@@ -10,9 +10,9 @@ export default {
         'phone': '+1.207.213.8525',
         'website': 'ebenbosman.com',
         'location': 'Brunswick, ME',
-        'social': {
+        'social': { 
             'github': 'https://github.com/ebenbosman',
-            'stackOverflow': 'https://stackoverflow.com/users/813689/ebbs'
+            'stackOverflow': 'https://stackoverflow.com/u/813689'
         }
     },
     'about': [
@@ -150,7 +150,7 @@ export default {
             ]
         },
         {
-            'Title': 'Framworks',
+            'Title': 'Frameworks',
             'Items': [
                 'React',
                 'Redux',

@@ -4,6 +4,16 @@ import MyDoc from './pdfDocument';
 
 import profilePicture from '../images/eben-profile.jpg';
 
+const constructResumeFileName = name => {
+    const date = new Date();
+
+    const formattedDate = date.toLocaleDateString('en-GB', {
+        day: '2-digit', month: 'short', year: 'numeric'
+    }).replace(/ /g, ' ')
+
+    return `Resume of ${name} (${formattedDate}).pdf`;
+}
+
 const SiderBar = ({ basics }) => {
     return <div className="col-12 col-md-3 col-xl-2 p-0 bg-dark flex-shrink-1 nav-bar-texture">
         <nav id="sidebar"
@@ -20,16 +30,16 @@ const SiderBar = ({ basics }) => {
             <div id="nav" className="collapse navbar-collapse order-last">
                 <ul className="navbar-nav flex-column w-100 justify-content-center">
                     <li className="nav-item">
-                        <a className="nav-link" href="#about">About</a>
+                        <a className="nav-link text-white" href="#about">About</a>
                     </li>
                     <li className="nav-item">
-                        <a className="nav-link" href="#education">Education</a>
+                        <a className="nav-link text-white" href="#education">Education</a>
                     </li>
                     <li className="nav-item">
-                        <a className="nav-link" href="#experience">Experience</a>
+                        <a className="nav-link text-white" href="#experience">Experience</a>
                     </li>
                     <li className="nav-item">
-                        <a className="nav-link" href="#skills">Skills</a>
+                        <a className="nav-link text-white" href="#skills">Skills</a>
                     </li>
                 </ul>
             </div>
@@ -45,7 +55,7 @@ const SiderBar = ({ basics }) => {
                 </li>
                 <li className="nav-item">
                     <div className="nav-link text-white px-2">
-                        <PDFDownloadLink className="text-white fa fa-file-pdf fa-lg" document={<MyDoc />} fileName="somename.pdf">
+                        <PDFDownloadLink className="text-white fa fa-file-pdf fa-lg" document={<MyDoc />} fileName={constructResumeFileName('Eben Bosman')}>
                             {({ blob, url, loading, error }) => (loading ? '' : '')}
                         </PDFDownloadLink>
                     </div>

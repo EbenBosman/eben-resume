@@ -1,5 +1,7 @@
 import React from 'react';
-import { Page, Text, View, Document, StyleSheet } from '@react-pdf/renderer';
+import { Page, Text, View, Document, StyleSheet, Image, Link } from '@react-pdf/renderer';
+
+import profilePic from '../images/eben-profile.jpg';
 
 import resume from '../data/resume';
 
@@ -14,23 +16,29 @@ const styles = StyleSheet.create({
   },
   leftSection: {
     marginLeft: 10,
-    marginTop: 0,
+    marginTop: 10,
     marginBottom: 10,
-    marginRight: 10,
-    padding: 10,
-    backgroundColor: 'blue',
+    marginRight: 0,
+    paddingLeft: 10,
+    paddingTop: 10,
+    paddingBottom: 10,
+    paddingRight: 0,
+    backgroundColor: 'white',
     flexGrow: 1,
     flexShrink: 0,
     flexBasis: 100,
+    borderRight: '1pt solid #388bff'
   },
   rightSection: {
-    marginLeft: 0,
-    marginTop: 0,
+    marginLeft: 5,
+    marginTop: 10,
     marginBottom: 10,
     marginRight: 10,
-    padding: 10,
+    paddingLeft: 5,
+    paddingTop: 10,
+    paddingBottom: 10,
+    paddingRight: 10,
     backgroundColor: 'white',
-    padding: 5,
     flexShrink: 0,
     flexGrow: 4,
     flexBasis: 100,
@@ -68,30 +76,79 @@ const styles = StyleSheet.create({
   p: {
     fontSize: 8,
     marginBottom: 2
+  },
+  profilePicture: {
+    width: '155px',
+    marginBottom: 5
+  },
+  social: {
+    marginBottom: 5
   }
 });
+
+const scrubUrl = url => {
+  return url
+    .replace('https://', '')
+    .replace('http://', '')
+    .replace('www.', '');
+}
 
 // Create Document Component
 const MyDocument = () => <Document>
   <Page size="A4" style={styles.page}>
     <View style={styles.heading.body}>
-      <Text style={styles.heading.small}>Resume of</Text>
       <Text style={styles.heading.big}>{resume.basics.name}</Text>
-      <Text style={styles.heading.small}>for the position of {resume.basics.position}</Text>
+      <Text style={styles.heading.small}>{resume.basics.label}</Text>
     </View>
     <View style={styles.sectionContainer}>
       <View style={styles.leftSection}>
-        <Text>Section #1</Text>
+        {/*<Image source={profilePic} style={styles.profilePicture} />*/}
+        <View wrap={false} style={styles.social}>
+          <Text style={styles.title}>Contact Details</Text>
+          <Text style={styles.p}>{scrubUrl(resume.basics.phone)}</Text>
+          <Link style={styles.p}>{scrubUrl(resume.basics.email)}</Link>
+
+          <Text style={styles.title}>Hometown</Text>
+          <Text style={styles.p}>{scrubUrl(resume.basics.location)}</Text>
+
+          <Text style={styles.title}>Useful Links</Text>
+          <Link style={styles.p}>ebenbosman.com</Link>
+          <Link style={styles.p}>{scrubUrl(resume.basics.social.stackOverflow)}</Link>
+          <Link style={styles.p}>{scrubUrl(resume.basics.social.github)}</Link>
+        </View>
+        <View wrap={false} style={styles.social}>
+          {
+            resume.skills.map((skill, skillKey) => {
+              return <View wrap={false} style={styles.social}>
+                <Text key={skillKey} style={styles.title}>{skill.Title}</Text>
+                {
+                  skill.Items.map((type, key) => <Text key={key} style={styles.p}>{type}</Text>)
+                }
+              </View>;
+            })
+          }
+        </View>
+        <View wrap={false} style={styles.social}>
+          <Text style={styles.title}>Education</Text>
+          {
+            resume.education.map((ed, key) => {
+              return <View wrap={false} style={styles.social}>
+                <Text key={key} style={styles.title}>{ed.what}</Text>
+                <Text key={key} style={styles.p}>{ed.where} ({ed.when})</Text>
+              </View>;
+            })
+          }
+        </View>
       </View>
       <View style={styles.rightSection}>
-        <Text style={styles.title}>About me</Text>
+        <Text style={styles.title}>Personal Profile</Text>
         {
-          resume.about.map(line => <Text style={styles.p}>{line}</Text>)
+          resume.about.map((line, key) => <Text key={key} style={styles.p}>{line}</Text>)
         }
-        <Text style={styles.title}>Work Experience</Text>
+        <Text style={styles.title}>Experience</Text>
         {
           resume.work.map(
-            xp => <View wrap={false}>
+            (xp, key) => <View key={key} wrap={false}>
               <Text style={styles.subTitle}>{xp.company}</Text>
               <Text style={styles.p}>{xp.summary}</Text>
               {xp.highlights.map(h => <Text style={styles.p}>{h}</Text>)}
