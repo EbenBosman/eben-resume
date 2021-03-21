@@ -1,9 +1,24 @@
 import React from 'react';
-import { Page, Text, View, Document, StyleSheet, Image, Link } from '@react-pdf/renderer';
+import { Page, Text, View, Document, StyleSheet } from '@react-pdf/renderer';
 
-import profilePic from '../images/eben-profile.jpg';
+import Header from './content/resume-document/header';
 
-import resume from '../data/resume';
+//  Left Column
+import ContactDetails from './content/resume-document/left-column/contactDetails';
+import Education from './content/resume-document/left-column//education';
+import HomeTown from './content/resume-document/left-column/homeTown';
+import UsefulLinks from './content/resume-document/left-column/usefulLinks';
+import Skills from './content/resume-document/left-column/skills';
+
+//  Right Column
+import PersonalProfile from './content/resume-document/right-column/personalProfile';
+import Experience from './content/resume-document/right-column/experience';
+
+//import profilePic from '../images/eben-profile.jpg';
+
+import resume_data from '../data/resume';
+
+const theme_color = '#4c6c64';
 
 const styles = StyleSheet.create({
   page: {
@@ -14,10 +29,10 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     backgroundColor: 'white'
   },
-  leftSection: {
+  leftColumn: {
     marginLeft: 10,
-    marginTop: 10,
-    marginBottom: 10,
+    marginTop: 0,
+    marginBottom: 0,
     marginRight: 0,
     paddingLeft: 10,
     paddingTop: 10,
@@ -27,12 +42,12 @@ const styles = StyleSheet.create({
     flexGrow: 1,
     flexShrink: 0,
     flexBasis: 100,
-    borderRight: '1pt solid #388bff'
+    borderRight: `1pt solid ${theme_color}`
   },
-  rightSection: {
+  rightColumn: {
     marginLeft: 5,
-    marginTop: 10,
-    marginBottom: 10,
+    marginTop: 0,
+    marginBottom: 0,
     marginRight: 10,
     paddingLeft: 5,
     paddingTop: 10,
@@ -43,46 +58,59 @@ const styles = StyleSheet.create({
     flexGrow: 4,
     flexBasis: 100,
   },
-  heading: {
+  header: {
     body: {
       flexGrow: 0,
       flexShrink: 0,
       flexBasis: 100,
-      marginLeft: 10,
-      marginTop: 10,
-      marginBottom: 0,
-      marginRight: 10,
+      padding: 20,
       display: 'flex',
       justifyContent: 'center',
-      alignItems: 'center'
+      alignItems: 'center',
+      backgroundColor: theme_color,
+      color: '#ffffff'
     },
-    small: {
+    sub: {
       fontSize: 14,
       marginBottom: 4
     },
-    big: {
+    main: {
       fontSize: 22,
       marginBottom: 6
     }
   },
-  title: {
-    fontSize: 12,
-    marginBottom: 6
-  },
-  subTitle: {
-    fontSize: 10,
-    marginBottom: 4
-  },
-  p: {
-    fontSize: 8,
-    marginBottom: 2
-  },
-  profilePicture: {
-    width: '155px',
-    marginBottom: 5
-  },
-  social: {
-    marginBottom: 5
+  block: {
+    title: {
+      fontSize: 12,
+      marginBottom: 2
+    },
+    subTitle: {
+      fontSize: 10,
+      marginBottom: 2
+    },
+    subTitleDesc: {
+      fontSize: 8,
+      marginBottom: 2
+    },
+    p: {
+      fontSize: 8,
+      lineHeight: 1.15,
+      marginBottom: 1
+    },
+    link: {
+      fontSize: 8,
+      lineHeight: 1.15,
+      marginBottom: 1,
+      textDecoration: 'none',
+      color: theme_color,
+    },
+    li: {
+      fontSize: 8,
+      lineHeight: 1.15
+    },
+    view: {
+      marginBottom: 6
+    },
   }
 });
 
@@ -93,71 +121,53 @@ const scrubUrl = url => {
     .replace('www.', '');
 }
 
-// Create Document Component
-const MyDocument = () => <Document>
+const resume_document = () => <Document>
   <Page size="A4" style={styles.page}>
-    <View style={styles.heading.body}>
-      <Text style={styles.heading.big}>{resume.basics.name}</Text>
-      <Text style={styles.heading.small}>{resume.basics.label}</Text>
-    </View>
+
+    <Header
+      style={styles.header}
+      main_text={resume_data.basics.name}
+      sub_text={resume_data.basics.label}
+    />
+
     <View style={styles.sectionContainer}>
-      <View style={styles.leftSection}>
-        {/*<Image source={profilePic} style={styles.profilePicture} />*/}
-        <View wrap={false} style={styles.social}>
-          <Text style={styles.title}>Contact Details</Text>
-          <Text style={styles.p}>{scrubUrl(resume.basics.phone)}</Text>
-          <Link style={styles.p}>{scrubUrl(resume.basics.email)}</Link>
-
-          <Text style={styles.title}>Hometown</Text>
-          <Text style={styles.p}>{scrubUrl(resume.basics.location)}</Text>
-
-          <Text style={styles.title}>Useful Links</Text>
-          <Link style={styles.p}>ebenbosman.com</Link>
-          <Link style={styles.p}>{scrubUrl(resume.basics.social.stackOverflow)}</Link>
-          <Link style={styles.p}>{scrubUrl(resume.basics.social.github)}</Link>
-        </View>
-        <View wrap={false} style={styles.social}>
-          {
-            resume.skills.map((skill, skillKey) => {
-              return <View wrap={false} style={styles.social}>
-                <Text key={skillKey} style={styles.title}>{skill.Title}</Text>
-                {
-                  skill.Items.map((type, key) => <Text key={key} style={styles.p}>{type}</Text>)
-                }
-              </View>;
-            })
-          }
-        </View>
-        <View wrap={false} style={styles.social}>
-          <Text style={styles.title}>Education</Text>
-          {
-            resume.education.map((ed, key) => {
-              return <View wrap={false} style={styles.social}>
-                <Text key={key} style={styles.title}>{ed.what}</Text>
-                <Text key={key} style={styles.p}>{ed.where} ({ed.when})</Text>
-              </View>;
-            })
-          }
-        </View>
+      <View style={styles.leftColumn}>
+        <ContactDetails
+          style={styles.block}
+          phone_number={scrubUrl(resume_data.basics.phone)}
+          email_address={scrubUrl(resume_data.basics.email)}
+        />
+        <HomeTown
+          style={styles.block}
+          location={scrubUrl(resume_data.basics.location)}
+        />
+        <UsefulLinks
+          style={styles.block}
+          stack_overflow={scrubUrl(resume_data.basics.social.stackOverflow)}
+          github={scrubUrl(resume_data.basics.social.github)}
+        />
+        <Skills
+          style={styles.block}
+          skills={resume_data.skills}
+        />
+        <Education
+          style={styles.block}
+          education={resume_data.education}
+        />
       </View>
-      <View style={styles.rightSection}>
-        <Text style={styles.title}>Personal Profile</Text>
-        {
-          resume.about.map((line, key) => <Text key={key} style={styles.p}>{line}</Text>)
-        }
-        <Text style={styles.title}>Experience</Text>
-        {
-          resume.work.map(
-            (xp, key) => <View key={key} wrap={false}>
-              <Text style={styles.subTitle}>{xp.company}</Text>
-              <Text style={styles.p}>{xp.summary}</Text>
-              {xp.highlights.map(h => <Text style={styles.p}>{h}</Text>)}
-            </View>
-          )
-        }
+
+      <View style={styles.rightColumn}>
+        <PersonalProfile
+          style={styles.block}
+          about={resume_data.about}
+        />
+        <Experience
+          style={styles.block}
+          work={resume_data.work}
+        />
       </View>
     </View>
   </Page>
 </Document>;
 
-export default MyDocument;
+export default resume_document;
