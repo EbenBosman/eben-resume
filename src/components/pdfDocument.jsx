@@ -1,5 +1,5 @@
 import React from 'react';
-import { Page, Text, View, Document, StyleSheet } from '@react-pdf/renderer';
+import { Page, Font, View, Document, StyleSheet } from '@react-pdf/renderer';
 
 import Header from './content/resume-document/header';
 
@@ -18,7 +18,22 @@ import Experience from './content/resume-document/right-column/experience';
 
 import resume_data from '../data/resume';
 
-const theme_color = '#4c6c64';
+//  Note 1: react-pdf does not seem like anything but TTF
+//  Note 2: fount a list of Roboto ttf fonts at https://gist.github.com/karimnaaji/b6c9c9e819204113e9cabf290d580551
+// Font.register({ family: 'Roboto 100', src: 'https://fonts.gstatic.com/s/roboto/v15/7MygqTe2zs9YkP0adA9QQQ.ttf' });
+// Font.register({ family: 'Roboto 100italic', src: 'https://fonts.gstatic.com/s/roboto/v15/T1xnudodhcgwXCmZQ490TPesZW2xOQ-xsNqO47m55DA.ttf' });
+// Font.register({ family: 'Roboto 300', src: 'https://fonts.gstatic.com/s/roboto/v15/dtpHsbgPEm2lVWciJZ0P-A.ttf' });
+// Font.register({ family: 'Roboto 300italic', src: 'https://fonts.gstatic.com/s/roboto/v15/iE8HhaRzdhPxC93dOdA056CWcynf_cDxXwCLxiixG1c.ttf' });
+Font.register({ family: 'Roboto 400', src: 'https://fonts.gstatic.com/s/roboto/v15/W5F8_SL0XFawnjxHGsZjJA.ttf' });
+Font.register({ family: 'Roboto 400italic', src: 'https://fonts.gstatic.com/s/roboto/v15/hcKoSgxdnKlbH5dlTwKbow.ttf' });
+Font.register({ family: 'Roboto 500', src: 'https://fonts.gstatic.com/s/roboto/v15/Uxzkqj-MIMWle-XP2pDNAA.ttf' });
+Font.register({ family: 'Roboto 500italic', src: 'https://fonts.gstatic.com/s/roboto/v15/daIfzbEw-lbjMyv4rMUUTqCWcynf_cDxXwCLxiixG1c.ttf' });
+Font.register({ family: 'Roboto 700', src: 'https://fonts.gstatic.com/s/roboto/v15/bdHGHleUa-ndQCOrdpfxfw.ttf' });
+// Font.register({ family: 'Roboto 700italic', src: 'https://fonts.gstatic.com/s/roboto/v15/owYYXKukxFDFjr0ZO8NXh6CWcynf_cDxXwCLxiixG1c.ttf' });
+Font.register({ family: 'Roboto 900', src: 'https://fonts.gstatic.com/s/roboto/v15/H1vB34nOKWXqzKotq25pcg.ttf' });
+//Font.register({ family: 'Roboto 900italic', src: 'https://fonts.gstatic.com/s/roboto/v15/b9PWBSMHrT2zM5FgUdtu0aCWcynf_cDxXwCLxiixG1c.ttf' });
+
+const theme_color = '#2158b0';
 
 const styles = StyleSheet.create({
   page: {
@@ -68,34 +83,39 @@ const styles = StyleSheet.create({
       justifyContent: 'center',
       alignItems: 'center',
       backgroundColor: theme_color,
-      color: '#ffffff'
+      color: '#ffffff',
     },
     sub: {
       fontSize: 14,
-      marginBottom: 4
+      fontFamily: 'Roboto 500italic'
     },
     main: {
-      fontSize: 22,
-      marginBottom: 6
+      fontSize: 28,
+      marginBottom: 2,
+      fontFamily: 'Roboto 900'
     }
   },
   block: {
     title: {
       fontSize: 12,
-      marginBottom: 2
+      marginBottom: 2,
+      fontFamily: "Roboto 700"
     },
     subTitle: {
       fontSize: 10,
-      marginBottom: 2
+      marginBottom: 2,
+      fontFamily: "Roboto 500"
     },
     subTitleDesc: {
-      fontSize: 8,
-      marginBottom: 2
+      fontSize: 7,
+      marginBottom: 2,
+      fontFamily: "Roboto 400italic"
     },
     p: {
       fontSize: 8,
       lineHeight: 1.15,
-      marginBottom: 1
+      marginBottom: 1,
+      fontFamily: "Roboto 400"
     },
     link: {
       fontSize: 8,
@@ -103,10 +123,12 @@ const styles = StyleSheet.create({
       marginBottom: 1,
       textDecoration: 'none',
       color: theme_color,
+      fontFamily: "Roboto 400"
     },
     li: {
       fontSize: 8,
-      lineHeight: 1.15
+      lineHeight: 1.15,
+      fontFamily: "Roboto 400"
     },
     view: {
       marginBottom: 6
