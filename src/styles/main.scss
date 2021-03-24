@@ -28,10 +28,27 @@ $lighterStripe: #595959;
 
 .experience-company {
     color: #004691 !important;
-    text-decoration: none !important
+    text-decoration: none !important;
 }
 
 .experience-company:hover {
     color: #00244a !important;
-    text-decoration: none !important
+    text-decoration: none !important;
+}
+
+.experience-date {
+    font-size: 1rem !important;
+}
+
+.side-bar-link-hide-text {
+    line-height: 0;
+    font-size: 0;
+    color: transparent;
+}
+
+.side-bar-link-hide-text .fa,
+.side-bar-link-hide-text .fab {
+    font-size: 1.3rem !important;
+    line-height: 0.75em;
+    vertical-align: -0.0667em;
 }

@@ -40,7 +40,7 @@ const generateCard = (key, job) => {
             <div className="card border">
                 <div className="card-body">
                     <h4 className="card-title mb-0">{generateHeader({ website: job.website, company: job.company, position: job.position })}</h4>
-                    <h6 className="card-title mb-0">{job.startDate} - {job.endDate}</h6>
+                    <h5 className="card-title mb-0 experience-date">{job.startDate} - {job.endDate}</h5>
                     <div className="small font-italic pb-2">{job.location}</div>
                     {generateSummaryParagraphs({ summary: job.summary })}
                     {generateSummaryHighlights({ highlights: job.highlights })}

@@ -45,16 +45,17 @@ const SiderBar = ({ basics }) => {
             </div>
             <ul className="nav justify-content-center">
                 <li className="nav-item">
-                    <a rel="noreferrer" href={basics.social.github} className="nav-link text-white px-2"><i className="fab fa-github fa-lg"></i></a>
+                    <a rel="noreferrer" href={basics.social.github} className="nav-link text-white px-2 side-bar-link-hide-text" target="_blank">Github Prfole<i className="fab fa-github fa-lg"></i></a>
                 </li>
                 <li className="nav-item">
-                    <a rel="noreferrer" href={basics.social.stackOverflow} className="nav-link text-white px-2"><i className="fab fa-stack-overflow fa-lg"></i></a>
+                    <a rel="noreferrer" href={basics.social.stackOverflow} className="nav-link text-white px-2 side-bar-link-hide-text" target="_blank">Stack Overflow Profile<i className="fab fa-stack-overflow fa-lg"></i></a>
                 </li>
                 <li className="nav-item">
-                    <a rel="noreferrer" href={`mailto:${basics.email}`} className="nav-link text-white px-2"><i className="fa fa-envelope fa-lg"></i></a>
+                    <a rel="noreferrer" href={`mailto:${basics.email}`} className="nav-link text-white px-2 side-bar-link-hide-text">Mail Me<i className="fa fa-envelope fa-lg"></i></a>
                 </li>
                 <li className="nav-item">
-                    <div className="nav-link text-white px-2">
+                    <div className="nav-link text-white px-2 side-bar-link-hide-text">
+                        My Resume
                         <PDFDownloadLink className="text-white fa fa-file-pdf fa-lg" document={<Resume />} fileName={constructResumeFileName('Eben Bosman')}>
                             {({ blob, url, loading, error }) => (loading ? '' : '')}
                         </PDFDownloadLink>
