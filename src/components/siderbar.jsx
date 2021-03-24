@@ -20,9 +20,6 @@ const SiderBar = ({ basics }) => {
             className="navbar navbar-expand-md navbar-dark bg-none flex-md-column flex-row align-items-center py-2 text-center sticky-top">
             <div className="text-center">
                 <img alt="" width="true" height="true" src={profilePicture} className="rounded-circle my-4 d-none d-md-block p-1 shadow profile-pic" />
-                {/* <a className="navbar-brand mx-0 font-weight-bold text-nowrap" href="#about">{basics.name}</a> */}
-                {/* <h6 className="mx-0 text-nowrap"><b>{basics.position}</b></h6>
-                <h6 className="text-muted">{basics.label}</h6> */}
             </div>
             <button className="navbar-toggler border-0 order-1" type="button" data-toggle="collapse" data-target="#nav" aria-controls="nav" aria-expanded="false" aria-label="Toggle navigation">
                 <span className="navbar-toggler-icon"></span>

@@ -28,7 +28,7 @@ const education = ({ content }) => {
                                 <div className="card border">
                                     <div className="card-body">
                                         <h4 className="card-title mb-0">{education.what}</h4>
-                                        <h6 className="card-title mb-0">{education.when}</h6>
+                                        <h5 className="card-title mb-0 education-date">{education.when}</h5>
                                         <div className="small font-italic">{education.where}</div>
                                         {generateCourses({ courses: education.courses })}
                                     </div>
