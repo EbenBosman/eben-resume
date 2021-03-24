@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { lazy } from 'react';
+
 import About from './content/about';
 import Education from './content/education';
 import Experience from './content/experience';
