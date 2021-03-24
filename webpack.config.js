@@ -58,7 +58,7 @@ module.exports = (env) => {
 					],
 				},
 				{
-					test: /\.(png|jpe?g)$/i,
+					test: /\.(webp|png|jpe?g)$/i,
 					use: [
 						'file-loader',
 						{

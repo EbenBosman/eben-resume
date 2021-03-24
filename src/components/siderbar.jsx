@@ -1,8 +1,8 @@
-import React from 'react';
+import React, { lazy } from 'react';
 import { PDFDownloadLink } from '@react-pdf/renderer';
 import Resume from './pdfDocument';
 
-import profilePicture from '../images/eben-profile.jpg';
+const ProfilePic = lazy(() => import('./content/side-bar-content/profilePic'));
 
 const constructResumeFileName = name => {
     const date = new Date();
@@ -14,13 +14,11 @@ const constructResumeFileName = name => {
     return `Resume of ${name} (${formattedDate}).pdf`;
 }
 
-const SiderBar = ({ basics }) => {
-    return <div className="col-12 col-md-3 col-xl-2 p-0 bg-dark flex-shrink-1 nav-bar-texture">
+const SiderBar = ({ basics }) => (
+    <div className="col-12 col-md-3 col-xl-2 p-0 bg-dark flex-shrink-1 nav-bar-texture">
         <nav id="sidebar"
             className="navbar navbar-expand-md navbar-dark bg-none flex-md-column flex-row align-items-center py-2 text-center sticky-top">
-            <div className="text-center">
-                <img alt="" width="true" height="true" src={profilePicture} className="rounded-circle my-4 d-none d-md-block p-1 shadow profile-pic" />
-            </div>
+            <ProfilePic />
             <button className="navbar-toggler border-0 order-1" type="button" data-toggle="collapse" data-target="#nav" aria-controls="nav" aria-expanded="false" aria-label="Toggle navigation">
                 <span className="navbar-toggler-icon"></span>
             </button>
@@ -59,7 +57,7 @@ const SiderBar = ({ basics }) => {
                 </li>
             </ul>
         </nav>
-    </div>;
-}
+    </div>
+)
 
 export default SiderBar;
