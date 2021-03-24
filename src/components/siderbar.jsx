@@ -1,6 +1,6 @@
 import React from 'react';
 import { PDFDownloadLink } from '@react-pdf/renderer';
-import MyDoc from './pdfDocument';
+import Resume from './pdfDocument';
 
 import profilePicture from '../images/eben-profile.jpg';
 
@@ -55,7 +55,7 @@ const SiderBar = ({ basics }) => {
                 </li>
                 <li className="nav-item">
                     <div className="nav-link text-white px-2">
-                        <PDFDownloadLink className="text-white fa fa-file-pdf fa-lg" document={<MyDoc />} fileName={constructResumeFileName('Eben Bosman')}>
+                        <PDFDownloadLink className="text-white fa fa-file-pdf fa-lg" document={<Resume />} fileName={constructResumeFileName('Eben Bosman')}>
                             {({ blob, url, loading, error }) => (loading ? '' : '')}
                         </PDFDownloadLink>
                     </div>
