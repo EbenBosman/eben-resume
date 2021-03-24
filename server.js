@@ -1,7 +1,7 @@
-var express = require('express');
-var serveStatic = require('serve-static');
-app = express();
-app.use(serveStatic(__dirname + "/public"));
-var port = process.env.PORT || 5000;
-app.listen(port);
+const express = require('express');
+const serveStatic = require('serve-static');
+const server = express();
+server.use(serveStatic(__dirname + "/public"));
+const port = process.env.PORT || 5000;
+server.listen(port);
 console.log('server started '+ port);
