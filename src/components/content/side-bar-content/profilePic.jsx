@@ -6,7 +6,7 @@ const LazyImage = lazy(() => import(/* webpackChunkName: "lazy-image" */   './La
 
 const profilePic = () => (
     <div className="text-center">
-        <LazyImage alt="" width={200} height={200} src={profilePicture} placeholder="Loading..." className="rounded-circle my-4 d-none d-md-block p-1 shadow profile-pic" />
+        <LazyImage alt="" width={200} height={200} src={profilePicture} className="rounded-circle my-4 d-none d-md-block p-1 shadow profile-pic" />
     </div>
 );
 
