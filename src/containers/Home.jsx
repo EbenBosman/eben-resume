@@ -1,7 +1,8 @@
-import React from 'react';
-import SiderBar from '../components/siderbar';
-import Content from '../components/content';
+import React, { lazy } from 'react';
 import resume from '../data/resume';
+
+const SiderBar = lazy(() => import('../components/siderbar'));
+const Content = lazy(() => import('../components/content'));
 
 class Home extends React.Component {
     render() {

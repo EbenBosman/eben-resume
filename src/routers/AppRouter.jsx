@@ -1,12 +1,12 @@
-import React, { Suspense } from 'react';
+import React, { Suspense, lazy } from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 
-import HomePage from '../containers/Home';
-import PageNotFound from '../containers/PageNotFound';
+const HomePage = lazy(() => import('../containers/Home'));
+const PageNotFound = lazy(() => import('../containers/PageNotFound'));
 
 const AppRouter = props => (
     <Router>
-        <Suspense>
+        <Suspense fallback={<div>Loading...</div>}>
             <Switch>
                 <Route path="/" component={HomePage} exact={true} />
                 <Route component={PageNotFound} />

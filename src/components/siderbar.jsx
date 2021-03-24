@@ -1,5 +1,5 @@
 import React from 'react';
-import { PDFDownloadLink, Document, Page } from '@react-pdf/renderer';
+import { PDFDownloadLink } from '@react-pdf/renderer';
 import MyDoc from './pdfDocument';
 
 import profilePicture from '../images/eben-profile.jpg';
