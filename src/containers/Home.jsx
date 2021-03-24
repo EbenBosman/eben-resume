@@ -1,8 +1,8 @@
 import React, { lazy } from 'react';
 import resume from '../data/resume';
 
-const SiderBar = lazy(/* webpackChunkName: "sidebar-section */ () => import('../components/siderbar'));
-const Content = lazy(/* webpackChunkName: "content-section" */ () => import('../components/content'));
+const SiderBar = lazy(/* webpackChunkName: "sidebar-section */() => import('../components/siderbar'));
+const Content = lazy(/* webpackChunkName: "content-section" */() => import('../components/content'));
 
 class Home extends React.Component {
     render() {
