@@ -19,7 +19,7 @@ const SiderBar = ({ basics }) => {
         <nav id="sidebar"
             className="navbar navbar-expand-md navbar-dark bg-none flex-md-column flex-row align-items-center py-2 text-center sticky-top">
             <div className="text-center">
-                <img width="1197" height="1198" src={profilePicture} className="rounded-circle my-4 d-none d-md-block p-1 shadow profile-pic" />
+                <img width="true" height="true" src={profilePicture} className="rounded-circle my-4 d-none d-md-block p-1 shadow profile-pic" />
                 {/* <a className="navbar-brand mx-0 font-weight-bold text-nowrap" href="#about">{basics.name}</a> */}
                 {/* <h6 className="mx-0 text-nowrap"><b>{basics.position}</b></h6>
                 <h6 className="text-muted">{basics.label}</h6> */}
