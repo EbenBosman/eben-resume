@@ -51,8 +51,7 @@ const SiderBar = ({ basics }) => {
                     <a rel="noreferrer" href={`mailto:${basics.email}`} className="nav-link text-white px-2 side-bar-link-hide-text">Mail Me<i className="fa fa-envelope fa-lg"></i></a>
                 </li>
                 <li className="nav-item">
-                    <div className="nav-link text-white px-2 side-bar-link-hide-text">
-                        My Resume
+                    <div className="nav-link text-white px-2">
                         <PDFDownloadLink className="text-white fa fa-file-pdf fa-lg" document={<Resume />} fileName={constructResumeFileName('Eben Bosman')}>
                             {({ blob, url, loading, error }) => (loading ? '' : '')}
                         </PDFDownloadLink>
