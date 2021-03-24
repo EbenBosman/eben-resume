@@ -29,7 +29,7 @@ const generateHeader = ({ website, company, position }) => {
 
 const generateLink = ({ website, company }) => {
     if (typeof website !== 'undefined' && website.includes('http'))
-        return <span><small> at </small><a href={website} target="_blank"><small>{company}</small></a></span>;
+        return <span><small> at </small><a rel="noopener" href={website} target="_blank"><small>{company}</small></a></span>;
 
     return null;
 }

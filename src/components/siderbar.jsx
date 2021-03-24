@@ -30,28 +30,28 @@ const SiderBar = ({ basics }) => {
             <div id="nav" className="collapse navbar-collapse order-last">
                 <ul className="navbar-nav flex-column w-100 justify-content-center">
                     <li className="nav-item">
-                        <a className="nav-link text-white" href="#about">About</a>
+                        <a rel="noopener" className="nav-link text-white" href="#about">About</a>
                     </li>
                     <li className="nav-item">
-                        <a className="nav-link text-white" href="#education">Education</a>
+                        <a rel="noopener" className="nav-link text-white" href="#education">Education</a>
                     </li>
                     <li className="nav-item">
-                        <a className="nav-link text-white" href="#experience">Experience</a>
+                        <a rel="noopener" className="nav-link text-white" href="#experience">Experience</a>
                     </li>
                     <li className="nav-item">
-                        <a className="nav-link text-white" href="#skills">Skills</a>
+                        <a rel="noopener" className="nav-link text-white" href="#skills">Skills</a>
                     </li>
                 </ul>
             </div>
             <ul className="nav justify-content-center">
                 <li className="nav-item">
-                    <a href={basics.social.github} className="nav-link text-white px-2"><i className="fab fa-github fa-lg"></i></a>
+                    <a rel="noreferrer" href={basics.social.github} className="nav-link text-white px-2"><i className="fab fa-github fa-lg"></i></a>
                 </li>
                 <li className="nav-item">
-                    <a href={basics.social.stackOverflow} className="nav-link text-white px-2"><i className="fab fa-stack-overflow fa-lg"></i></a>
+                    <a rel="noreferrer" href={basics.social.stackOverflow} className="nav-link text-white px-2"><i className="fab fa-stack-overflow fa-lg"></i></a>
                 </li>
                 <li className="nav-item">
-                    <a href={`mailto:${basics.email}`} className="nav-link text-white px-2"><i className="fa fa-envelope fa-lg"></i></a>
+                    <a rel="noreferrer" href={`mailto:${basics.email}`} className="nav-link text-white px-2"><i className="fa fa-envelope fa-lg"></i></a>
                 </li>
                 <li className="nav-item">
                     <div className="nav-link text-white px-2">
