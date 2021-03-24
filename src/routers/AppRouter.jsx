@@ -1,8 +1,8 @@
 import React, { Suspense, lazy } from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 
-const HomePage = lazy(() => import('../containers/Home'));
-const PageNotFound = lazy(() => import('../containers/PageNotFound'));
+const HomePage = lazy(/* webpackChunkName: "home-page" */ () => import('../containers/Home'));
+const PageNotFound = lazy(/* webpackChunkName: "page-not-found" */ () => import('../containers/PageNotFound'));
 
 const AppRouter = props => (
     <Router>

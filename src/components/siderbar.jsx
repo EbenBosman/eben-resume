@@ -2,7 +2,7 @@ import React, { lazy } from 'react';
 import { PDFDownloadLink } from '@react-pdf/renderer';
 import Resume from './pdfDocument';
 
-const ProfilePic = lazy(() => import('./content/side-bar-content/profilePic'));
+const ProfilePic = lazy(() => import(/* webpackChunkName: "profile-pic" */ './content/side-bar-content/profilePic'));
 
 const constructResumeFileName = name => {
     const date = new Date();
