@@ -4,6 +4,7 @@ const path = require('path');
 const webpack = require('webpack');
 
 const CompressionPlugin = require("compression-webpack-plugin");
+const BrotliPlugin = require('brotli-webpack-plugin');
 const OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const TerserPlugin = require('terser-webpack-plugin');
@@ -132,7 +133,12 @@ module.exports = params => {
 			new CompressionPlugin({
 				algorithm: "gzip",
 				compressionOptions: { level: isProduction ? 9 : 1 },
-				minRatio: 0.8,
+				minRatio: 0.1,
+				deleteOriginalAssets: isProduction
+			}),
+			
+			new BrotliPlugin({
+				minRatio: 0.1,
 				deleteOriginalAssets: isProduction
 			})
 		],
