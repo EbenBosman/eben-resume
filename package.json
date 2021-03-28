@@ -30,6 +30,7 @@
     "@babel/plugin-proposal-object-rest-spread": "^7.12.13",
     "@babel/preset-env": "^7.13.12",
     "@babel/preset-react": "^7.13.13",
+    "assert": "^2.0.0",
     "babel-loader": "^8.2.2",
     "base64-inline-loader": "^1.1.1",
     "before-build-webpack": "^0.2.11",
