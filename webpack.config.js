@@ -1,26 +1,44 @@
 //	Node.js does not support the "import { join } as 'path'"; syntax.
 //	Don't try and follow VSCode's recommendation.
 const path = require('path');
-const TerserPlugin = require('terser-webpack-plugin');
+
 const OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const TerserPlugin = require('terser-webpack-plugin');
+const webpack = require('webpack');
 const WebpackBeforeBuildPlugin = require('before-build-webpack');
 
-module.exports = (env) => {
-	const isProduction = env === 'prod';
+const isEnvProd = params => {
+	if (typeof params.prd !== 'undefined' && params.prd === true)
+		return true;
+
+	return false;
+};
+
+module.exports = params => {
+	const isProduction = isEnvProd(params);
 
 	return {
 		mode: isProduction ? 'production' : 'development',
-		entry: ['@babel/polyfill', './src/app.jsx'],
+		entry: ['core-js/stable', 'regenerator-runtime/runtime', './src/app.jsx'],
 		target: 'web',
 		stats: {
-			modules: false
+			modules: false,
+			children: true,
+			errorDetails: true
 		},
 		watchOptions: {
 			ignored: /node_modules/
 		},
 		resolve: {
-			extensions: ['*', '.js', '.jsx']
+			extensions: ['*', '.js', '.jsx'],
+			fallback: {
+				"assert": false,
+				"buffer": require.resolve("buffer/"),
+				"stream": require.resolve("stream-browserify"),
+				"util": require.resolve("util/"),
+				"zlib": require.resolve("browserify-zlib")
+			}
 		},
 		output: {
 			path: path.resolve('public/assets'),
@@ -30,42 +48,42 @@ module.exports = (env) => {
 		},
 		module: {
 			rules: [{
-					test: /\.(js|jsx)$/,
-					loader: 'babel-loader',
-					exclude: /node_modules/
+				test: /\.(js|jsx)$/,
+				loader: 'babel-loader',
+				exclude: /node_modules/
+			},
+			{
+				test: /\.(jpe?g|png|ttf|eot|svg|woff(2)?)(\?[a-z0-9=&.]+)?$/,
+				use: 'base64-inline-loader?limit=10000000&name=[name].[ext]'
+			},
+			{
+				test: /\.s?css$/,
+				use: [{
+					loader: MiniCssExtractPlugin.loader,
 				},
 				{
-					test: /\.(png|woff|woff2|eot|ttf|svg)$/,
-					loader: 'url-loader?limit=100000'
+					loader: 'css-loader',
+					options: {
+						sourceMap: !isProduction
+					}
 				},
 				{
-					test: /\.s?css$/,
-					use: [{
-							loader: MiniCssExtractPlugin.loader,
-						},
-						{
-							loader: 'css-loader',
-							options: {
-								sourceMap: !isProduction
-							}
-						},
-						{
-							loader: 'sass-loader',
-							options: {
-								sourceMap: !isProduction
-							}
-						}
-					],
-				},
-				{
-					test: /\.(webp|png|jpe?g)$/i,
-					use: [
-						'file-loader',
-						{
-							loader: 'image-webpack-loader'
-						}
-					]
+					loader: 'sass-loader',
+					options: {
+						sourceMap: !isProduction
+					}
 				}
+				],
+			},
+			{
+				test: /\.(webp|png|jpe?g)$/i,
+				use: [
+					'file-loader',
+					{
+						loader: 'image-webpack-loader'
+					}
+				]
+			}
 			]
 		},
 		plugins: [
@@ -96,8 +114,13 @@ module.exports = (env) => {
 				chunkFilename: 'css/[name].[contenthash].css',
 				ignoreOrder: true,
 			}),
+
+			new webpack.ProvidePlugin({
+				process: 'process/browser',
+				Buffer: ['buffer', 'Buffer'],
+			})
 		],
-		devtool: isProduction ? 'source-map' : 'inline-source-map',
+		devtool: isProduction ? 'nosources-source-map' : 'inline-source-map',	//	https://webpack.js.org/configuration/devtool/
 		devServer: {
 			contentBase: path.join(__dirname, 'public'),
 			historyApiFallback: true,
