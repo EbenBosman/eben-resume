@@ -133,12 +133,12 @@ module.exports = params => {
 			new CompressionPlugin({
 				algorithm: "gzip",
 				compressionOptions: { level: isProduction ? 9 : 1 },
-				minRatio: 0.1,
+				minRatio: 0.7,
 				deleteOriginalAssets: isProduction
 			}),
 			
 			new BrotliPlugin({
-				minRatio: 0.1,
+				minRatio: 0.7,
 				deleteOriginalAssets: isProduction
 			})
 		],
