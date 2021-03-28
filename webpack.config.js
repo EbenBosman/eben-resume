@@ -1,11 +1,12 @@
 //	Node.js does not support the "import { join } as 'path'"; syntax.
 //	Don't try and follow VSCode's recommendation.
 const path = require('path');
+const webpack = require('webpack');
 
+const CompressionPlugin = require("compression-webpack-plugin");
 const OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const TerserPlugin = require('terser-webpack-plugin');
-const webpack = require('webpack');
 const WebpackBeforeBuildPlugin = require('before-build-webpack');
 
 const isEnvProd = params => {
@@ -109,6 +110,7 @@ module.exports = params => {
 					callback();
 				}
 			}),
+
 			new MiniCssExtractPlugin({
 				filename: 'css/main.css',
 				chunkFilename: 'css/[name].[contenthash].css',
@@ -118,6 +120,20 @@ module.exports = params => {
 			new webpack.ProvidePlugin({
 				process: 'process/browser',
 				Buffer: ['buffer', 'Buffer'],
+			}),
+
+			new webpack.DefinePlugin({
+				'process.env': {
+					'NODE_ENV': isProduction ? JSON.stringify('production') : JSON.stringify('development')
+				}
+			}),
+			new webpack.optimize.AggressiveMergingPlugin(),
+
+			new CompressionPlugin({
+				algorithm: "gzip",
+				compressionOptions: { level: isProduction ? 9 : 1 },
+				minRatio: 0.8,
+				deleteOriginalAssets: isProduction
 			})
 		],
 		devtool: isProduction ? 'nosources-source-map' : 'inline-source-map',	//	https://webpack.js.org/configuration/devtool/

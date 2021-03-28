@@ -36,6 +36,7 @@
     "before-build-webpack": "^0.2.11",
     "browserify-zlib": "^0.2.0",
     "buffer": "^6.0.3",
+    "compression-webpack-plugin": "^7.1.2",
     "core-js": "^3.8.3",
     "css-loader": "^5.0.2",
     "file-loader": "^6.2.0",
