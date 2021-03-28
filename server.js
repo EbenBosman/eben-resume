@@ -1,40 +1,61 @@
 const express = require('express');
-const expressStaticGzip = require("express-static-gzip");
+// const expressStaticGzip = require("express-static-gzip");
 const serveStatic = require('serve-static');
 const server = express();
 
-// server.get('*.js', function (req, res, next) {
-//     req.url = req.url + '.gz';
-//     res.set('Content-Encoding', 'gzip');
-//     res.set('Content-Type', 'text/javascript');
-//     next();
-// });
+server.get('*.js', function (req, res, next) {
 
-// server.get('*.css', function (req, res, next) {
-//     req.url = req.url + '.gz';
-//     res.set('Content-Encoding', 'gzip');
-//     res.set('Content-Type', 'text/css');
-//     next();
-// });
+    if (req.header("Accept-Encoding").indexOf('br') !== -1) {
+        req.url = req.url + '.br';
+        res.set('Content-Encoding', 'br');
+    } else {
+        req.url = req.url + '.gz';
+        res.set('Content-Encoding', 'gzip');
+    }
 
-// server.get('*.webp', function (req, res, next) {
-//     req.url = req.url + '.gz';
-//     res.set('Content-Encoding', 'gzip');
-//     res.set('Content-Type', 'image/webp');
-//     next();
-// });
+    res.set('Content-Type', 'text/javascript');
+    next();
+});
 
-server.use('/public/assets/js', expressStaticGzip('public/assets/js', {
-    enableBrotli: true,
-    orderPreference: ['br', 'gz'],
-    setHeaders: (res, path) => res.setHeader("Cache-Control", "public, max-age=31536000")
-}));
+server.get('*.css', function (req, res, next) {
+    
+    if (req.header("Accept-Encoding").indexOf('br') !== -1) {
+        req.url = req.url + '.br';
+        res.set('Content-Encoding', 'br');
+    } else {
+        req.url = req.url + '.gz';
+        res.set('Content-Encoding', 'gzip');
+    }
 
-server.use('/public/assets/css', expressStaticGzip('public/assets/css', {
-    enableBrotli: true,
-    orderPreference: ['br', 'gz'],
-    setHeaders: (res, path) => res.setHeader("Cache-Control", "public, max-age=31536000")
-}));
+    res.set('Content-Type', 'text/css');
+    next();
+});
+
+server.get('*.webp', function (req, res, next) {
+    
+    if (req.header("Accept-Encoding").indexOf('br') !== -1) {
+        req.url = req.url + '.br';
+        res.set('Content-Encoding', 'br');
+    } else {
+        req.url = req.url + '.gz';
+        res.set('Content-Encoding', 'gzip');
+    }
+
+    res.set('Content-Type', 'image/webp');
+    next();
+});
+
+// server.use('/public/assets/js', expressStaticGzip('public/assets/js', {
+//     enableBrotli: true,
+//     orderPreference: ['br', 'gz'],
+//     setHeaders: (res, path) => res.setHeader("Cache-Control", "public, max-age=31536000")
+// }));
+
+// server.use('/public/assets/css', expressStaticGzip('public/assets/css', {
+//     enableBrotli: true,
+//     orderPreference: ['br', 'gz'],
+//     setHeaders: (res, path) => res.setHeader("Cache-Control", "public, max-age=31536000")
+// }));
 
 server.use(serveStatic(__dirname + "/public"));
 const port = process.env.PORT || 5000;
