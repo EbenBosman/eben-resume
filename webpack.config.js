@@ -33,7 +33,7 @@ module.exports = params => {
 		resolve: {
 			extensions: ['*', '.js', '.jsx'],
 			fallback: {
-				"assert": false,
+				"assert": require.resolve("assert/"),
 				"buffer": require.resolve("buffer/"),
 				"stream": require.resolve("stream-browserify"),
 				"util": require.resolve("util/"),
