@@ -30,6 +30,13 @@ server.get('*.webp', function (req, res, next) {
     next();
 });
 
+// issue: https://developer.chrome.com/blog/enabling-shared-array-buffer/
+server.use((req, res, next) => {
+    res.set('Cross-Origin-Embedder-Policy', 'require-corp');
+    res.set('Cross-Origin-Opener-Policy', 'same-origin');
+    next();
+});
+
 server.use(serveStatic(__dirname + "/public"));
 const port = process.env.PORT || 5000;
 server.listen(port);
