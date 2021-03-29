@@ -139,6 +139,10 @@ module.exports = params => {
 			new BrotliPlugin({
 				minRatio: 0.9,
 				deleteOriginalAssets: isProduction
+			}),
+
+			new webpack.DefinePlugin({
+				'__REACT_DEVTOOLS_GLOBAL_HOOK__': `({ isDisabled: ${!isProduction} })`
 			})
 		],
 		devtool: isProduction ? 'nosources-source-map' : 'inline-source-map',	//	https://webpack.js.org/configuration/devtool/
