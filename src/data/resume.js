@@ -30,7 +30,7 @@ export default {
             'startDate': '2018',
             'endDate': 'Present',
             'location': 'Remote position. HQ in Denver, CO.',
-            'summary': 'This is a remote contract position witht he aim of redesigning & rearchitecting the current OnePager Live site. (Cloud version of OnePager\'s desktop product, still in development.)',
+            'summary': 'This is a remote contract position with the aim of redesigning & rearchitecting the current OnePager Live site. (Cloud version of OnePager\'s desktop product, still in development.)',
             'highlights': [
                 '.Net Core (2 at first and then migrated to 3), REST, C#, VB.net',
                 'MS SQL',
