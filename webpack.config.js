@@ -79,12 +79,11 @@ module.exports = params => {
 			},
 			{
 				test: /\.(webp|png|jpe?g)$/i,
-				use: [
-					'file-loader',
-					{
-						loader: 'image-webpack-loader'
-					}
-				]
+				loader: "file-loader",
+				options: {
+					name: "[contenthash].[ext]",
+					outputPath: "images",
+				},
 			}
 			]
 		},
@@ -136,7 +135,7 @@ module.exports = params => {
 				minRatio: 0.9,
 				deleteOriginalAssets: isProduction
 			}),
-			
+
 			new BrotliPlugin({
 				minRatio: 0.9,
 				deleteOriginalAssets: isProduction
