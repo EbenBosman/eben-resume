@@ -67,7 +67,7 @@ $lighterStripe: #595959;
     background-image: radial-gradient(#11581e, #041607), url("https://media.giphy.com/media/oEI9uBYSzLpBK/giphy.gif");
     background-repeat: no-repeat;
     background-size: cover;
-    font-family: 'Inconsolata', monospace;
+    font-family: "Inconsolata", monospace;
     font-size: 1.5rem;
     color: rgba(128, 255, 128, 0.8);
     text-shadow: 0 0 1ex rgba(51, 255, 51, 1), 0 0 2px rgba(255, 255, 255, 0.8);
@@ -167,4 +167,58 @@ a.not-found::after {
 
 .errorcode {
     color: white;
+}
+
+// Loading Spinner
+// Credit https://codepen.io/ozdalgic/pen/wvaLZEq
+
+.dot-spinner-container {
+    width: 100vw;
+    height: 100vh;
+
+    background-color: black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.dot-spinner {
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    &:after {
+        animation: dotSpinner 1s linear infinite;
+        display: block;
+        content: "⠁";
+        font-size: 30px;
+    }
+}
+
+@keyframes dotSpinner {
+    0% {
+        content: "⠁";
+    }
+    10% {
+        content: "⠉";
+    }
+    20% {
+        content: "⠈";
+    }
+    30% {
+        content: "⠘";
+    }
+    40% {
+        content: "⠐";
+    }
+    50% {
+        content: "⠒";
+    }
+    60% {
+        content: "⠂";
+    }
+    70% {
+        content: "⠃";
+    }
 }
