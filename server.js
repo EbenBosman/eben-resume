@@ -3,8 +3,6 @@ const path = require('path');
 const serveStatic = require('serve-static');
 const server = express();
 
-console.log(0, __dirname + "/public/index.html")
-
 const setContentEncoding = (req, res) => {
     if (req.header("Accept-Encoding").indexOf('br') !== -1) {
         req.url = req.url + '.br';
@@ -37,7 +35,7 @@ server.get('*.webp', function (req, res, next) {
 server.use((req, res, next) => {
     res.set('Cross-Origin-Embedder-Policy', 'require-corp');
     res.set('Cross-Origin-Opener-Policy', 'same-origin');
-    // res.set('Cache-control', 'public, max-age=300')
+    res.set('Cache-control', 'public, max-age=300');
 
     next();
 });
