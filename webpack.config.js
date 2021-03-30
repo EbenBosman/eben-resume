@@ -142,7 +142,7 @@ module.exports = params => {
 			}),
 
 			new webpack.DefinePlugin({
-				'__REACT_DEVTOOLS_GLOBAL_HOOK__': `({ isDisabled: ${isProduction} })`
+				'__REACT_DEVTOOLS_GLOBAL_HOOK__': `({ isDisabled: true })`
 			})
 		],
 		devtool: isProduction ? 'nosources-source-map' : 'inline-source-map',	//	https://webpack.js.org/configuration/devtool/
