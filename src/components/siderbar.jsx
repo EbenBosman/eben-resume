@@ -1,6 +1,6 @@
 import React, { lazy } from 'react';
-import { PDFDownloadLink } from '@react-pdf/renderer';
-import Resume from './pdfDocument';
+import axios from 'axios';
+import { saveAs } from 'file-saver';
 
 const ProfilePic = lazy(() => import(/* webpackChunkName: "profile-pic" */ './content/side-bar-content/profilePic'));
 
@@ -12,6 +12,17 @@ const constructResumeFileName = name => {
     }).replace(/ /g, ' ')
 
     return `Resume of ${name} (${formattedDate}).pdf`;
+}
+
+const createAndDownloadPdf = e => {
+    e.preventDefault();
+    axios.post('/pdf-resume', {})
+        .then(() => axios.get('/pdf-resume', { responseType: 'blob' }))
+        .then((res) => {
+            const pdfBlob = new Blob([res.data], { type: 'application/pdf' });
+
+            saveAs(pdfBlob, constructResumeFileName('Eben Bosman'));
+        });
 }
 
 const SiderBar = ({ basics }) => (
@@ -49,11 +60,7 @@ const SiderBar = ({ basics }) => (
                     <a rel="noreferrer" href={`mailto:${basics.email}`} className="nav-link text-white px-2 side-bar-link-hide-text">Mail Me<i className="fa fa-envelope fa-lg"></i></a>
                 </li>
                 <li className="nav-item">
-                    <div className="nav-link text-white px-2">
-                        <PDFDownloadLink className="text-white fa fa-file-pdf fa-lg" document={<Resume />} fileName={constructResumeFileName('Eben Bosman')}>
-                            {({ blob, url, loading, error }) => (loading ? '' : '')}
-                        </PDFDownloadLink>
-                    </div>
+                    <a rel="noreferrer" href="" className="nav-link text-white px-2 side-bar-link-hide-text" onClick={createAndDownloadPdf}>PDF Resume<i className="fa fa-file-pdf fa-lg"></i></a>
                 </li>
             </ul>
         </nav>

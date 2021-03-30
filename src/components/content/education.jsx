@@ -19,7 +19,7 @@ const education = ({ content }) => {
 
     return <section id="education" className="bg-light pt-4 pb-4">
         <div className="container">
-            <h3 className="font-weight-light">Education &amp; Certificates</h3>
+            <h3 className="font-weight-light">Certificates</h3>
             {
                 content.map((education, key) => {
                     return (

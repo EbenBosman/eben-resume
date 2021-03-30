@@ -1,0 +1,240 @@
+<!doctype html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,400;0,500;0,900;1,400&display=swap"
+        rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            border: 0;
+            outline: 0;
+            font-family: 'Roboto', sans-serif;
+        }
+
+        body {
+            font-family: 'Roboto', sans-serif;
+        }
+
+        .header {
+            padding: 2em;
+            background-color: #2158b0;
+            color: #fff;
+        }
+
+        .header h1 {
+            font-size: 36pt;
+            font-weight: 900;
+            text-align: center;
+        }
+
+        .header h2 {
+            font-size: 13.5pt;
+            font-weight: 500;
+            text-align: center;
+        }
+
+        .column {
+            height: 970px;
+            float: left;
+            padding-bottom: .5em;
+        }
+
+        .left {
+            width: 220px;
+            border-right: 1pt solid #2158b0;
+            padding-left: .2em;
+        }
+
+        .right {
+            width: 563px;
+            padding-right: .2em;
+        }
+
+        .column-content {
+            padding: .5em;
+        }
+
+        .content-block {
+            padding-top: 0.3em;
+            padding-bottom: 0.3em;
+        }
+
+        h3 {
+            font-weight: 500;
+            font-size: 11pt;
+        }
+
+        h4 {
+            font-weight: 500;
+            font-size: 10pt;
+            padding-bottom: 0.1em;
+        }
+
+        h4 span {
+            font-size: 8pt;
+        }
+
+        h5 {
+            font-size: 7pt;
+            font-style: italic;
+            color: #1f1f1f;
+        }
+
+        p,
+        a {
+            line-height: 1.15;
+            font-size: 8pt;
+        }
+
+        a,
+        a:hover {
+            text-decoration: none;
+            color: #2158b0;
+        }
+
+        li {
+            font-size: 4pt;
+            list-style-position: outside;
+            margin-left: 2em;
+            line-height: 1.15;
+        }
+
+        li span {
+            margin: 0 auto;
+            font-size: 8pt;
+            vertical-align: middle;
+        }
+
+        .pill {
+            font-size: 8pt;
+            font-weight: 500;
+            background-color: #404040;
+            border: none;
+            color: #fff;
+            padding: 2px 4px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            margin-bottom: 2px;
+            border-radius: 4px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="header">
+        <h1>
+            {{basics.name}}
+        </h1>
+        <h2>
+            {{basics.label}}
+        </h2>
+    </div>
+    <div class="row">
+        <div class="column left">
+            <div class="column-content">
+                <div class="content-block-container">
+                    <h3>Contact Details</h3>
+                    <div class="content-block">
+                        <p><a href="{{basics.phone}}">{{basics.phone}}</a></p>
+                        <p><a href="mailto:{{basics.email}}">{{basics.email}}</a></p>
+                    </div>
+                </div>
+                <div class="content-block-container">
+                    <h3>Hometown</h3>
+                    <div class="content-block">
+                        <p>{{basics.location}}</p>
+                    </div>
+                </div>
+                <div class="content-block-container">
+                    <h3>Useful Links</h3>
+                    <div class="content-block">
+                        <p>
+                            <a href="{{basics.website}}">{{basics.website}}</a>
+                        </p>
+                        <p>
+                            <a href="{{basics.social.stackOverflow}}">
+                                {{#replace basics.social.stackOverflow "https://" ""}}{{/replace}}
+                            </a>
+                        </p>
+                        <p>
+                            <a href="{{basics.social.github}}">
+                                {{#replace basics.social.github "https://" ""}}{{/replace}}
+                            </a>
+                        </p>
+                    </div>
+                </div>
+                <div class="content-block-container">
+                    <h3>Skills</h3>
+                    {{#each skills}}
+                    <div class="content-block">
+                        <h4>{{this.Title}}</h4>
+                        <div class="content-block">
+                            {{#each this.Items}}
+                            <div class="pill">{{this}}</div>
+                            {{/each}}
+                        </div>
+                    </div>
+                    {{/each}}
+                </div>
+                <div class="content-block-container">
+                    <h3>Certificates</h3>
+                    {{#each education}}
+                    <div class="content-block">
+                        <h4>{{this.what}}</h4>
+                        <h5>{{this.where}} ({{this.when}})</h5>
+                        {{#if this.courses}}
+                        <div class="content-block">
+                            {{#each this.courses}}
+                            <div class="pill">{{this}}</div>
+                            {{/each}}
+                        </div>
+                        {{/if}}
+                    </div>
+                    {{/each}}
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="column right">
+        <div class="column-content">
+            <div class="content-block-container">
+                <h3>Personal Details</h3>
+                <div class="content-block">
+                    {{#each about}}
+                    <p>{{this}}</p>
+                    {{/each}}
+                </div>
+            </div>
+            <div class="content-block-container">
+                <h3>Experience</h3>
+                {{#each work}}
+                <div class="content-block">
+                    <h4>{{this.position}} <span>at <a href="{{this.website}}">{{this.company}}</a></span></h4>
+                    <h5>{{this.startDate}} - {{this.endDate}}</h5>
+                    <h5>{{this.location}}</h5>
+                    <div class="content-block">
+                        {{#if this.summary}}
+                        <p>{{this.summary}}</p>
+                        {{/if}}
+                        {{#if this.highlights}}
+                        <ul>
+                            {{#each this.highlights}}
+                            <li><span>{{this}}</span></li>
+                            {{/each}}
+                        </ul>
+                        {{/if}}
+                        {{/each}}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+</body>
+
+</html>

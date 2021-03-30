@@ -1,7 +1,20 @@
+const cors = require('cors');
 const express = require('express');
 const path = require('path');
 const serveStatic = require('serve-static');
+
 const server = express();
+const pdfTemplate = require('./server/resume-template');
+
+server.use(cors());
+
+server.post('/pdf-resume', (req, res) => {
+    pdfTemplate(res);
+});
+
+server.get('/pdf-resume', (req, res) => {
+    res.sendFile(`${__dirname}/result.pdf`)
+})
 
 const setContentEncoding = (req, res) => {
     if (req.header("Accept-Encoding").indexOf('br') !== -1) {
