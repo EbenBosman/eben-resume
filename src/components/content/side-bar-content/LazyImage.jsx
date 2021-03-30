@@ -1,39 +1,15 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import React, { Suspense } from 'react';
 
 export default class LazyImage extends React.Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            src: null,
-        };
-    }
-
-    componentDidMount() {
-        const { src } = this.props;
-
-        const imageLoader = new Image();
-        imageLoader.src = src;
-
-        imageLoader.onload = () => {
-            this.setState({ src });
-        };
-    }
+    loadingFallback = () => (
+        <img src={this.props.lowResSrc} className={this.props.className} height={this.props.height} width={this.props.width} alt={this.props.alt} />
+    );
 
     render() {
-        const { placeholder, className, height, width, alt } = this.props;
-        const { src } = this.state;
         return (
-            <img src={src || placeholder} className={className} height={height} width={width} alt={alt} />
+            <Suspense fallback={this.loadingFallback()}>
+                <img src={this.props.fullResSrc} className={this.props.className} height={this.props.height} width={this.props.width} alt={this.props.alt} />
+            </Suspense>
         );
     }
 }
-
-LazyImage.propTypes = {
-    src: PropTypes.string,
-    placeholder: PropTypes.string,
-    className: PropTypes.string,
-    height: PropTypes.number,
-    width: PropTypes.number,
-    alt: PropTypes.string,
-};
