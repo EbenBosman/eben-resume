@@ -48,7 +48,7 @@ server.get('*.webp', function (req, res, next) {
 server.use((req, res, next) => {
     res.set('Cross-Origin-Embedder-Policy', 'require-corp');
     res.set('Cross-Origin-Opener-Policy', 'same-origin');
-    res.set('Cache-control', 'public, max-age=300');
+    res.set('Cache-control', 'public, max-age=31536000');
 
     next();
 });
