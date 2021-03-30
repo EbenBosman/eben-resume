@@ -22,7 +22,9 @@ module.exports = (res) => {
             const htmlString = template(JSON.parse(resume_data));
 
             const options = {
-               "format": "A4"
+               "format": "A4",
+               "quality": "100",
+               "dpi": 96
             };
 
             pdf.create(htmlString, options).toFile('result.pdf', (err) => {
