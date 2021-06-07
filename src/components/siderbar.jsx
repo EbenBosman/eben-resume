@@ -34,7 +34,7 @@ const SiderBar = ({ basics }) => {
     }
 
     return (
-        <div className="col-12 col-md-3 col-xl-2 p-0 bg-dark flex-shrink-1 nav-bar-texture">
+        <div className="col-12 col-md-3 col-xl-2 p-0 bg-dark flex-shrink-1 nav-bar">
             <nav id="sidebar"
                 className="navbar navbar-expand-md navbar-dark bg-none flex-md-column flex-row align-items-center py-2 text-center sticky-top">
                 <ProfilePic />

@@ -1,3 +1,6 @@
+$darkBlue: #00244a;
+$lighterBlue: #004691;
+
 body {
     font-family: "Roboto", sans-serif;
 }
@@ -6,30 +9,17 @@ body {
     max-width: 200px;
 }
 
-$darkerStripe: #242424;
-$lighterStripe: #595959;
-
-.nav-bar-texture {
-    background-image: linear-gradient(
-        45deg,
-        $darkerStripe 37.5%,
-        $lighterStripe 37.5%,
-        $lighterStripe 50%,
-        $darkerStripe 50%,
-        $darkerStripe 87.5%,
-        $lighterStripe 87.5%,
-        $lighterStripe 100%
-    );
-    background-size: 5.66px 5.66px;
+.nav-bar {
+    background: $darkBlue !important;
 }
 
 .experience-company {
-    color: #004691 !important;
+    color: $lighterBlue !important;
     text-decoration: none !important;
 }
 
 .experience-company:hover {
-    color: #00244a !important;
+    color: $darkBlue !important;
     text-decoration: none !important;
 }
 
