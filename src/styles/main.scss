@@ -9,6 +9,14 @@ body {
     max-width: 200px;
 }
 
+/* For ipad portrait layouts only */
+@media only screen and (min-device-width: 481px) and (max-device-width: 1024px) and (orientation: portrait) {
+    .profile-pic {
+        max-width: 180px;
+        max-height: 180px;
+    }
+}
+
 .nav-bar {
     background: $darkBlue !important;
 }
