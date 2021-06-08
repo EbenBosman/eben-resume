@@ -92,7 +92,7 @@ const SiderBar = ({ basics }) => {
             setMessageInvalidText(`The minimum required message length is 50 characters. (${50 - rawMessage.length} to go)`);
         } else {
             setMessageValid(true);
-            setMessageInvalidText("")
+            setMessageInvalidText("");
         }
     }
 
@@ -107,6 +107,18 @@ const SiderBar = ({ basics }) => {
     const isValidEmail = email => {
         const re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
         return re.test(email)
+    }
+
+    const clearMessageFields = () => {
+        setEmail("");
+        setEmailValid(true);
+        setEmailInvalidText("");
+
+        setMessage("");
+        setMessageValid(true);
+        setMessageInvalidText("");
+
+        $('#mailMe').modal('hide');
     }
 
     return (
@@ -163,20 +175,19 @@ const SiderBar = ({ basics }) => {
                         <div className="modal-body">
                             <form noValidate>
                                 <div className="form-group">
-                                    <label htmlFor="recipient-name" className={`col-form-label ${!isEmailValid ? "text-danger" : ""}`}>Your Email Address</label>
-                                    <input type="text" className={`form-control ${!isEmailValid ? "is-invalid" : ''}`} id="email" onChange={changeEmail} required></input>
+                                    <label htmlFor="email" className={`col-form-label ${!isEmailValid ? "text-danger" : ""}`}>Your Email Address</label>
+                                    <input type="text" className={`form-control ${!isEmailValid ? "is-invalid" : ''}`} id="email" name="email" onChange={changeEmail} value={email}></input>
                                     {!isEmailValid ? <div className="invalid-feedback">{emailInvalidText}</div> : <div></div>}
-
                                 </div>
                                 <div className="form-group">
                                     <label htmlFor="message-text" className={`col-form-label ${!isMessageValid ? "text-danger" : ""}`}>Message</label>
-                                    <textarea className={`form-control ${!isMessageValid ? "is-invalid" : ''}`} id="message-text" onChange={changeMessage} rows="5" required></textarea>
+                                    <textarea className={`form-control ${!isMessageValid ? "is-invalid" : ''}`} id="message-text" name="message-text" onChange={changeMessage} rows="5" value={message}></textarea>
                                     {!isMessageValid ? <div id="messageValidation" className="invalid-feedback">{messageInvalidText}</div> : <div></div>}
                                 </div>
                             </form>
                         </div>
                         <div className="modal-footer">
-                            <button type="button" className="btn btn-secondary" data-dismiss="modal">Close</button>
+                            <button type="button" className="btn btn-secondary" onClick={clearMessageFields}>Close</button>
                             <button type="submit" className="btn btn-primary" onClick={sendMessage} disabled={isTextEmpty(message) || isTextEmpty(email) || !isValidEmail(email) || isTextLessThan50(message)}>Send</button>
                         </div>
                     </div>
