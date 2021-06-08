@@ -1,4 +1,5 @@
 const cors = require('cors');
+const dotenv = require('dotenv');
 const express = require('express');
 const path = require('path');
 const serveStatic = require('serve-static');
@@ -7,6 +8,36 @@ const server = express();
 const pdfTemplate = require('./server/resume-template');
 
 server.use(cors());
+server.use(express.urlencoded({ extended: true }));
+server.use(express.json());
+
+dotenv.config();
+
+server.post('/message', (req, res) => {
+    const sgMail = require('@sendgrid/mail');
+    sgMail.setApiKey(process.env.SENDGRID_API_KEY);
+
+    const formattedEmail = `You have a new message from: <strong>${req.body.email}</strong><br><br>The original message is:<br><br>${req.body.message.replace(/(\r\n|\n|\r)/g,"<br />")}`;
+
+    const msg = {
+        to: process.env.MAILBOX_TO_MONITOR,
+        from: 'no-reply@ebenbosman.com',
+        subject: 'Message from ebenbosman.com',
+        text: req.body.message,
+        html: formattedEmail
+    };
+
+    sgMail
+        .send(msg)
+        .then(() => {
+            console.log('Email sent');
+            res.status(200).end("Email sent");
+        })
+        .catch((error) => {
+            console.error(error);
+            res.status(500).end("Message not sent")
+        });        
+});
 
 server.post('/pdf-resume', (req, res) => {
     pdfTemplate(res);
