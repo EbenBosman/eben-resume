@@ -1,6 +1,10 @@
 $darkBlue: #00244a;
 $lighterBlue: #004691;
 
+html {
+    scroll-behavior: smooth
+}
+
 body {
     font-family: "Roboto", sans-serif;
 }
