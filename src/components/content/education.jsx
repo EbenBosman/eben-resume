@@ -17,7 +17,7 @@ const education = ({ content }) => {
     if (!content)
         return null;
 
-    return <section id="education" className="bg-light pt-4 pb-4">
+    return <section id="certificates" className="bg-light pt-4 pb-4">
         <div className="container">
             <h3 className="font-weight-light">Certificates</h3>
             {
