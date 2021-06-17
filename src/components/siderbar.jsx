@@ -136,7 +136,7 @@ const SiderBar = ({ basics }) => {
                                 <a rel="noopener" className="nav-link text-white" href="#about">About</a>
                             </li>
                             <li className="nav-item">
-                                <a rel="noopener" className="nav-link text-white" href="#education">Education</a>
+                                <a rel="noopener" className="nav-link text-white" href="#education">Certificates</a>
                             </li>
                             <li className="nav-item">
                                 <a rel="noopener" className="nav-link text-white" href="#experience">Experience</a>
