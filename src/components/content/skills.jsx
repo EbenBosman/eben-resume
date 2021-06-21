@@ -29,7 +29,9 @@ const skills = ({ content }) => {
     return (
         <section id="skills" className="bg-light pb-5">
             <div className="container pt-4 pb-4">
-                <h2 className="text-center font-weight-light mb-5">Skills &amp; Favourite Tools</h2>
+                <div className="row justify-content-center">
+                    <h2 className="font-weight-light mb-2">Skills &amp; Favourite Tools</h2>
+                </div>
                 <div className="row text-center justify-content-center">
                     {generateSkillSection({ skills: content })}
                 </div>

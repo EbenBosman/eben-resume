@@ -55,7 +55,11 @@ const experience = ({ content }) => {
         return null;
 
     return <section id="experience" className="container pt-4 pb-4">
-        <h3 className="font-weight-light">Experience</h3>
+        <div className="row justify-content-center">
+            <div className="col-12">
+                <h3 className="font-weight-light">Experience</h3>
+            </div>
+        </div>
         {content.map((job, key) => generateCard(key, job))}
     </section>;
 }
