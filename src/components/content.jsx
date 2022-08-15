@@ -1,8 +1,9 @@
-import React from 'react';
-import About from './content/about';
-import Education from './content/education';
-import Experience from './content/experience';
-import Skills from './content/skills';
+import React, { lazy } from 'react';
+
+const About = lazy(() => import(/* webpackChunkName: "about" */  './content/about'));
+const Education = lazy(() => import(/* webpackChunkName: "education" */  './content/education'));
+const Experience = lazy(() => import(/* webpackChunkName: "experience" */  './content/experience'));
+const Skills = lazy(() => import(/* webpackChunkName: "skills" */  './content/skills'));
 
 const Content = ({ basics, about, work, education, skills }) => {
     return <div id="resume" className="col px-0 pt-3 flex-grow-1">

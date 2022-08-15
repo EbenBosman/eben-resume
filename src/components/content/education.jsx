@@ -17,9 +17,13 @@ const education = ({ content }) => {
     if (!content)
         return null;
 
-    return <section id="education" className="bg-light pt-4 pb-4">
+    return <section id="certificates" className="bg-light pt-4 pb-4">
         <div className="container">
-            <h3 className="font-weight-light">Education &amp; Certificates</h3>
+            <div className="row">
+                <div className="col-12">
+                    <h3 className="font-weight-light">Certificates</h3>
+                </div>
+            </div>
             {
                 content.map((education, key) => {
                     return (
@@ -28,7 +32,7 @@ const education = ({ content }) => {
                                 <div className="card border">
                                     <div className="card-body">
                                         <h4 className="card-title mb-0">{education.what}</h4>
-                                        <h6 className="card-title mb-0">{education.when}</h6>
+                                        <h5 className="card-title mb-0 education-date">{education.when}</h5>
                                         <div className="small font-italic">{education.where}</div>
                                         {generateCourses({ courses: education.courses })}
                                     </div>

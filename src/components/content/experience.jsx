@@ -29,7 +29,7 @@ const generateHeader = ({ website, company, position }) => {
 
 const generateLink = ({ website, company }) => {
     if (typeof website !== 'undefined' && website.includes('http'))
-        return <span><small> at </small><a href={website} target="_blank"><small>{company}</small></a></span>;
+        return <span><small> at </small><a className="experience-company" rel="noreferrer" href={website} target="_blank"><small>{company}</small></a></span>;
 
     return null;
 }
@@ -40,7 +40,7 @@ const generateCard = (key, job) => {
             <div className="card border">
                 <div className="card-body">
                     <h4 className="card-title mb-0">{generateHeader({ website: job.website, company: job.company, position: job.position })}</h4>
-                    <h6 className="card-title mb-0">{job.startDate} - {job.endDate}</h6>
+                    <h5 className="card-title mb-0 experience-date">{job.startDate} - {job.endDate}</h5>
                     <div className="small font-italic pb-2">{job.location}</div>
                     {generateSummaryParagraphs({ summary: job.summary })}
                     {generateSummaryHighlights({ highlights: job.highlights })}
@@ -55,7 +55,11 @@ const experience = ({ content }) => {
         return null;
 
     return <section id="experience" className="container pt-4 pb-4">
-        <h3 className="font-weight-light">Experience</h3>
+        <div className="row justify-content-center">
+            <div className="col-12">
+                <h3 className="font-weight-light">Experience</h3>
+            </div>
+        </div>
         {content.map((job, key) => generateCard(key, job))}
     </section>;
 }

@@ -1,18 +1,285 @@
-@import "~bootstrap/scss/bootstrap";
-@import '~@fortawesome/fontawesome-free/css/all.min.css';
+$darkBlue: #00244a;
+$lighterBlue: #004691;
+
+$slightlyLessNeonGreen: #80ff80;
+$veryNeonGreen: #33ff33;
+$mediumGreen: #208020;
+$darkGreen: #11581e;
+$notQuiteBlackGreen: #041607;
+
+html {
+    scroll-behavior: smooth;
+}
 
 body {
-    font-family: Helvetica, Roboto, Arial, sans-serif;
+    font-family: "Roboto", sans-serif;
 }
 
 .profile-pic {
     max-width: 200px;
 }
 
-$darkerStripe: #242424;
-$lighterStripe: #595959;
+/* For ipad portrait layouts only */
+@media only screen and (min-device-width: 481px) and (max-device-width: 1024px) and (orientation: portrait) {
+    .profile-pic {
+        max-width: 180px;
+        max-height: 180px;
+    }
+}
 
-.nav-bar-texture {
-    background-image: linear-gradient(45deg, $darkerStripe 37.50%, $lighterStripe 37.50%, $lighterStripe 50%, $darkerStripe 50%, $darkerStripe 87.50%, $lighterStripe 87.50%, $lighterStripe 100%);
-    background-size: 5.66px 5.66px;
+.nav-bar {
+    background: $darkBlue !important;
+}
+
+.experience-company {
+    color: $lighterBlue !important;
+    text-decoration: none !important;
+}
+
+.experience-company:hover {
+    color: $darkBlue !important;
+    text-decoration: none !important;
+}
+
+.experience-date,
+.education-date {
+    font-size: 1rem !important;
+}
+
+.side-bar-link-hide-text {
+    line-height: 0;
+    font-size: 0;
+    color: transparent;
+}
+
+.side-bar-link-hide-text .fa,
+.side-bar-link-hide-text .fab {
+    font-size: 1.3rem !important;
+    line-height: 0.75em;
+    vertical-align: -0.0667em;
+}
+
+/* 404 page */
+// Credit : https://codepen.io/robinselmer/pen/vJjbOZ
+
+.page-404-container {
+    width: 100vw;
+    height: 100vh;
+    background-color: black !important;
+}
+
+.page-404 {
+    box-sizing: border-box;
+    height: 100%;
+    background-color: black !important;
+    background-image: radial-gradient($darkGreen, $notQuiteBlackGreen),
+        url("https://media.giphy.com/media/oEI9uBYSzLpBK/giphy.gif");
+    background-repeat: no-repeat;
+    background-size: cover;
+    font-family: "Inconsolata", monospace;
+    font-size: 1.5rem;
+    color: rgba($slightlyLessNeonGreen, 0.8);
+    text-shadow: 0 0 1ex rgba($veryNeonGreen, 1), 0 0 2px rgba(white, 0.8);
+}
+
+.noise {
+    pointer-events: none;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-image: url("https://media.giphy.com/media/oEI9uBYSzLpBK/giphy.gif");
+    background-repeat: no-repeat;
+    background-size: cover;
+    z-index: -1;
+    opacity: 0.02;
+}
+
+.overlay {
+    pointer-events: none;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: repeating-linear-gradient(180deg, rgba(black, 0) 0, rgba(black, 0.3) 50%, rgba(black, 0) 100%);
+    background-size: auto 4px;
+    z-index: 1;
+}
+
+.overlay::before {
+    content: "";
+    pointer-events: none;
+    position: absolute;
+    display: block;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    width: 100%;
+    height: 100%;
+    background-image: linear-gradient(
+        0deg,
+        transparent 0%,
+        rgba($mediumGreen, 0.2) 2%,
+        rgba($mediumGreen, 0.8) 3%,
+        rgba($mediumGreen, 0.2) 3%,
+        transparent 100%
+    );
+    background-repeat: no-repeat;
+    animation: scan 7.5s linear 0s infinite;
+}
+
+@keyframes scan {
+    0% {
+        background-position: 0 -100vh;
+    }
+    35%,
+    100% {
+        background-position: 0 100vh;
+    }
+}
+
+.terminal {
+    box-sizing: inherit;
+    position: absolute;
+    height: 100%;
+    width: 1000px;
+    max-width: 100%;
+    padding: 4rem;
+    text-transform: uppercase;
+}
+
+.output {
+    color: rgba(128, 255, 128, 0.8);
+    text-shadow: 0 0 1px rgba(51, 255, 51, 0.4), 0 0 2px rgba(255, 255, 255, 0.8);
+}
+
+.output::before {
+    content: "> ";
+}
+
+a.not-found,
+a.not-found:hover {
+    color: white;
+    text-decoration: none;
+}
+
+a.not-found:hover {
+    cursor: pointer;
+}
+
+a.not-found::before {
+    content: "[";
+}
+
+a.not-found::after {
+    content: "]";
+}
+
+.errorcode {
+    color: white;
+}
+
+// Loading Spinner
+// Credit https://codepen.io/ozdalgic/pen/wvaLZEq
+
+.dot-spinner-container {
+    width: 100vw;
+    height: 100vh;
+
+    background-color: black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.dot-spinner {
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    &:after {
+        animation: dotSpinner 1s linear infinite;
+        display: block;
+        content: "⠁";
+        font-size: 30px;
+    }
+}
+
+@keyframes dotSpinner {
+    0% {
+        content: "⠁";
+    }
+    10% {
+        content: "⠉";
+    }
+    20% {
+        content: "⠈";
+    }
+    30% {
+        content: "⠘";
+    }
+    40% {
+        content: "⠐";
+    }
+    50% {
+        content: "⠒";
+    }
+    60% {
+        content: "⠂";
+    }
+    70% {
+        content: "⠃";
+    }
+}
+
+//  Animate something
+@keyframes flickerAnimation {
+    0% {
+        opacity: 1;
+    }
+    50% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+@-o-keyframes flickerAnimation {
+    0% {
+        opacity: 1;
+    }
+    50% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+@-moz-keyframes flickerAnimation {
+    0% {
+        opacity: 1;
+    }
+    50% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+@-webkit-keyframes flickerAnimation {
+    0% {
+        opacity: 1;
+    }
+    50% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+.animate-flicker {
+    -webkit-animation: flickerAnimation 1s infinite;
+    -moz-animation: flickerAnimation 1s infinite;
+    -o-animation: flickerAnimation 1s infinite;
+    animation: flickerAnimation 1s infinite;
 }
