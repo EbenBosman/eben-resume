@@ -32,11 +32,13 @@
             "location": "Remote position. HQ in Denver, CO.",
             "summary": "This is a remote contract position with the aim of redesigning & rearchitecting the current OnePager Live site. (Cloud version of OnePager\"s desktop product, still in development.)",
             "highlights": [
-                ".Net Core (2 at first and then migrated to 3), REST, C#, VB.net",
+                "RESTful API",
+                "C# & VB.net",
                 "MS SQL",
-                "React-Redux, Sass, Webpack, Babel",
+                "React, React-Redux, Sass, Webpack, Babel",
                 "Jenkins CICD",
-                "Azure"
+                "Azure VMs",
+                "Some basic SVG"
             ]
         },
         {
@@ -140,7 +142,6 @@
             "Items": [
                 "React",
                 "Redux",
-                "jQuery",
                 "Sass",
                 "Node.js",
                 ".Net"
