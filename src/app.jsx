@@ -1,7 +1,14 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
+import React, { StrictMode } from 'react';
+import { createRoot } from 'react-dom/client';
 import AppRouter from './routers/AppRouter';
 
 import '../src/styles/main.scss';
 
-ReactDOM.render(<AppRouter />, document.getElementById('app'))
+const rootElement = document.getElementById('app');
+const root = createRoot(rootElement);
+
+root.render(
+    <StrictMode>
+        <AppRouter />
+    </StrictMode>,
+);
