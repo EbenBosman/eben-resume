@@ -148,16 +148,19 @@ const SiderBar = ({ basics }) => {
                     </div>
                     <ul className="nav justify-content-center">
                         <li className="nav-item">
-                            <a rel="noreferrer" href={basics.social.github} className="nav-link text-white px-2 side-bar-link-hide-text" target="_blank">Github Prfole<i className="fab fa-github fa-lg"></i></a>
+                            <a rel="noreferrer" href={basics.social.github} className="nav-link text-white px-2 side-bar-link-hide-text" target="_blank" title="Github Profile">Github Profile<i className="fab fa-github fa-lg"></i></a>
                         </li>
                         <li className="nav-item">
-                            <a rel="noreferrer" href={basics.social.stackOverflow} className="nav-link text-white px-2 side-bar-link-hide-text" target="_blank">Stack Overflow Profile<i className="fab fa-stack-overflow fa-lg"></i></a>
+                            <a rel="noreferrer" href={basics.social.stackOverflow} className="nav-link text-white px-2 side-bar-link-hide-text" target="_blank" title="Stack Overflow Profile">Stack Overflow Profile<i className="fab fa-stack-overflow fa-lg"></i></a>
                         </li>
-                        <li className="nav-item">
+                        {/* <li className="nav-item">
                             <button type="button" className="btn btn-link nav-link text-white px-2 side-bar-link-hide-text" data-toggle="modal" data-target="#mailMe">Mail Me<i className="fa fa-envelope fa-lg"></i></button>
+                        </li> */}
+                        <li className="nav-item">
+                            <a rel="noreferrer" href={basics.social.linkedIn} className="nav-link text-white px-2 side-bar-link-hide-text" target="_blank" title="LinkedIn Profile">LinkedIn Profile<i className="fab fa-linkedin fa-lg"></i></a>
                         </li>
                         <li className="nav-item">
-                            <a rel="noreferrer" href="" className={`nav-link text-white px-2 side-bar-link-hide-text ${isPdfLoading ? "animate-flicker" : ""}`} onClick={createAndDownloadPdf}>PDF Resume<i className="fa fa-file-pdf fa-lg"></i></a>
+                            <a rel="noreferrer" href="" className={`nav-link text-white px-2 side-bar-link-hide-text ${isPdfLoading ? "animate-flicker" : ""}`} onClick={createAndDownloadPdf} title="PDF Resume">PDF Resume<i className="fa fa-file-pdf fa-lg"></i></a>
                         </li>
                     </ul>
                 </nav>
