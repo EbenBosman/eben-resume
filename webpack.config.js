@@ -3,12 +3,12 @@
 const path = require('path');
 const webpack = require('webpack');
 
+const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const CompressionPlugin = require("compression-webpack-plugin");
 const BrotliPlugin = require('brotli-webpack-plugin');
 const CssMinimizerWebpackPlugin = require('css-minimizer-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const TerserPlugin = require('terser-webpack-plugin');
-const WebpackBeforeBuildPlugin = require('before-build-webpack');
 
 const isEnvProd = params => {
 	if (typeof params.prd !== 'undefined' && params.prd === true)
@@ -91,27 +91,14 @@ module.exports = params => {
 			]
 		},
 		plugins: [
-			new WebpackBeforeBuildPlugin(function (stats, callback) {
-				const fs = require('fs')
-				const rimraf = require("rimraf");
-				const pathToAssets = path.resolve('public/assets');
-
-				//	colors in console.log : https://stackoverflow.com/a/41407246/813689
-
-				try {
-					if (fs.existsSync(pathToAssets)) {
-						rimraf(pathToAssets, function () {
-							console.log("\x1b[32m", "\r\nsuccessfully deleted public/assets\r\ncontinuing build...\r\n");
-							callback();
-						});
-					} else {
-						console.log("\x1b[33m", "\r\npublic/assets already cleared\r\ncontinuing build...\r\n");
-						callback();
-					}
-				} catch (err) {
-					console.error("\x1b[31m", err);
-					callback();
-				}
+			new CleanWebpackPlugin({
+				verbose: true,
+				cleanOnceBeforeBuildPatterns: [
+					'public/assets/**.*',
+					'!public/images/**.*',
+					'!public/robots.txt',
+					'!public/index.html'
+				]
 			}),
 
 			new MiniCssExtractPlugin({
