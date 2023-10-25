@@ -77,7 +77,7 @@ server.get('*.webp', function (req, res, next) {
 
 // issue: https://developer.chrome.com/blog/enabling-shared-array-buffer/
 server.use((req, res, next) => {
-    res.set('Cross-Origin-Embedder-Policy', 'require-corp');
+    res.set('Cross-Origin-Embedder-Policy', 'credentialless');
     res.set('Cross-Origin-Opener-Policy', 'same-origin');
     res.set('Cache-control', 'public, max-age=31536000');
 
