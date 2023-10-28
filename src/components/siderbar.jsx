@@ -23,7 +23,7 @@ const SiderBar = ({ basics }) => {
         }).replace(/ /g, ' ')
 
         return `Resume of ${name} (${formattedDate}).pdf`;
-    }
+    };
 
     const createAndDownloadPdf = e => {
         e.preventDefault();
@@ -37,8 +37,12 @@ const SiderBar = ({ basics }) => {
             })
             .then(() => {
                 setPdfIsLoading(false);
+            })
+            .catch((error) => {
+                console.error(error);
+                setPdfIsLoading(false);  // Ensure loading state is reset on error
             });
-    }
+    };
 
     const sendMessage = e => {
         e.preventDefault();
@@ -59,7 +63,7 @@ const SiderBar = ({ basics }) => {
             .then(() => {
                 $('#mailMe').modal('hide');
             });
-    }
+    };
 
     const changeEmail = e => {
         const rawEmail = e.target.value;
@@ -77,7 +81,7 @@ const SiderBar = ({ basics }) => {
             setEmailValid(true);
             setEmailInvalidText("");
         }
-    }
+    };
 
     const changeMessage = e => {
         const rawMessage = e.target.value;
@@ -93,20 +97,20 @@ const SiderBar = ({ basics }) => {
             setMessageValid(true);
             setMessageInvalidText("");
         }
-    }
+    };
 
     const isTextEmpty = text => {
         return text.length === 0 && text === "";
-    }
+    };
 
     const isTextLessThan50 = text => {
         return text.length <= 49 && text !== "";
-    }
+    };
 
     const isValidEmail = email => {
         const re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
         return re.test(email)
-    }
+    };
 
     const clearMessageFields = () => {
         setEmail("");
@@ -118,7 +122,7 @@ const SiderBar = ({ basics }) => {
         setMessageInvalidText("");
 
         $('#mailMe').modal('hide');
-    }
+    };
 
     return (
         <React.Fragment>
@@ -197,6 +201,6 @@ const SiderBar = ({ basics }) => {
             </div>
         </React.Fragment>
     );
-}
+};
 
 export default SiderBar;
