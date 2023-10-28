@@ -11,6 +11,7 @@
   },
   "scripts": {
     "dev": "webpack serve --progress --env=dev",
+    "server": "webpack --progress --env=prod && node server.js",
     "build": "webpack --progress --env=prod",
     "build:dev": "webpack --progress --env=dev",
     "build:prod": "webpack --progress --env=prod",
