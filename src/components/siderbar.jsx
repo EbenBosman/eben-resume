@@ -6,6 +6,7 @@ const ProfilePic = lazy(() => import(/* webpackChunkName: "profile-pic" */ './co
 
 const SiderBar = ({ basics }) => {
     const [isPdfLoading, setPdfIsLoading] = useState(false);
+    const [isPdfIsErrored, setPdfIsErrored] = useState(false);
     const [isMessageSending, setMessageLoading] = useState(false);
 
     const [email, setEmail] = useState("");
@@ -31,6 +32,7 @@ const SiderBar = ({ basics }) => {
         axios.post('/pdf-resume', {})
             .then(() => axios.get('/pdf-resume', { responseType: 'blob' }))
             .then((res) => {
+
                 const pdfBlob = new Blob([res.data], { type: 'application/pdf' });
 
                 saveAs(pdfBlob, constructResumeFileName('Eben Bosman'));
@@ -39,8 +41,12 @@ const SiderBar = ({ basics }) => {
                 setPdfIsLoading(false);
             })
             .catch((error) => {
-                console.error(error);
-                setPdfIsLoading(false);  // Ensure loading state is reset on error
+                setPdfIsLoading(false);
+
+                setPdfIsErrored(true);
+                setTimeout(() => {
+                    setPdfIsErrored(false);
+                }, 1000);
             });
     };
 
@@ -163,7 +169,13 @@ const SiderBar = ({ basics }) => {
                             <a rel="noreferrer" href={basics.social.linkedIn} className="nav-link text-white px-2 side-bar-link-hide-text" target="_blank" title="LinkedIn Profile">LinkedIn Profile<i className="fab fa-linkedin fa-lg"></i></a>
                         </li>
                         <li className="nav-item">
-                            <a rel="noreferrer" href="" className={`nav-link text-white px-2 side-bar-link-hide-text ${isPdfLoading ? "animate-flicker" : ""}`} onClick={createAndDownloadPdf} title="PDF Resume">PDF Resume<i className="fa fa-file-pdf fa-lg"></i></a>
+                            <a
+                                rel="noreferrer"
+                                href=""
+                                className={`nav-link text-white px-2 side-bar-link-hide-text ${isPdfLoading ? "animate-flicker" : ""}`}
+                                onClick={createAndDownloadPdf} title="PDF Resume">
+                                PDF Resume<i className={`fa fa-file-pdf fa-lg ${isPdfIsErrored ? "shake" : ""}`} style={{color: isPdfIsErrored ? "red" : ""}}></i>
+                            </a>
                         </li>
                     </ul>
                 </nav>
