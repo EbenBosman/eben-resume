@@ -4,7 +4,6 @@ import { saveAs } from 'file-saver';
 
 const ProfilePic = lazy(() => import(/* webpackChunkName: "profile-pic" */ './content/side-bar-content/profilePic'));
 
-
 const SiderBar = ({ basics }) => {
     const [isPdfLoading, setPdfIsLoading] = useState(false);
     const [isMessageSending, setMessageLoading] = useState(false);
