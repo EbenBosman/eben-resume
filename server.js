@@ -40,10 +40,12 @@ server.post('/message', (req, res) => {
 });
 
 server.post('/pdf-resume', (req, res) => {
+    console.log('post pdf-resume', res)
     pdfTemplate(res);
 });
 
 server.get('/pdf-resume', (req, res) => {
+    console.log('get pdf-resume', `${__dirname}/result.pdf`)
     res.sendFile(`${__dirname}/result.pdf`)
 });
 
