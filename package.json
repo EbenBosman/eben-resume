@@ -1,13 +1,13 @@
 {
   "name": "eben-resume",
-  "version": "1.3.0",
+  "version": "1.3.1",
   "description": "This is the Resume for Eben Bosman",
   "main": "app.jsx",
   "author": "eben bosman",
   "license": "MIT",
   "engines": {
     "node": "20.x",
-    "npm": "9.x"
+    "npm": "10.x"
   },
   "scripts": {
     "dev": "webpack serve --progress --env=dev",
