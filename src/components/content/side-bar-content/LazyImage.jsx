@@ -1,15 +1,15 @@
 import React, { Suspense } from 'react';
 
-export default class LazyImage extends React.Component {
-    loadingFallback = () => (
-        <img src={this.props.lowResSrc} className={this.props.className} height={this.props.height} width={this.props.width} alt={this.props.alt} />
+const LazyImage = ({ lowResSrc, fullResSrc, className, height, width, alt }) => {
+    const loadingFallback = (
+        <img src={lowResSrc} className={className} height={height} width={width} alt={alt} />
     );
 
-    render() {
-        return (
-            <Suspense fallback={this.loadingFallback()}>
-                <img src={this.props.fullResSrc} className={this.props.className} height={this.props.height} width={this.props.width} alt={this.props.alt} />
-            </Suspense>
-        );
-    }
-}
+    return (
+        <Suspense fallback={loadingFallback}>
+            <img src={fullResSrc} className={className} height={height} width={width} alt={alt} />
+        </Suspense>
+    );
+};
+
+export default LazyImage;
