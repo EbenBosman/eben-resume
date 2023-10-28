@@ -40,7 +40,6 @@ server.post('/message', (req, res) => {
 });
 
 server.post('/pdf-resume', (req, res) => {
-    console.log('post pdf-resume', res)
     pdfTemplate(res);
 });
 
