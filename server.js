@@ -69,12 +69,6 @@ server.get('*.css', function (req, res, next) {
     next();
 });
 
-server.get('*.webp', function (req, res, next) {
-    setContentEncoding(req, res);
-    res.set('Content-Type', 'image/webp');
-    next();
-});
-
 // issue: https://developer.chrome.com/blog/enabling-shared-array-buffer/
 server.use((req, res, next) => {
     res.set('Cross-Origin-Embedder-Policy', 'credentialless');
