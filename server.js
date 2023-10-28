@@ -45,7 +45,7 @@ server.post('/pdf-resume', (req, res) => {
 
 server.get('/pdf-resume', (req, res) => {
     res.sendFile(`${__dirname}/result.pdf`)
-})
+});
 
 const setContentEncoding = (req, res) => {
     if (req.header("Accept-Encoding").indexOf('br') !== -1) {
@@ -55,7 +55,7 @@ const setContentEncoding = (req, res) => {
         req.url = req.url + '.gz';
         res.set('Content-Encoding', 'gzip');
     }
-}
+};
 
 server.get('*.js', function (req, res, next) {
     setContentEncoding(req, res);
@@ -82,7 +82,12 @@ server.use(serveStatic(__dirname + "/public"));
 
 server.get('*', function (req, res) {
     res.sendFile(path.resolve(__dirname, "public", "index.html"));
-})
+});
+
+server.get('/fontawesome-css', (req, res) => {
+    const url = 'https://pro.fontawesome.com/releases/v5.10.0/css/all.css';
+    req.pipe(request(url)).pipe(res);
+});
 
 const port = process.env.PORT || 5000;
 server.listen(port);
