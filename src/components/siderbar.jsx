@@ -29,20 +29,16 @@ const SiderBar = ({ basics }) => {
     const createAndDownloadPdf = e => {
         e.preventDefault();
         setPdfIsLoading(true);
-        axios.post('/pdf-resume', {})
-            .then(() => axios.get('/pdf-resume', { responseType: 'blob' }))
+        
+        axios.post('/pdf-resume', {}, { responseType: 'blob' })
             .then((res) => {
-
                 const pdfBlob = new Blob([res.data], { type: 'application/pdf' });
-
                 saveAs(pdfBlob, constructResumeFileName('Eben Bosman'));
-            })
-            .then(() => {
                 setPdfIsLoading(false);
             })
             .catch((error) => {
+                console.error(error);
                 setPdfIsLoading(false);
-
                 setPdfIsErrored(true);
                 setTimeout(() => {
                     setPdfIsErrored(false);
