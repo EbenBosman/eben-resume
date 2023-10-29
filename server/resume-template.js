@@ -25,12 +25,13 @@ module.exports = (req, res) => {
          const options = {
             "format": "A4"
          };
-         
+
          // There exists an issue that if zoom is not applied to the html (inside the doc's style tag),
          // then all content is rendered too large.
          // https://github.com/marcbachmann/node-html-pdf/issues/110
          pdf.create(htmlString, options).toStream((err, stream) => {
             if (err) {
+               console.error('PDF Create Error:', err);
                return res.status(500).send('Error creating PDF');
             }
 
