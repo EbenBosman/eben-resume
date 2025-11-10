@@ -33,10 +33,10 @@
             "location": "Remote (HQ in Melrose, MA)",
             "summary": "As Co-founder and Lead Developer, I drove the product vision and defined the full-stack architecture, overseeing all technical aspects from concept to production.",
             "highlights": [
-                "Architected high-performance frontend using Next.js (App Router) and React 19+",
-                "Designed secure API layer utilizing MongoDB (Mongoose) for scalable data persistence",
+                "Architected high-performance frontend using Next.js and React",
+                "Designed secure API layer utilizing MongoDB for scalable data persistence",
                 "Managed full hosting and CI/CD pipeline via AWS Amplify",
-                "Integrated critical third-party services including Auth0 (Authentication), Stripe (Payments), and Melissa.com (Data Verification)"
+                "Integrated critical third-party services including Auth0, Stripe, and Melissa.com"
             ]
         },
         {
