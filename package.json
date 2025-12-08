@@ -6,7 +6,7 @@
 	"author": "eben bosman",
 	"license": "MIT",
 	"engines": {
-		"node": "25.x",
+		"node": "24.x",
 		"npm": "11.x"
 	},
 	"scripts": {
