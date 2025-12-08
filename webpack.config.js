@@ -5,7 +5,7 @@ const webpack = require('webpack');
 
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const CompressionPlugin = require("compression-webpack-plugin");
-const BrotliPlugin = require('brotli-webpack-plugin');
+// const BrotliPlugin = require('brotli-webpack-plugin');
 const CssMinimizerWebpackPlugin = require('css-minimizer-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const TerserPlugin = require('terser-webpack-plugin');
@@ -49,45 +49,46 @@ module.exports = params => {
 			publicPath: "/assets/"
 		},
 		module: {
-			rules: [{
-				test: /\.(js|jsx)$/,
-				loader: 'babel-loader',
-				exclude: /node_modules/,
-                resolve: {
-                  fullySpecified: false,
-                }
-			},
-			{
-				test: /\.(jpe?g|png|ttf|eot|svg|woff(2)?)(\?[a-z0-9=&.]+)?$/,
-				use: 'base64-inline-loader?limit=10000000&name=[name].[ext]'
-			},
-			{
-				test: /\.s?css$/,
-				use: [{
-					loader: MiniCssExtractPlugin.loader,
-				},
+			rules: [
 				{
-					loader: 'css-loader',
-					options: {
-						sourceMap: !isProduction
+					test: /\.(js|jsx)$/,
+					loader: 'babel-loader',
+					exclude: /node_modules/,
+					resolve: {
+						fullySpecified: false,
 					}
 				},
 				{
-					loader: 'sass-loader',
-					options: {
-						sourceMap: !isProduction
+					test: /\.(jpe?g|png|ttf|eot|svg|woff(2)?)(\?[a-z0-9=&.]+)?$/,
+					use: 'base64-inline-loader?limit=10000000&name=[name].[ext]'
+				},
+				{
+					test: /\.s?css$/,
+					use: [{
+						loader: MiniCssExtractPlugin.loader,
+					},
+					{
+						loader: 'css-loader',
+						options: {
+							sourceMap: !isProduction
+						}
+					},
+					{
+						loader: 'sass-loader',
+						options: {
+							sourceMap: !isProduction
+						}
 					}
+					],
+				},
+				{
+					test: /\.(webp|png|jpe?g)$/i,
+					loader: "file-loader",
+					options: {
+						name: "[contenthash].[ext]",
+						outputPath: "images",
+					},
 				}
-				],
-			},
-			{
-				test: /\.(webp|png|jpe?g)$/i,
-				loader: "file-loader",
-				options: {
-					name: "[contenthash].[ext]",
-					outputPath: "images",
-				},
-			}
 			]
 		},
 		plugins: [
@@ -126,10 +127,10 @@ module.exports = params => {
 				deleteOriginalAssets: isProduction
 			}),
 
-			new BrotliPlugin({
-				minRatio: 0.9,
-				deleteOriginalAssets: isProduction
-			}),
+			// new BrotliPlugin({
+			// 	minRatio: 0.9,
+			// 	deleteOriginalAssets: isProduction
+			// }),
 
 			new webpack.DefinePlugin({
 				'__REACT_DEVTOOLS_GLOBAL_HOOK__': `({ isDisabled: true })`
@@ -137,18 +138,14 @@ module.exports = params => {
 		],
 		devtool: isProduction ? 'nosources-source-map' : 'inline-source-map',	//	https://webpack.js.org/configuration/devtool/
 		devServer: {
-			static: path.join(__dirname, 'public'),
-			historyApiFallback: true,
-			https: true, // https://diary-of-programmer.blogspot.com/2019/04/tips-using-ssl-locally-with-webpack-dev.html
-			compress: true,
-			open: true,
 			port: 3000,
-			hot: true,
-			devMiddleware: {
-				publicPath: '/assets/',
-				stats: 'minimal', // none, errors-only, minimal, verbose
-				writeToDisk: true
-			}
+			static: path.join(__dirname, 'public'),
+			proxy: [
+				{
+					context: ['/message', '/pdf-resume'],
+					target: 'http://localhost:5000',
+				},
+			],
 		},
 		optimization: {
 			minimize: isProduction,

@@ -14,7 +14,7 @@ const AppRouter = () => (
     <Router>
         <Suspense fallback={loadingFallback()}>
             <Routes>
-                <Route path="/" element={<HomePage />} exact={true} />
+                <Route path="/" element={<HomePage />} />
                 <Route element={<PageNotFound />} />
             </Routes>
         </Suspense>
