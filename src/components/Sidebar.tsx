@@ -219,11 +219,11 @@ const Sidebar: React.FC<SidebarProps> = ({ basics }) => {
 									<FontAwesomeIcon icon={faStackOverflow} className="fa-lg md:fa-2x" />
 								</a>
 							</li>
-							<li className="nav-item">
+							{/* <li className="nav-item">
 								<button type="button" className="text-white hover:text-primary transition-colors bg-transparent border-0 cursor-pointer" onClick={() => setShowModal(true)} title="Mail Me">
 									<FontAwesomeIcon icon={faEnvelope} className="fa-lg md:fa-2x" />
 								</button>
-							</li>
+							</li> */}
 							<li className="nav-item">
 								<a rel="noreferrer" href={basics.social.linkedIn} className="text-white hover:text-primary transition-colors cursor-pointer" target="_blank" title="LinkedIn">
 									<FontAwesomeIcon icon={faLinkedin} className="fa-lg md:fa-2x" />
@@ -283,12 +283,12 @@ const Sidebar: React.FC<SidebarProps> = ({ basics }) => {
 										<FontAwesomeIcon icon={faStackOverflow} className="fa-lg" />
 									</a>
 								</li>
-								<li className="nav-item">
+								{/* <li className="nav-item">
 									<button type="button" className="text-white hover:text-primary transition-colors bg-transparent border-0 cursor-pointer" onClick={() => setShowModal(true)} title="Mail Me">
 										<span className="hidden">Mail Me</span>
 										<FontAwesomeIcon icon={faEnvelope} className="fa-lg" />
 									</button>
-								</li>
+								</li> */}
 								<li className="nav-item">
 									<a rel="noreferrer" href={basics.social.linkedIn} className="text-white hover:text-primary transition-colors" target="_blank" title="LinkedIn">
 										<span className="hidden">LinkedIn Profile</span>
