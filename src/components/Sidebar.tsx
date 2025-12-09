@@ -1,10 +1,16 @@
 'use client';
 
 import React, { useState, ChangeEvent } from 'react';
-import { saveAs } from 'file-saver';
-import { useTheme } from 'next-themes';
-import { Basics } from '../types/resume';
+
 import Image from 'next/image';
+import { useTheme } from 'next-themes';
+
+import { saveAs } from 'file-saver';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faGithub, faStackOverflow, faLinkedin } from '@fortawesome/free-brands-svg-icons';
+import { faEnvelope, faFilePdf, faMoon, faSun, faBars } from '@fortawesome/free-solid-svg-icons';
+
+import { Basics } from '../types/resume';
 import fullResolutionProfilePicture from '../images/eben-profile.webp';
 
 import ProfilePic from './content/side-bar-content/ProfilePic';
@@ -192,7 +198,7 @@ const Sidebar: React.FC<SidebarProps> = ({ basics }) => {
 							onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
 							aria-label="Toggle navigation"
 						>
-							<i className="fas fa-bars fa-2x"></i>
+							<FontAwesomeIcon icon={faBars} className="fa-lg md:fa-lg md:fa-2x" />
 						</button>
 					</div>
 
@@ -205,27 +211,27 @@ const Sidebar: React.FC<SidebarProps> = ({ basics }) => {
 						<ul className="flex flex-row justify-center items-center w-full mt-6 space-x-8">
 							<li className="nav-item">
 								<a rel="noreferrer" href={basics.social.github} className="text-white hover:text-primary transition-colors cursor-pointer" target="_blank" title="Github">
-									<i className="fab fa-github fa-2x"></i>
+									<FontAwesomeIcon icon={faGithub} className="fa-lg md:fa-2x" />
 								</a>
 							</li>
 							<li className="nav-item">
 								<a rel="noreferrer" href={basics.social.stackOverflow} className="text-white hover:text-primary transition-colors cursor-pointer" target="_blank" title="Stack Overflow">
-									<i className="fab fa-stack-overflow fa-2x"></i>
+									<FontAwesomeIcon icon={faStackOverflow} className="fa-lg md:fa-2x" />
 								</a>
 							</li>
 							<li className="nav-item">
 								<button type="button" className="text-white hover:text-primary transition-colors bg-transparent border-0 cursor-pointer" onClick={() => setShowModal(true)} title="Mail Me">
-									<i className="fa fa-envelope fa-2x"></i>
+									<FontAwesomeIcon icon={faEnvelope} className="fa-lg md:fa-2x" />
 								</button>
 							</li>
 							<li className="nav-item">
 								<a rel="noreferrer" href={basics.social.linkedIn} className="text-white hover:text-primary transition-colors cursor-pointer" target="_blank" title="LinkedIn">
-									<i className="fab fa-linkedin fa-2x"></i>
+									<FontAwesomeIcon icon={faLinkedin} className="fa-lg md:fa-2x" />
 								</a>
 							</li>
 							<li className="nav-item">
-								<a rel="noreferrer" href="#" className={`text-white hover:text-primary transition-colors cursor-pointer ${isPdfLoading ? 'animate-flicker' : ''}`} onClick={createAndDownloadPdf} title="PDF Resume">
-									<i className={`fa fa-file-pdf fa-2x ${isPdfIsErrored ? 'shake' : ''}`} style={{ color: isPdfIsErrored ? 'red' : '' }}></i>
+								<a rel="noreferrer" href="#" className={`text-white hover:text-primary transition-colors cursor-pointer ${isPdfLoading ? 'animate-flicker' : ''} ${isPdfIsErrored ? 'shake' : ''}`} onClick={createAndDownloadPdf} title="PDF Resume">
+									<FontAwesomeIcon icon={faFilePdf} className="fa-lg md:fa-2x" style={{ color: isPdfIsErrored ? 'red' : '' }} />
 								</a>
 							</li>
 						</ul>
@@ -242,7 +248,7 @@ const Sidebar: React.FC<SidebarProps> = ({ basics }) => {
 						<div className="w-full mt-8 pt-4 border-t border-sidebar-border flex justify-center">
 							<button onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')} className="flex items-center text-white hover:text-primary cursor-pointer">
 								<span className="mr-2">{theme === 'dark' ? 'Light Mode' : 'Dark Mode'}</span>
-								<i className={`fas ${theme === 'dark' ? 'fa-sun' : 'fa-moon'} fa-lg`}></i>
+								<FontAwesomeIcon icon={theme === 'dark' ? faSun : faMoon} className="fa-lg" />
 							</button>
 						</div>
 					</div>
@@ -268,31 +274,31 @@ const Sidebar: React.FC<SidebarProps> = ({ basics }) => {
 								<li className="nav-item">
 									<a rel="noreferrer" href={basics.social.github} className="text-white hover:text-primary transition-colors" target="_blank" title="Github">
 										<span className="hidden">Github Profile</span>
-										<i className="fab fa-github fa-lg"></i>
+										<FontAwesomeIcon icon={faGithub} className="fa-lg" />
 									</a>
 								</li>
 								<li className="nav-item">
 									<a rel="noreferrer" href={basics.social.stackOverflow} className="text-white hover:text-primary transition-colors" target="_blank" title="Stack Overflow">
 										<span className="hidden">Stack Overflow Profile</span>
-										<i className="fab fa-stack-overflow fa-lg"></i>
+										<FontAwesomeIcon icon={faStackOverflow} className="fa-lg" />
 									</a>
 								</li>
 								<li className="nav-item">
 									<button type="button" className="text-white hover:text-primary transition-colors bg-transparent border-0 cursor-pointer" onClick={() => setShowModal(true)} title="Mail Me">
 										<span className="hidden">Mail Me</span>
-										<i className="fa fa-envelope fa-lg"></i>
+										<FontAwesomeIcon icon={faEnvelope} className="fa-lg" />
 									</button>
 								</li>
 								<li className="nav-item">
 									<a rel="noreferrer" href={basics.social.linkedIn} className="text-white hover:text-primary transition-colors" target="_blank" title="LinkedIn">
 										<span className="hidden">LinkedIn Profile</span>
-										<i className="fab fa-linkedin fa-lg"></i>
+										<FontAwesomeIcon icon={faLinkedin} className="fa-lg" />
 									</a>
 								</li>
 								<li className="nav-item">
-									<a rel="noreferrer" href="#" className={`text-white hover:text-primary transition-colors ${isPdfLoading ? 'animate-flicker' : ''}`} onClick={createAndDownloadPdf} title="PDF Resume">
+									<a rel="noreferrer" href="#" className={`text-white hover:text-primary transition-colors ${isPdfLoading ? 'animate-flicker' : ''} ${isPdfIsErrored ? 'shake' : ''}`} onClick={createAndDownloadPdf} title="PDF Resume">
 										<span className="hidden">PDF Resume</span>
-										<i className={`fa fa-file-pdf fa-lg ${isPdfIsErrored ? 'shake' : ''}`} style={{ color: isPdfIsErrored ? 'red' : '' }}></i>
+										<FontAwesomeIcon icon={faFilePdf} className="fa-lg" style={{ color: isPdfIsErrored ? 'red' : '' }} />
 									</a>
 								</li>
 							</ul>
@@ -317,7 +323,7 @@ const Sidebar: React.FC<SidebarProps> = ({ basics }) => {
 							<span className="inline mr-2">
 								{theme === 'dark' ? 'Light Mode' : 'Dark Mode'}
 							</span>
-							<i className={`fas ${theme === 'dark' ? 'fa-sun' : 'fa-moon'} fa-lg`}></i>
+							<FontAwesomeIcon icon={theme === 'dark' ? faSun : faMoon} className="fa-lg" />
 						</button>
 					</div>
 				</nav>
