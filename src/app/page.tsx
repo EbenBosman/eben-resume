@@ -1,18 +1,15 @@
-'use client';
-
-import React, { lazy } from 'react';
 import resume from '../data/resume.json';
 import { ResumeData } from '../types/resume';
 
-const Sidebar = lazy(() => import('../components/Sidebar'));
-const Content = lazy(() => import('../components/Content'));
+import Sidebar from '../components/Sidebar';
+import Content from '../components/Content';
 
 export default function Page() {
     // Cast strict type
     const data = resume as ResumeData;
 
     return (
-        <div className="w-full min-h-screen bg-background dark:bg-dark-background">
+        <div className="w-full min-h-screen bg-background">
             <div className="flex flex-col md:flex-row min-h-screen">
                 <Sidebar basics={data.basics} />
                 <Content

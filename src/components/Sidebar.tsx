@@ -1,3 +1,5 @@
+'use client';
+
 import React, { useState, ChangeEvent } from 'react';
 import { saveAs } from 'file-saver';
 import { useTheme } from 'next-themes';
@@ -7,6 +9,9 @@ import fullResolutionProfilePicture from '../images/eben-profile.webp';
 
 import ProfilePic from './content/side-bar-content/ProfilePic';
 import Modal from './Modal';
+import { Button } from './ui/Button';
+import { Input } from './ui/Input';
+import { TextArea } from './ui/TextArea';
 
 interface SidebarProps {
 	basics: Basics;
@@ -165,12 +170,12 @@ const Sidebar: React.FC<SidebarProps> = ({ basics }) => {
 
 	return (
 		<React.Fragment>
-			<div className="w-full md:w-1/4 xl:w-1/5 bg-gray-900 border-b md:border-b-0 md:border-r border-gray-700 flex-shrink-0">
+			<div className="w-full md:w-1/4 xl:w-1/5 bg-sidebar border-b md:border-b-0 md:border-r border-sidebar-border flex-shrink-0">
 
 				{/* ================= MOBILE LAYOUT ================= */}
-				<div className="md:hidden w-full bg-gray-900">
+				<div className="md:hidden w-full bg-sidebar">
 					{/* Mobile Header: Profile Pic + Hamburger */}
-					<div className="flex justify-between items-center px-4 h-16 border-b border-gray-700 z-50 relative bg-gray-900">
+					<div className="flex justify-between items-center px-4 h-16 border-b border-sidebar-border z-50 relative bg-sidebar">
 						<div className="flex-shrink-0 flex items-center">
 							<Image
 								src={fullResolutionProfilePicture}
@@ -193,18 +198,18 @@ const Sidebar: React.FC<SidebarProps> = ({ basics }) => {
 
 					{/* Mobile Dropdown Menu */}
 					<div
-						className={`flex flex-col w-full bg-gray-900 border-b border-gray-700 px-4 transition-all duration-300 ease-in-out overflow-hidden ${isMobileMenuOpen ? 'max-h-screen opacity-100 pb-6' : 'max-h-0 opacity-0 pb-0'}`}
+						className={`flex flex-col w-full bg-sidebar border-b border-sidebar-border px-4 transition-all duration-300 ease-in-out overflow-hidden ${isMobileMenuOpen ? 'max-h-screen opacity-100 pb-6' : 'max-h-0 opacity-0 pb-0'}`}
 					>
 
 						{/* 1. Social Icons (Row) */}
 						<ul className="flex flex-row justify-center items-center w-full mt-6 space-x-8">
 							<li className="nav-item">
-								<a rel="noreferrer" href={basics.social.github} className="text-white hover:text-primary transition-colors" target="_blank" title="Github">
+								<a rel="noreferrer" href={basics.social.github} className="text-white hover:text-primary transition-colors cursor-pointer" target="_blank" title="Github">
 									<i className="fab fa-github fa-2x"></i>
 								</a>
 							</li>
 							<li className="nav-item">
-								<a rel="noreferrer" href={basics.social.stackOverflow} className="text-white hover:text-primary transition-colors" target="_blank" title="Stack Overflow">
+								<a rel="noreferrer" href={basics.social.stackOverflow} className="text-white hover:text-primary transition-colors cursor-pointer" target="_blank" title="Stack Overflow">
 									<i className="fab fa-stack-overflow fa-2x"></i>
 								</a>
 							</li>
@@ -214,12 +219,12 @@ const Sidebar: React.FC<SidebarProps> = ({ basics }) => {
 								</button>
 							</li>
 							<li className="nav-item">
-								<a rel="noreferrer" href={basics.social.linkedIn} className="text-white hover:text-primary transition-colors" target="_blank" title="LinkedIn">
+								<a rel="noreferrer" href={basics.social.linkedIn} className="text-white hover:text-primary transition-colors cursor-pointer" target="_blank" title="LinkedIn">
 									<i className="fab fa-linkedin fa-2x"></i>
 								</a>
 							</li>
 							<li className="nav-item">
-								<a rel="noreferrer" href="#" className={`text-white hover:text-primary transition-colors ${isPdfLoading ? 'animate-flicker' : ''}`} onClick={createAndDownloadPdf} title="PDF Resume">
+								<a rel="noreferrer" href="#" className={`text-white hover:text-primary transition-colors cursor-pointer ${isPdfLoading ? 'animate-flicker' : ''}`} onClick={createAndDownloadPdf} title="PDF Resume">
 									<i className={`fa fa-file-pdf fa-2x ${isPdfIsErrored ? 'shake' : ''}`} style={{ color: isPdfIsErrored ? 'red' : '' }}></i>
 								</a>
 							</li>
@@ -234,8 +239,8 @@ const Sidebar: React.FC<SidebarProps> = ({ basics }) => {
 						</ul>
 
 						{/* Mobile Dark Mode Toggle */}
-						<div className="w-full mt-8 pt-4 border-t border-gray-700 flex justify-center">
-							<button onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')} className="flex items-center text-white hover:text-primary">
+						<div className="w-full mt-8 pt-4 border-t border-sidebar-border flex justify-center">
+							<button onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')} className="flex items-center text-white hover:text-primary cursor-pointer">
 								<span className="mr-2">{theme === 'dark' ? 'Light Mode' : 'Dark Mode'}</span>
 								<i className={`fas ${theme === 'dark' ? 'fa-sun' : 'fa-moon'} fa-lg`}></i>
 							</button>
@@ -248,7 +253,7 @@ const Sidebar: React.FC<SidebarProps> = ({ basics }) => {
 				{/* ================= DESKTOP LAYOUT ================= */}
 				<nav
 					id="sidebar"
-					className="hidden md:flex flex-col items-center py-4 text-center sticky top-0 h-screen w-full bg-gray-900"
+					className="hidden md:flex flex-col items-center py-4 text-center sticky top-0 h-screen w-full bg-sidebar "
 				>
 					<div className="flex-1 flex flex-col items-center w-full overflow-y-auto no-scrollbar">
 
@@ -303,10 +308,10 @@ const Sidebar: React.FC<SidebarProps> = ({ basics }) => {
 					</div>
 
 					{/* Desktop Dark Mode Toggle */}
-					<div className="w-full mt-auto mb-4 px-4 pt-4 border-t border-gray-700">
+					<div className="w-full mt-auto mb-4 px-4 pt-4 border-sidebar-border">
 						<button
 							onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
-							className="flex items-center justify-center text-white hover:text-primary transition-colors w-full py-2"
+							className="flex items-center justify-center text-white hover:text-primary transition-colors cursor-pointer w-full py-2"
 							title="Toggle Dark Mode"
 						>
 							<span className="inline mr-2">
@@ -324,16 +329,14 @@ const Sidebar: React.FC<SidebarProps> = ({ basics }) => {
 				title="Contact Me"
 				footer={
 					<>
-						<button
-							type="button"
-							className="px-4 py-2 bg-gray-200 text-gray-800 rounded hover:bg-gray-300 dark:bg-gray-700 dark:text-white dark:hover:bg-gray-600 transition-colors"
+						<Button
+							variant="secondary"
 							onClick={clearMessageFields}
 						>
 							Close
-						</button>
-						<button
-							type="button"
-							className="px-4 py-2 bg-primary text-white rounded hover:bg-primary-dark disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+						</Button>
+						<Button
+							variant="primary"
 							onClick={sendMessage}
 							disabled={
 								isTextEmpty(message) ||
@@ -343,49 +346,28 @@ const Sidebar: React.FC<SidebarProps> = ({ basics }) => {
 							}
 						>
 							Send
-						</button>
+						</Button>
 					</>
 				}
 			>
 				<form noValidate>
-					<div className="mb-4">
-						<label
-							htmlFor="email"
-							className={`block mb-2 text-sm font-medium ${!isEmailValid ? 'text-red-500' : 'text-gray-700 dark:text-gray-300'}`}
-						>
-							Your Email Address
-						</label>
-						<input
-							type="text"
-							className={`w-full px-3 py-2 border rounded shadow-sm focus:outline-none focus:ring-2 focus:ring-primary bg-white dark:bg-gray-800 dark:border-gray-600 dark:text-white ${!isEmailValid ? 'border-red-500' : 'border-gray-300'}`}
-							id="email"
-							name="email"
-							onChange={changeEmail}
-							value={email}
-						/>
-						{!isEmailValid && (
-							<p className="mt-1 text-sm text-red-500">{emailInvalidText}</p>
-						)}
-					</div>
-					<div className="mb-4">
-						<label
-							htmlFor="message-text"
-							className={`block mb-2 text-sm font-medium ${!isMessageValid ? 'text-red-500' : 'text-gray-700 dark:text-gray-300'}`}
-						>
-							Message
-						</label>
-						<textarea
-							className={`w-full px-3 py-2 border rounded shadow-sm focus:outline-none focus:ring-2 focus:ring-primary bg-white dark:bg-gray-800 dark:border-gray-600 dark:text-white ${!isMessageValid ? 'border-red-500' : 'border-gray-300'}`}
-							id="message-text"
-							name="message-text"
-							onChange={changeMessage}
-							rows={5}
-							value={message}
-						></textarea>
-						{!isMessageValid && (
-							<p className="mt-1 text-sm text-red-500">{messageInvalidText}</p>
-						)}
-					</div>
+					<Input
+						id="email"
+						label="Your Email Address"
+						value={email}
+						onChange={changeEmail}
+						error={!isEmailValid ? emailInvalidText : undefined}
+						name="email"
+					/>
+					<TextArea
+						id="message-text"
+						label="Message"
+						value={message}
+						onChange={changeMessage}
+						error={!isMessageValid ? messageInvalidText : undefined}
+						name="message-text"
+						rows={5}
+					/>
 				</form>
 			</Modal>
 		</React.Fragment>

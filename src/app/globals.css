@@ -1,41 +1,63 @@
 @import "tailwindcss";
 
-@theme {
+:root {
     --color-primary: #2158b0;
     --color-primary-dark: #1a468c;
     --color-background: #ffffff;
-    --color-text: #000000;
-
-    /* Dark mode overrides */
-    --color-dark-background: #1a1a1a;
-    --color-dark-text: #ffffff;
-    --color-dark-surface: #2d2d2d;
+    --color-foreground: #000000;
+    --color-surface: #ffffff;
+    --color-background-alt: #f9fafb;
+    /* gray-50 */
+    --color-border: #d1d5db;
+    /* gray-300 */
+    --color-muted: #4b5563;
+    /* gray-600 */
+    --color-sidebar: #111827;
+    /* gray-900 */
+    --color-sidebar-border: #374151;
+    /* gray-700 */
 }
 
 /* Force dark mode class strategy */
 @custom-variant dark (&:where(.dark, .dark *));
 
-/* Custom Utilities for Legacy Support */
-@utility container-fluid {
-    width: 100%;
-    padding-right: 15px;
-    padding-left: 15px;
-    margin-right: auto;
-    margin-left: auto;
+@variant dark {
+    --color-background: #1a1a1a;
+    --color-foreground: #ffffff;
+    --color-surface: #1f2937;
+    /* gray-800 */
+    --color-background-alt: #1f2937;
+    /* gray-800 */
+    --color-border: #374151;
+    /* gray-700 */
+    --color-muted: #9ca3af;
+    /* gray-400 */
+    --color-sidebar: #111827;
+    --color-sidebar-border: #374151;
 }
 
-@utility row {
-    display: flex;
-    flex-wrap: wrap;
-    margin-right: -15px;
-    margin-left: -15px;
+@theme {
+    --color-primary: var(--color-primary);
+    --color-primary-dark: var(--color-primary-dark);
+    --color-background: var(--color-background);
+    --color-foreground: var(--color-foreground);
+    --color-surface: var(--color-surface);
+    --color-background-alt: var(--color-background-alt);
+    --color-border: var(--color-border);
+    --color-muted: var(--color-muted);
+    --color-sidebar: var(--color-sidebar);
+    --color-sidebar-border: var(--color-sidebar-border);
 }
 
-@utility col-12 {
-    flex: 0 0 100%;
-    max-width: 100%;
-    padding-right: 15px;
-    padding-left: 15px;
+@layer base {
+
+    *,
+    ::after,
+    ::before,
+    ::backdrop,
+    ::file-selector-button {
+        border-color: var(--color-border, currentColor);
+    }
 }
 
 /* Animate Flicker for PDF Loading */
