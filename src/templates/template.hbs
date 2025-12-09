@@ -3,258 +3,358 @@
 <head>
 	<meta charset='utf-8' />
 	<style>
-		@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,400;0,500;0,900;1,400&display=swap');
+		@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,300;0,400;0,500;0,700;1,400&display=swap');
 
 		* {
 			margin: 0;
 			padding: 0;
-			border: 0;
-			outline: 0;
+			box-sizing: border-box;
 			font-family: 'Roboto', sans-serif;
-		}
-
-		html {
-			zoom: 0.999;
 		}
 
 		body {
-			font-family: 'Roboto', sans-serif;
+			background: linear-gradient(to right, #111827 0%, #111827 30%, #ffffff 30%, #ffffff 100%);
+			color: #374151;
+			/* gray-700 */
+			font-size: 9px;
+			/* Reduced to 9px */
+			line-height: 1.25;
+			-webkit-print-color-adjust: exact;
+			print-color-adjust: exact;
+		}
+
+		/* Layout */
+		.page-container {
+			display: flex;
+			flex-direction: row;
+			width: 100%;
+			min-height: 100vh;
+		}
+
+		/* LEFT SIDEBAR */
+		.sidebar {
+			width: 30%;
+			color: #ffffff;
+			/* Safe Zone: Increased Top/Bottom padding to 25px */
+			padding: 25px 20px;
+			display: flex;
+			flex-direction: column;
+			gap: 12px;
+			/* Reduced gap to compensate */
+		}
+
+		.sidebar h3 {
+			color: #60a5fa;
+			/* blue-400 - lighter for dark bg */
+			font-size: 11px;
+			/* Reduced size */
+			text-transform: uppercase;
+			border-bottom: 1px solid #374151;
+			padding-bottom: 5px;
+			margin-bottom: 6px;
+			/* Reduced */
+			letter-spacing: 1px;
+		}
+
+		.contact-item {
+			margin-bottom: 5px;
+			/* Reduced */
+			font-size: 8.5px;
+			word-wrap: break-word;
+		}
+
+		.contact-item a {
+			color: #d1d5db;
+			/* gray-300 */
+			text-decoration: none;
+		}
+
+		.skill-group {
+			margin-bottom: 8px;
+			/* Reduced margin */
+		}
+
+		.skill-title {
+			font-weight: 700;
+			font-size: 10px;
+			margin-bottom: 4px;
+			color: #e5e7eb;
+			/* gray-200 */
+		}
+
+		.skill-pills {
+			display: flex;
+			flex-wrap: wrap;
+			gap: 4px;
+		}
+
+		.pill {
+			background-color: #374151;
+			/* gray-700 */
+			color: #ffffff;
+			padding: 2px 6px;
+			border-radius: 4px;
+			font-size: 8px;
+		}
+
+		.edu-item {
+			margin-bottom: 8px;
+			/* Reduced margin */
+		}
+
+		.edu-degree {
+			font-weight: 700;
+			font-size: 10px;
+		}
+
+		.edu-meta {
+			font-style: italic;
+			color: #9ca3af;
+			/* gray-400 */
+			font-size: 9px;
+		}
+
+		/* RIGHT MAIN CONTENT */
+		.main {
+			width: 70%;
+			/* Safe Zone: Increased Top/Bottom padding to 25px */
+			padding: 25px 30px;
 		}
 
 		.header {
-			padding-top: 40px;
-			padding-bottom: 40px;
-			padding-left: 45px;
-			padding-right: 45px;
-			background-color: #2158b0;
-			color: #fff;
+			margin-bottom: 10px;
+			/* Reduced */
+			padding-bottom: 8px;
+			/* Reduced padding */
 		}
 
 		.header h1 {
-			font-size: 38px;
-			font-weight: 900;
-			text-align: center;
+			font-size: 28px;
+			/* Reduced size */
+			font-weight: 700;
+			color: #111827;
+			margin-bottom: 5px;
+			line-height: 1;
 		}
 
 		.header h2 {
 			font-size: 14px;
-			font-weight: 500;
-			text-align: center;
-		}
-
-		.column {
-			height: 939px;
-			float: left;
-			padding: 10px;
-		}
-
-		.left {
-			width: 220px;
-			border-right: 1px solid #2158b0;
-		}
-
-		.right {
-			width: 532px;
-		}
-
-		.content-block {
-			padding-top: 3px;
-			padding-bottom: 3px;
-		}
-
-		h3 {
-			font-weight: 500;
-			font-size: 16px;
-		}
-
-		h4 {
-			font-weight: 500;
-			font-size: 14px;
-			padding-bottom: 3px;
-		}
-
-		h4 span,
-		h4 span a {
-			font-size: 12px;
-		}
-
-		h5 {
-			font-size: 12px;
-			font-style: italic;
-			color: #1f1f1f;
-		}
-
-		p,
-		a {
-			line-height: 1.2;
-			font-size: 10px;
-		}
-
-		a,
-		a:hover {
-			text-decoration: none;
+			font-weight: 400;
 			color: #2158b0;
+			/* primary */
+			text-transform: uppercase;
+			letter-spacing: 2px;
 		}
 
-		li {
-			font-size: 8px;
-			list-style-position: outside;
-			margin-left: 14px;
-			line-height: 1.2;
+		.section {
+			margin-bottom: 10px;
+			/* Reduced */
 		}
 
-		li span {
-			margin: 0 auto;
-			font-size: 10px;
+		.section-title {
+			font-size: 12px;
+			/* Reduced size */
+			font-weight: 700;
+			color: #2158b0;
+			text-transform: uppercase;
+			border-bottom: 1px solid #e5e7eb;
+			padding-bottom: 5px;
+			margin-bottom: 8px;
+			/* Reduced margin */
 		}
 
-		.pill {
-			font-size: 10px;
-			font-weight: 500;
-			background-color: #404040;
-			border: none;
-			color: #fff;
-			padding: 2px 4px;
-			text-align: center;
-			text-decoration: none;
-			display: inline-block;
+		.about-text p {
+			margin-bottom: 3px;
+			/* Reduced */
+			text-align: justify;
+			font-size: 9px;
+		}
+
+		.job-item {
+			margin-bottom: 6px;
+			/* Reduced */
+			page-break-inside: avoid;
+		}
+
+		.job-header {
+			display: flex;
+			justify-content: space-between;
+			align-items: baseline;
 			margin-bottom: 2px;
-			border-radius: 4px;
 		}
 
-		.references-isolation {
-			margin-top: 10px;
-			border-top: 1px solid #2158b0;
-			color: #404040;
+		.job-role {
+			font-weight: 700;
+			font-size: 10px;
+			color: #111827;
 		}
 
-		.references-isolation h4 {
-			margin-top: 10px;
+		.job-company {
+			color: #2158b0;
+			font-weight: 500;
+		}
+
+		.job-meta {
+			font-size: 8.5px;
+			/* Slightly smaller meta */
+			color: #6b7280;
+			/* gray-500 */
+			margin-bottom: 4px;
+			font-style: italic;
+		}
+
+		.job-summary {
+			margin-bottom: 4px;
+		}
+
+		.job-highlights {
+			padding-left: 12px;
+		}
+
+		.job-highlights li {
+			margin-bottom: 0px;
+			/* Reduced */
+			color: #4b5563;
+		}
+
+		a {
+			color: inherit;
+			text-decoration: none;
 		}
 	</style>
 </head>
 
 <body>
-	<div class='header'>
-		<h1>
-			{{basics.name}}
-		</h1>
-		<h2>
-			{{basics.label}}
-		</h2>
-	</div>
-	<div class='row'>
-		<div class='column left'>
-			<div class='column-content'>
-				<div class='content-block-container'>
-					<h3>Contact Details</h3>
-					<div class='content-block'>
-						<p><a href='{{basics.phone}}'>{{basics.phone}}</a></p>
-						<p><a href='mailto:{{basics.email}}'>{{basics.email}}</a></p>
-					</div>
+	<div class="page-container">
+		<!-- LEFT SIDEBAR -->
+		<div class="sidebar">
+			<!-- Contact -->
+			<div>
+				<h3>Contact</h3>
+				<div class="contact-item">
+					<strong>Phone</strong><br>
+					{{basics.phone}}
 				</div>
-				<div class='content-block-container'>
-					<h3>Hometown</h3>
-					<div class='content-block'>
-						<p>{{basics.location}}</p>
-					</div>
+				<div class="contact-item">
+					<strong>Email</strong><br>
+					<a href="mailto:{{basics.email}}">{{basics.email}}</a>
 				</div>
-				<div class='content-block-container'>
-					<h3>Useful Links</h3>
-					<div class='content-block'>
-						<p>
-							<a href='{{basics.website}}'>{{basics.website}}</a>
-						</p>
-						<p>
-							<a href='{{basics.social.stackOverflow}}'>
-								{{#replace basics.social.stackOverflow 'https://' ''}}{{/replace}}
-							</a>
-						</p>
-						<p>
-							<a href='{{basics.social.github}}'>
-								{{#replace basics.social.github 'https://' ''}}{{/replace}}
-							</a>
-						</p>
-						<p>
-							<a href='{{basics.social.linkedIn}}'>
-								{{#replace basics.social.linkedIn 'https://' ''}}{{/replace}}
-							</a>
-						</p>
-					</div>
+				<div class="contact-item">
+					<strong>Location</strong><br>
+					{{basics.location}}
 				</div>
-				<div class='content-block-container'>
-					<h3>Skills</h3>
-					{{#each skills}}
-					<div class='content-block'>
-						<h4>{{this.Title}}</h4>
-						<div class='content-block'>
-							{{#each this.Items}}
-							<div class='pill'>{{this}}</div>
-							{{/each}}
-						</div>
-					</div>
-					{{/each}}
-				</div>
-				<div class='content-block-container'>
-					<h3>Certificates</h3>
-					{{#each education}}
-					<div class='content-block'>
-						<h4>{{this.what}}</h4>
-						<h5>{{this.where}} ({{this.when}})</h5>
-						{{#if this.courses}}
-						<div class='content-block'>
-							{{#each this.courses}}
-							<div class='pill'>{{this}}</div>
-							{{/each}}
-						</div>
-						{{/if}}
-					</div>
-					{{/each}}
-				</div>
-				<div class='content-block-container references-isolation'>
-					<h4>References</h4>
-					<h5>Available upon request</h5>
+				<div class="contact-item">
+					<strong>Website</strong><br>
+					<a href="https://{{basics.website}}">{{basics.website}}</a>
 				</div>
 			</div>
+
+			<!-- Links -->
+			<div>
+				<h3>Links</h3>
+				<div class="contact-item">
+					<strong>GitHub</strong><br>
+					<a href="{{basics.social.github}}">{{#replace basics.social.github 'https://' ''}}{{/replace}}</a>
+				</div>
+				<div class="contact-item">
+					<strong>LinkedIn</strong><br>
+					<a href="{{basics.social.linkedIn}}">{{#replace basics.social.linkedIn 'https://'
+						''}}{{/replace}}</a>
+				</div>
+				<div class="contact-item">
+					<strong>Stack Overflow</strong><br>
+					<a href="{{basics.social.stackOverflow}}">StackOverflow Profile</a>
+				</div>
+			</div>
+
+			<!-- Skills -->
+			<div>
+				<h3>Skills</h3>
+				{{#each skills}}
+				<div class="skill-group">
+					<div class="skill-title">{{this.Title}}</div>
+					<div class="skill-pills">
+						{{#each this.Items}}
+						<span class="pill">{{this}}</span>
+						{{/each}}
+					</div>
+				</div>
+				{{/each}}
+			</div>
+
+			<!-- Education -->
+			<div>
+				<h3>Education</h3>
+				{{#each education}}
+				<div class="edu-item">
+					<div class="edu-degree">{{this.what}}</div>
+					<div class="edu-meta">{{this.where}} • {{this.when}}</div>
+				</div>
+				{{/each}}
+			</div>
+
+			<!-- References -->
+			{{!--
+			<div>
+				<h3>References</h3>
+				{{#each references}}
+				<div class="contact-item">
+					<strong>{{this.name}}</strong><br>
+					{{this.reference}}
+				</div>
+				{{/each}}
+			</div>
+			--}}
 		</div>
-	</div>
-	<div class='column right'>
-		<div class='column-content'>
-			<div class='content-block-container'>
-				<h3>About Me</h3>
-				<div class='content-block'>
+
+		<!-- RIGHT MAIN CONTENT -->
+		<div class="main">
+			<div class="header">
+				<h1>{{basics.name}}</h1>
+				<h2>{{basics.position}}</h2> <!-- Using position here instead of label for clearer role title -->
+			</div>
+
+			<!-- About -->
+			<div class="section">
+				<div class="section-title">About Me</div>
+				<div class="about-text">
 					{{#each about}}
 					<p>{{this}}</p>
 					{{/each}}
 				</div>
 			</div>
-			<div class='content-block-container'>
-				<h3>Experience</h3>
+
+			<!-- Experience -->
+			<div class="section">
+				<div class="section-title">Experience</div>
 				{{#each work}}
-				<div class='content-block'>
-					<h4>{{this.position}}
-						<span>at <a href='{{this.website}}'>{{this.company}}</a></span>
-					</h4>
-					<h5>{{this.startDate}} - {{this.endDate}}</h5>
-					<h5>{{this.location}}</h5>
-					<div class='content-block'>
-						{{#if this.summary}}
-						<p>{{this.summary}}</p>
-						{{/if}}
-						{{#if this.highlights}}
-						<ul>
-							{{#each this.highlights}}
-							<li><span>{{this}}</span></li>
-							{{/each}}
-						</ul>
-						{{/if}}
+				<div class="job-item">
+					<div class="job-header">
+						<div>
+							<span class="job-role">{{this.position}}</span>
+							<span style="font-size: 10px; color: #9ca3af;"> at </span>
+							<span class="job-company"><a href="{{this.website}}">{{this.company}}</a></span>
+						</div>
+						<div class="job-meta">{{this.startDate}} - {{this.endDate}}</div>
 					</div>
+					<div class="job-meta">{{this.location}}</div>
+
+					{{#if this.summary}}
+					<div class="job-summary">{{this.summary}}</div>
+					{{/if}}
+
+					{{#if this.highlights}}
+					<ul class="job-highlights">
+						{{#each this.highlights}}
+						<li>{{this}}</li>
+						{{/each}}
+					</ul>
+					{{/if}}
 				</div>
 				{{/each}}
 			</div>
 		</div>
 	</div>
-
 </body>
 
 </html>

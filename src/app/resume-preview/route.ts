@@ -2,9 +2,8 @@ import { NextResponse } from 'next/server';
 import fs from 'fs';
 import path from 'path';
 import handlebars from 'handlebars';
-import pdf from 'html-pdf-node';
 
-export async function POST(req: Request) {
+export async function GET() {
 	try {
 		// Read data and template
 		const resumePath = path.join(process.cwd(), 'src', 'data', 'resume.json');
@@ -21,28 +20,14 @@ export async function POST(req: Request) {
 		const template = handlebars.compile(templateSource);
 		const htmlString = template(JSON.parse(resumeData));
 
-		const options = {
-			format: 'A4',
-			printBackground: true,
-		};
-
-		const file = {
-			content: htmlString,
-		};
-
-		// Generate PDF
-		// html-pdf-node uses promises
-		const pdfBuffer = await pdf.generatePdf(file, options);
-
-		return new NextResponse(pdfBuffer, {
+		return new NextResponse(htmlString, {
 			status: 200,
 			headers: {
-				'Content-Type': 'application/pdf',
-				'Content-Disposition': 'attachment; filename=result.pdf',
+				'Content-Type': 'text/html',
 			},
 		});
 	} catch (error) {
-		console.error('Error generating PDF:', error);
-		return new NextResponse('Error generating PDF', { status: 500 });
+		console.error('Error generating preview:', error);
+		return new NextResponse('Error generating preview', { status: 500 });
 	}
 }
