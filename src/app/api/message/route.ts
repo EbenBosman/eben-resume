@@ -1,33 +1,40 @@
-import sgMail from '@sendgrid/mail';
+import { MailerSend, EmailParams, Sender, Recipient } from "mailersend";
 import { NextResponse } from 'next/server';
 
 export async function POST(request: Request) {
-  try {
-    const body = await request.json();
-    const apiKey = process.env.SENDGRID_API_KEY;
+	try {
+		const body = await request.json();
+		const apiKey = process.env.MAILERSEND_API_KEY;
+		const mailboxToMonitor = process.env.MAILBOX_TO_MONITOR;
 
-    if (!apiKey) {
-      console.error('SENDGRID_API_KEY is not defined');
-      return new NextResponse('Server configuration error', { status: 500 });
-    }
+		if (!apiKey || !apiKey?.length || !mailboxToMonitor || !mailboxToMonitor?.length) {
+			console.error('MAILERSEND_API_KEY or MAILBOX_TO_MONITOR is not defined');
+			return new NextResponse('Server configuration error', { status: 500 });
+		}
 
-    sgMail.setApiKey(apiKey);
+		const mailerSend = new MailerSend({
+			apiKey: apiKey,
+		});
 
-    const emailContent = `You have a new message from: <strong>${body.email}</strong><br><br>The original message is:<br><br>${body.message.replace(/(\r\n|\n|\r)/g, '<br />')}`;
+		const sentFrom = new Sender("no-reply@ataru.it", "Eben Bosman Website");
+		const recipients = [
+			new Recipient(mailboxToMonitor, "Eben Bosman")
+		];
 
-    const msg = {
-      to: process.env.MAILBOX_TO_MONITOR || 'ebenbosman@gmail.com', // Fallback or strict? Keeping robust.
-      from: 'no-reply@ebenbosman.com',
-      subject: 'Message from ebenbosman.com',
-      text: body.message,
-      html: emailContent,
-    };
+		const emailContent = `You have a new message from: <strong>${body.email}</strong><br><br>The original message is:<br><br>${body.message.replace(/(\r\n|\n|\r)/g, '<br />')}`;
 
-    await sgMail.send(msg);
-    console.log('Email sent');
-    return new NextResponse('Email sent', { status: 200 });
-  } catch (error) {
-    console.error(error);
-    return new NextResponse('Message not sent', { status: 500 });
-  }
+		const emailParams = new EmailParams()
+			.setFrom(sentFrom)
+			.setTo(recipients)
+			.setSubject('Message from ebenbosman.com')
+			.setHtml(emailContent)
+			.setText(body.message);
+
+		await mailerSend.email.send(emailParams);
+		return new NextResponse('Email sent', { status: 200 });
+	} catch (error) {
+		// @ts-ignore
+		const errorMessage = error?.body?.message || error?.message || 'Unknown error';
+		return new NextResponse(`Message not sent: ${errorMessage}`, { status: 500 });
+	}
 }

@@ -32,6 +32,9 @@ const Sidebar: React.FC<SidebarProps> = ({ basics }) => {
 
 	// eslint-disable-next-line @typescript-eslint/no-unused-vars
 	const [isMessageSending, setMessageLoading] = useState<boolean>(false);
+	const [isMessageSuccess, setMessageSuccess] = useState<boolean>(false);
+	const [isMessageError, setMessageError] = useState<boolean>(false);
+	const [messageErrorText, setMessageErrorText] = useState<string>('');
 
 	const [email, setEmail] = useState<string>('');
 	const [isEmailValid, setEmailValid] = useState<boolean>(true);
@@ -82,8 +85,14 @@ const Sidebar: React.FC<SidebarProps> = ({ basics }) => {
 	const sendMessage = async (e: React.MouseEvent<HTMLButtonElement>) => {
 		e.preventDefault();
 		setMessageLoading(true);
+		setMessageSuccess(false);
+		setMessageError(false);
+		setMessageErrorText('');
 
-		if (!isEmailValid || !isMessageValid) return;
+		if (!isEmailValid || !isMessageValid) {
+			setMessageLoading(false);
+			return;
+		};
 
 		const messageDetails = {
 			message,
@@ -99,13 +108,31 @@ const Sidebar: React.FC<SidebarProps> = ({ basics }) => {
 				body: JSON.stringify(messageDetails),
 			});
 
-			if (!res.ok) throw new Error('Failed to send message');
+			if (!res.ok) {
+				const text = await res.text();
+				throw new Error(text || 'Failed to send message');
+			}
 
 			setMessageLoading(false);
-			setShowModal(false);
-		} catch (error) {
+			setMessageSuccess(true);
+			setEmail('');
+			setMessage('');
+
+			setTimeout(() => {
+				setMessageSuccess(false);
+				setShowModal(false);
+			}, 5000);
+
+		} catch (error: any) {
 			console.error(error);
 			setMessageLoading(false);
+			setMessageError(true);
+			setMessageErrorText(error.message || 'Something went wrong. Please try again later.');
+
+			setTimeout(() => {
+				setMessageError(false);
+				setMessageErrorText('');
+			}, 5000);
 		}
 	};
 
@@ -219,11 +246,11 @@ const Sidebar: React.FC<SidebarProps> = ({ basics }) => {
 									<FontAwesomeIcon icon={faStackOverflow} className="fa-lg md:fa-2x" />
 								</a>
 							</li>
-							{/* <li className="nav-item">
+							<li className="nav-item">
 								<button type="button" className="text-white hover:text-primary transition-colors bg-transparent border-0 cursor-pointer" onClick={() => setShowModal(true)} title="Mail Me">
 									<FontAwesomeIcon icon={faEnvelope} className="fa-lg md:fa-2x" />
 								</button>
-							</li> */}
+							</li>
 							<li className="nav-item">
 								<a rel="noreferrer" href={basics.social.linkedIn} className="text-white hover:text-primary transition-colors cursor-pointer" target="_blank" title="LinkedIn">
 									<FontAwesomeIcon icon={faLinkedin} className="fa-lg md:fa-2x" />
@@ -283,12 +310,12 @@ const Sidebar: React.FC<SidebarProps> = ({ basics }) => {
 										<FontAwesomeIcon icon={faStackOverflow} className="fa-lg" />
 									</a>
 								</li>
-								{/* <li className="nav-item">
+								<li className="nav-item">
 									<button type="button" className="text-white hover:text-primary transition-colors bg-transparent border-0 cursor-pointer" onClick={() => setShowModal(true)} title="Mail Me">
 										<span className="hidden">Mail Me</span>
 										<FontAwesomeIcon icon={faEnvelope} className="fa-lg" />
 									</button>
-								</li> */}
+								</li>
 								<li className="nav-item">
 									<a rel="noreferrer" href={basics.social.linkedIn} className="text-white hover:text-primary transition-colors" target="_blank" title="LinkedIn">
 										<span className="hidden">LinkedIn Profile</span>
@@ -331,13 +358,14 @@ const Sidebar: React.FC<SidebarProps> = ({ basics }) => {
 
 			<Modal
 				isOpen={showModal}
-				onClose={() => setShowModal(false)}
+				onClose={() => !isMessageSending && setShowModal(false)}
 				title="Contact Me"
 				footer={
 					<>
 						<Button
 							variant="secondary"
 							onClick={clearMessageFields}
+							disabled={isMessageSending}
 						>
 							Close
 						</Button>
@@ -345,18 +373,33 @@ const Sidebar: React.FC<SidebarProps> = ({ basics }) => {
 							variant="primary"
 							onClick={sendMessage}
 							disabled={
+								isMessageSending ||
 								isTextEmpty(message) ||
 								isTextEmpty(email) ||
 								!isValidEmail(email) ||
 								isTextLessThan50(message)
 							}
 						>
-							Send
+							{isMessageSending ? 'Sending...' : 'Send'}
 						</Button>
 					</>
 				}
 			>
 				<form noValidate>
+					{isMessageSuccess && (
+						<div className="mb-4 p-3 bg-green-100 border border-green-400 text-green-700 rounded relative overflow-hidden" role="alert">
+							<strong className="font-bold">Email Successfully Sent</strong>
+							<span className="block sm:inline"> Expect a response soon.</span>
+							<div className="absolute bottom-0 left-0 h-1 bg-green-400 animate-progress"></div>
+						</div>
+					)}
+					{isMessageError && (
+						<div className="mb-4 p-3 bg-red-100 border border-red-400 text-red-700 rounded relative overflow-hidden" role="alert">
+							<strong className="font-bold">Something went wrong</strong>
+							<span className="block sm:inline"> {messageErrorText}</span>
+							<div className="absolute bottom-0 left-0 h-1 bg-red-400 animate-progress"></div>
+						</div>
+					)}
 					<Input
 						id="email"
 						label="Your Email Address"
@@ -364,6 +407,7 @@ const Sidebar: React.FC<SidebarProps> = ({ basics }) => {
 						onChange={changeEmail}
 						error={!isEmailValid ? emailInvalidText : undefined}
 						name="email"
+						disabled={isMessageSending}
 					/>
 					<TextArea
 						id="message-text"
@@ -373,6 +417,7 @@ const Sidebar: React.FC<SidebarProps> = ({ basics }) => {
 						error={!isMessageValid ? messageInvalidText : undefined}
 						name="message-text"
 						rows={5}
+						disabled={isMessageSending}
 					/>
 				</form>
 			</Modal>
