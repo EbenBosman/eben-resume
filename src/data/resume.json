@@ -25,22 +25,7 @@
 	],
 	"work": [
 		{
-			"company": "MySmartRenter.com",
-			"position": "Co-Founder & Lead Developer",
-			"website": "https://www.mysmartrenter.com",
-			"startDate": "2024",
-			"endDate": "Present",
-			"location": "Remote (HQ in Melrose, MA)",
-			"summary": "As Co-founder and Lead Developer, I help drive the product vision and define the full-stack architecture, overseeing all technical aspects from concept to production.",
-			"highlights": [
-				"Architected high-performance frontend using Next.js and React",
-				"Designed secure API layer utilizing MongoDB for scalable data persistence",
-				"Managed full hosting and CI/CD pipeline via AWS Amplify",
-				"Integrated critical third-party services including Auth0, Stripe, and Melissa.com"
-			]
-		},
-		{
-			"company": "One Pager",
+			"company": "Chronicle Graphics Inc.",
 			"position": "Freelance Fullstack Developer",
 			"website": "https://www.onepager.com",
 			"startDate": "2018",
@@ -55,6 +40,21 @@
 				"Jenkins CICD",
 				"Azure VMs",
 				"Some basic SVG"
+			]
+		},
+		{
+			"company": "MySmartRenter.com",
+			"position": "Co-Founder & Lead Developer",
+			"website": "https://www.mysmartrenter.com",
+			"startDate": "2024",
+			"endDate": "2026",
+			"location": "Remote (HQ in Melrose, MA)",
+			"summary": "As Co-founder and Lead Developer, I help drive the product vision and define the full-stack architecture, overseeing all technical aspects from concept to production.",
+			"highlights": [
+				"Architected high-performance frontend using Next.js and React",
+				"Designed secure API layer utilizing MongoDB for scalable data persistence",
+				"Managed full hosting and CI/CD pipeline via AWS Amplify",
+				"Integrated critical third-party services including Auth0, Stripe, and Melissa.com"
 			]
 		},
 		{
