@@ -3,6 +3,7 @@ import { ResumeData } from '../types/resume';
 
 import Sidebar from '../components/Sidebar';
 import Content from '../components/Content';
+import { JsonLd } from '../components/JsonLd';
 
 export default function Page() {
     // Cast strict type
@@ -10,6 +11,7 @@ export default function Page() {
 
     return (
         <div className="w-full min-h-screen bg-background">
+            <JsonLd />
             <div className="flex flex-col md:flex-row min-h-screen">
                 <Sidebar basics={data.basics} />
                 <Content

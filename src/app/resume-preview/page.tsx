@@ -1,6 +1,15 @@
 import fs from 'fs';
 import path from 'path';
 import handlebars from 'handlebars';
+import type { Metadata } from 'next';
+
+export const metadata: Metadata = {
+    title: 'Resume - US Letter Preview',
+    robots: {
+        index: false,
+        follow: false,
+    },
+};
 
 async function getResumeContent() {
     const resumePath = path.join(process.cwd(), 'src', 'data', 'resume.json');
