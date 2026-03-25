@@ -14,7 +14,15 @@ async function getResumeContent() {
     });
 
     const template = handlebars.compile(templateSource);
-    const html = template(JSON.parse(resumeData));
+
+    // Read Ataru logo as base64 for embedding
+    const logoPath = path.join(process.cwd(), 'src', 'images', 'fav-sm.png');
+    const logoBase64 = fs.readFileSync(logoPath).toString('base64');
+
+    const data = JSON.parse(resumeData);
+    data.ataruLogoBase64 = `data:image/png;base64,${logoBase64}`;
+
+    const html = template(data);
 
     // Extract Styles
     const styleMatch = html.match(/<style>([\s\S]*?)<\/style>/);

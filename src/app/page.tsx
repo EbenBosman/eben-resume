@@ -15,6 +15,7 @@ export default function Page() {
                 <Content
                     basics={data.basics}
                     about={data.about}
+                    ataru={data.ataru}
                     work={data.work}
                     education={data.education}
                     skills={data.skills}

@@ -30,30 +30,28 @@ const Education: React.FC<EducationProps> = ({ content }) => {
     if (!content) return null;
 
     return (
-        <Section id="certificates" className="bg-background-alt">
+        <Section id="certificates">
             <SectionTitle title="Certificates" />
-            {content.map((education, key) => {
-                return (
-                    <div key={key} className="flex flex-wrap -mx-4 mb-4">
-                        <div className="w-full px-4" data-aos="zoom-in">
-                            <Card>
-                                <div className="flex flex-col h-full">
-                                    <h4 className="text-lg font-bold text-foreground mb-1">
-                                        {education.what}
-                                    </h4>
-                                    <h5 className="text-md font-medium text-muted mb-1">
-                                        {education.when}
-                                    </h5>
-                                    <div className="text-sm italic text-muted mb-2">
-                                        {education.where}
-                                    </div>
-                                    {generateCourses(education.courses)}
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                {content.map((education, key) => (
+                    <div key={key} data-aos="zoom-in">
+                        <Card>
+                            <div className="flex flex-col h-full">
+                                <h4 className="text-lg font-bold text-foreground mb-1">
+                                    {education.what}
+                                </h4>
+                                <h5 className="text-md font-medium text-muted mb-1">
+                                    {education.when}
+                                </h5>
+                                <div className="text-sm italic text-muted mb-2">
+                                    {education.where}
                                 </div>
-                            </Card>
-                        </div>
+                                {generateCourses(education.courses)}
+                            </div>
+                        </Card>
                     </div>
-                );
-            })}
+                ))}
+            </div>
         </Section>
     );
 };

@@ -49,8 +49,11 @@ export interface ReferenceItem {
 
 export interface Ataru {
 	name: string;
+	subtitle: string;
 	url: string;
+	tagline: string;
 	summary: string[];
+	features: string[];
 }
 
 export interface ResumeData {

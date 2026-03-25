@@ -24,17 +24,26 @@
     "Whether I am driving the product vision as a startup co-founder, building enterprise features as a contractor, or mentoring junior developers to 'pay it forward', I bring a self-sufficient, problem-solving mindset to every team I join."
   ],
   "ataru": {
-    "name": "Ataru.io",
+    "name": "Ataru",
+    "subtitle": "CESIUM",
     "url": "https://www.ataru.io",
+    "tagline": "Personal Project • Built from the ground up • Used daily",
     "summary": [
       "Managing an independent contracting business often means wrestling with disjointed tools and scattered spreadsheets.",
-      "To eliminate this operational overhead, I architected and built Ataru.io from the ground up as a comprehensive, centralized management platform.",
-      "I actively use this platform day-to-day to seamlessly handle my time tracking, project management, invoicing, and expense reporting, allowing me to focus entirely on writing great code."
+      "To eliminate this operational overhead, I architected and built Cesium - a comprehensive, centralized management platform hosted at Ataru.io.",
+      "I actively use Cesium day-to-day to seamlessly handle my time tracking, client projects, invoicing, expense reporting, and PTO, allowing me to focus entirely on writing great code."
+    ],
+    "features": [
+      "Time Tracking",
+      "Client/Projects Admin",
+      "Invoicing",
+      "Expense Reporting",
+      "PTO & Leave Tracking"
     ]
   },
   "work": [
     {
-      "company": "Ataru LLC contracting to Chronicle Graphics Inc.",
+      "company": "Ataru LLC consulting to Chronicle Graphics Inc.",
       "position": "Full Stack Developer",
       "website": "https://www.onepager.com",
       "startDate": "2018",

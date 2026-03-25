@@ -89,7 +89,7 @@ const Experience: React.FC<ExperienceProps> = ({ content }) => {
 	if (!content) return null;
 
 	return (
-		<Section id="experience">
+		<Section id="experience" className="bg-background-alt">
 			<SectionTitle title="Experience" />
 			{content.map((job, key) => generateCard(key, job))}
 		</Section>

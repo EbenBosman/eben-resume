@@ -266,6 +266,7 @@ const Sidebar: React.FC<SidebarProps> = ({ basics }) => {
 						{/* 2. Navigation Links (Column) */}
 						<ul className="flex flex-col w-full space-y-4 mt-8 items-center">
 							<li className="w-full text-center"><a className="block py-2 text-white text-lg font-medium hover:text-primary" href="#about">About</a></li>
+							<li className="w-full text-center"><a className="block py-2 text-white text-lg font-medium hover:text-primary" href="#ataru">Ataru.io</a></li>
 							<li className="w-full text-center"><a className="block py-2 text-white text-lg font-medium hover:text-primary" href="#certificates">Certificates</a></li>
 							<li className="w-full text-center"><a className="block py-2 text-white text-lg font-medium hover:text-primary" href="#experience">Experience</a></li>
 							<li className="w-full text-center"><a className="block py-2 text-white text-lg font-medium hover:text-primary" href="#skills">Skills</a></li>
@@ -333,6 +334,7 @@ const Sidebar: React.FC<SidebarProps> = ({ basics }) => {
 							{/* Desktop Nav Links */}
 							<ul className="flex flex-col w-full space-y-2 mt-4 items-center">
 								<li className="nav-item w-full"><a className="block py-2 text-white hover:text-primary transition-colors" href="#about">About</a></li>
+								<li className="nav-item w-full"><a className="block py-2 text-white hover:text-primary transition-colors" href="#ataru">Ataru.io</a></li>
 								<li className="nav-item w-full"><a className="block py-2 text-white hover:text-primary transition-colors" href="#certificates">Certificates</a></li>
 								<li className="nav-item w-full"><a className="block py-2 text-white hover:text-primary transition-colors" href="#experience">Experience</a></li>
 								<li className="nav-item w-full"><a className="block py-2 text-white hover:text-primary transition-colors" href="#skills">Skills</a></li>

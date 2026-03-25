@@ -19,7 +19,15 @@ export async function POST(req: Request) {
 		});
 
 		const template = handlebars.compile(templateSource);
-		const htmlString = template(JSON.parse(resumeData));
+
+		// Read Ataru logo as base64 for PDF embedding
+		const logoPath = path.join(process.cwd(), 'src', 'images', 'fav-sm.png');
+		const logoBase64 = fs.readFileSync(logoPath).toString('base64');
+
+		const data = JSON.parse(resumeData);
+		data.ataruLogoBase64 = `data:image/png;base64,${logoBase64}`;
+
+		const htmlString = template(data);
 
 		const options = {
 			format: 'A4',
