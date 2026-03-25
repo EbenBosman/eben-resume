@@ -17,8 +17,7 @@
 			color: #374151;
 			/* gray-700 */
 			font-size: 9px;
-			/* Reduced to 9px */
-			line-height: 1.25;
+			line-height: 1.4;
 			-webkit-print-color-adjust: exact;
 			print-color-adjust: exact;
 		}
@@ -114,6 +113,16 @@
 			font-size: 9px;
 		}
 
+		/* Ataru Section */
+		.ataru-summary p {
+			font-size: 8.5px;
+			color: #d1d5db;
+			/* gray-300 */
+			line-height: 1.35;
+			margin-bottom: 2px;
+			text-align: justify;
+		}
+
 		/* RIGHT MAIN CONTENT */
 		.main {
 			width: 70%;
@@ -164,10 +173,10 @@
 		}
 
 		.about-text p {
-			margin-bottom: 3px;
-			/* Reduced */
+			margin-bottom: 5px;
 			text-align: justify;
 			font-size: 9px;
+			line-height: 1.45;
 		}
 
 		.job-item {
@@ -205,16 +214,19 @@
 
 		.job-summary {
 			margin-bottom: 4px;
+			text-align: justify;
+			line-height: 1.4;
 		}
 
 		.job-highlights {
 			padding-left: 12px;
+			list-style-type: disc;
 		}
 
 		.job-highlights li {
-			margin-bottom: 0px;
-			/* Reduced */
+			margin-bottom: 1px;
 			color: #4b5563;
+			line-height: 1.4;
 		}
 
 		a {
@@ -236,8 +248,12 @@
 					{{basics.phone}}
 				</div>
 				<div class="contact-item">
-					<strong>Email</strong><br>
-					<a href="mailto:{{basics.email}}">{{basics.email}}</a>
+					<strong>Personal Email</strong><br>
+					<a href="mailto:{{basics.persona_email}}">{{basics.persona_email}}</a>
+				</div>
+				<div class="contact-item">
+					<strong>Business Email</strong><br>
+					<a href="mailto:{{basics.business_email}}">{{basics.business_email}}</a>
 				</div>
 				<div class="contact-item">
 					<strong>Location</strong><br>
@@ -246,6 +262,19 @@
 				<div class="contact-item">
 					<strong>Website</strong><br>
 					<a href="https://{{basics.website}}">{{basics.website}}</a>
+				</div>
+			</div>
+
+			<!-- Ataru -->
+			<div>
+				<h3>{{ataru.name}}</h3>
+				<div class="contact-item">
+					<strong><a href="{{ataru.url}}">{{#replace ataru.url 'https://' ''}}{{/replace}}</a></strong>
+				</div>
+				<div class="ataru-summary">
+					{{#each ataru.summary}}
+					<p>{{this}}</p>
+					{{/each}}
 				</div>
 			</div>
 
@@ -263,7 +292,8 @@
 				</div>
 				<div class="contact-item">
 					<strong>Stack Overflow</strong><br>
-					<a href="{{basics.social.stackOverflow}}">StackOverflow Profile</a>
+					<a href="{{basics.social.stackOverflow}}">{{#replace basics.social.stackOverflow 'https://'
+						''}}{{/replace}}</a>
 				</div>
 			</div>
 

@@ -1,7 +1,7 @@
 import './globals.css';
 import { Providers } from './providers';
 
-import favIcon from '../images/fav.jpg';
+import favIcon from '../images/fav.png';
 
 export const metadata = {
 	title: 'Eben Bosman Resume',

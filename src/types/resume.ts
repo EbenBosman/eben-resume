@@ -11,7 +11,8 @@ export interface Basics {
 	birthDate: string;
 	firstWorkYear: number;
 	label: string;
-	email: string;
+	persona_email: string;
+	business_email: string;
 	phone: string;
 	website: string;
 	location: string;
@@ -46,9 +47,16 @@ export interface ReferenceItem {
 	reference: string;
 }
 
+export interface Ataru {
+	name: string;
+	url: string;
+	summary: string[];
+}
+
 export interface ResumeData {
 	basics: Basics;
 	about: string[];
+	ataru: Ataru;
 	work: WorkItem[];
 	education: EducationItem[];
 	skills: SkillItem[];
