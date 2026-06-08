@@ -1,13 +1,11 @@
 {
   "basics": {
     "name": "Eben Bosman",
-    "position": "Fullstack Developer",
-    "gender": "Male",
-    "birthDate": "1984/01/19",
+    "position": "Senior Full-Stack Engineer",
     "firstWorkYear": 2007,
     "label": "Developer. Enthusiast. Perfectionist.",
     "persona_email": "eben.bosman@gmail.com",
-    "business_email": "eben@ataru.io",
+    "business_email": "eben@ataru.it",
     "phone": "+1.207.213.8525",
     "website": "ebenbosman.com",
     "location": "Melrose, MA",
@@ -18,20 +16,19 @@
     }
   },
   "about": [
-    "I am a driven Full-Stack Web Developer with nearly two decades of hands-on experience architecting and building modern web applications. As a self-taught developer, my career has been defined by an insatiable curiosity and a proven ability to master new technologies on the fly.",
-    "For me, writing code is an act of craftsmanship. I view clean, readable, and highly efficient code as the professional legacy I leave behind. I refuse to settle for 'average' when 'excellent' is on the table.",
-    "While I am deeply comfortable engineering backend APIs and databases, my favorite part of the job is perfecting the UX. I prioritize visual polish and intuitive design, always operating under one simple guiding principle: 'Would I enjoy using this product myself?'",
-    "Whether I am driving the product vision as a startup co-founder, building enterprise features as a contractor, or mentoring junior developers to 'pay it forward', I bring a self-sufficient, problem-solving mindset to every team I join."
+    "Senior Full-Stack Engineer with nearly two decades of experience building and shipping web applications. I work across the stack: React, Next.js, and TypeScript on the front end, Node.js and REST APIs on the back end, running on cloud infrastructure with automated CI/CD.",
+    "I like taking a product from an idea to something real and running in production, and I tend to lead while I build. Over the years I've run Agile teams, helped developers grow into senior roles, and co-founded a SaaS startup. Mostly I just care about writing code that's clean and easy to live with, and about building things I'd actually want to use.",
+    "Lately I've been going deeper into AI. I use AI-assisted tooling every day (Claude Code, Cursor, Antigravity), do a fair amount of prompt engineering, run local models with Ollama and LM Studio, and have done some integration work against the Anthropic API. I recently finished Google's Python certification, and I'm looking for a full-stack role on a team that's building with AI."
   ],
   "ataru": {
     "name": "Ataru",
     "subtitle": "CESIUM",
     "url": "https://www.ataru.io",
-    "tagline": "Personal Project • Built from the ground up • Used daily",
+    "tagline": "Personal Project • Built with AI-assisted development • Used daily",
     "summary": [
-      "Managing an independent contracting business often means wrestling with disjointed tools and scattered spreadsheets.",
-      "To eliminate this operational overhead, I architected and built Cesium - a comprehensive, centralized management platform hosted at Ataru.io.",
-      "I actively use Cesium day-to-day to seamlessly handle my time tracking, client projects, invoicing, expense reporting, and PTO, allowing me to focus entirely on writing great code."
+      "Running an independent contracting business usually means juggling a pile of disconnected tools and spreadsheets.",
+      "So I built Cesium, a single platform (hosted at ataru.io) that handles my time tracking, client and project admin, invoicing, expense reporting, and PTO.",
+      "I built it almost entirely through AI-assisted, prompt-driven development, and I use it every day. It doubles as a real-world testing ground for how I work with AI."
     ],
     "features": [
       "Time Tracking",
@@ -44,17 +41,18 @@
   "work": [
     {
       "company": "Ataru LLC consulting to Chronicle Graphics Inc.",
-      "position": "Full Stack Developer",
+      "position": "Full-Stack Engineer",
       "website": "https://www.onepager.com",
       "startDate": "2018",
       "endDate": "Present",
       "location": "Remote (HQ in Denver, CO)",
-      "summary": "Spearheading the cloud transformation of OnePager's flagship desktop product. Tasked with the end-to-end redesign and architecture of the 'OnePager Live' SaaS platform.",
+      "summary": "Leading the cloud transformation of OnePager's flagship desktop product, with responsibility for the redesign and architecture of the new 'OnePager Live' SaaS platform.",
       "highlights": [
-        "Architecting and building a scalable, cloud-native application using React, Next.js, and TypeScript.",
-        "Developing robust RESTful APIs and bridging the gap between modern frontend architecture and legacy systems (C# & VB.Net 4.8, MS SQL).",
-        "Establishing and maintaining CI/CD pipelines using Jenkins and GitHub Actions for streamlined deployments to Azure VMs.",
-        "Utilizing SVG manipulation to render complex data visualizations directly in the browser."
+        "Built a scalable, cloud-native SaaS application on React, Next.js, and TypeScript.",
+        "Designed REST APIs that connect the modern frontend to legacy C#/.NET and MS SQL systems.",
+        "Set up and maintained CI/CD pipelines in Jenkins and GitHub Actions for automated deployments to Azure.",
+        "Created interactive data visualizations in the browser using direct SVG manipulation.",
+        "Brought AI-assisted development tooling into the workflow to speed up delivery without sacrificing code quality."
       ]
     },
     {
@@ -64,12 +62,12 @@
       "startDate": "2024",
       "endDate": "2026",
       "location": "Remote (HQ in Melrose, MA)",
-      "summary": "As Co-founder and Lead Developer, I drive the product vision and defined the full-stack architecture, overseeing all technical aspects from initial concept to production deployment.",
+      "summary": "Co-founded the company and owned the full-stack architecture, from the initial concept through to production.",
       "highlights": [
-        "Architected a high-performance, SEO-optimized frontend utilizing Next.js and React.",
-        "Designed a secure, scalable API layer backed by MongoDB for efficient data persistence.",
-        "Engineered a fully automated cloud hosting and CI/CD pipeline via AWS Amplify.",
-        "Successfully integrated critical third-party infrastructure, including Auth0 for identity, Stripe for payments, and Melissa.com for data verification."
+        "Built a fast, SEO-friendly frontend with Next.js and React using server-side rendering.",
+        "Designed a secure REST API layer backed by MongoDB.",
+        "Set up automated cloud hosting and a CI/CD pipeline on AWS Amplify.",
+        "Integrated the key third-party services: Auth0 for identity, Stripe for payments, and Melissa for data verification."
       ]
     },
     {
@@ -79,12 +77,12 @@
       "startDate": "2017",
       "endDate": "2018",
       "location": "Rosebank, Johannesburg, South Africa",
-      "summary": "Led an Agile development team through a major technology modernization phase while actively managing daily operations and recruitment.",
+      "summary": "Led an Agile engineering team through a major platform modernization while managing day-to-day delivery and recruitment.",
       "highlights": [
-        "Spearheaded the successful migration of the entire legacy MS MVC application into a modern Single Page Application (SPA) utilizing Aurelia, C# WebAPI, and Cosmos DB.",
-        "Architected and implemented core platform features while driving continuous performance optimizations to improve site speed and reduce operational hosting costs.",
-        "Managed the full software development lifecycle within a fast-paced Agile environment.",
-        "Mentored intermediate developers and actively participated in technical recruitment to scale the engineering team."
+        "Led the migration of a legacy MS MVC application to a single-page application built on Aurelia, C# Web API, and Cosmos DB.",
+        "Built core platform features and worked on performance improvements that sped up the site and lowered hosting costs.",
+        "Owned the full development lifecycle in a fast-moving Agile environment.",
+        "Mentored mid-level developers and ran technical recruitment to grow the team."
       ]
     },
     {
@@ -96,12 +94,12 @@
       "summary": "",
       "location": "Sandton, Johannesburg, South Africa",
       "highlights": [
-        "Research and implement new technologies to enhance code quality",
-        "Team lead on a major Regulatory project",
-        "Maintain 3rd party AML systems. (Nice Actimize)",
-        "Lead and mentor 2 graduate/junior developers",
-        "Lias and work closely together with the Operations team to perform as an effective unit in DevOps",
-        "Implementation of most monitoring in our space so as to assist in predicting trends of possible failures and insuring minimal downtime"
+        "Researched and introduced new technologies to improve code quality and reliability.",
+        "Led engineering on a major regulatory compliance project.",
+        "Maintained and integrated third-party AML systems (NICE Actimize).",
+        "Mentored two graduate developers.",
+        "Worked closely with the Operations team in a DevOps model to keep systems running well.",
+        "Added monitoring across our systems to spot failure trends early and keep downtime to a minimum."
       ]
     },
     {
@@ -111,12 +109,12 @@
       "startDate": "2014",
       "endDate": "2015",
       "location": "Midrand, Johannesburg, South Africa",
-      "summary": "Sub contracting to work with numerous clients which involved mostly web development, but also a small amount of Windows and Ionic mobile development",
+      "summary": "Contracted across several clients, doing mostly web development with some Windows and Ionic mobile work.",
       "highlights": [
-        "europcar.co.za (car booking module)",
-        "Stanlib (various internal systems)",
-        "Tribe One/Sony Music (ticketing system)",
-        "Investec (various internal systems)"
+        "europcar.co.za: car booking module",
+        "Stanlib: various internal systems",
+        "Tribe One / Sony Music: ticketing system",
+        "Investec: various internal systems"
       ]
     },
     {
@@ -126,7 +124,7 @@
       "startDate": "2011",
       "endDate": "2014",
       "location": "Woodmead, Johannesburg, South Africa",
-      "summary": "Lead developer tasked with the ground up development of an enterprise grade solution to replace the outdated products. Responsible for the full development life cycle.",
+      "summary": "Lead developer building an enterprise platform from scratch to replace the company's outdated products. Owned the full development lifecycle.",
       "highlights": []
     },
     {
@@ -136,46 +134,69 @@
       "startDate": "2007",
       "endDate": "2011",
       "location": "Various, Johannesburg, South Africa",
-      "summary": "These were my formative years as a web developer. Generally speaking, most jobs available at the time were for .Net. As such I got to learn VB.Net, C# and SQL. I also worked extensively with Web Forms and once it became available, MVC.",
+      "summary": "My early years as a web developer, working mostly in the .NET world (VB.Net, C#, SQL) with Web Forms and, later, MVC.",
       "highlights": []
     }
   ],
   "education": [
     {
-      "what": "Microsoft Certified Developer C#",
-      "where": "Johannesburg, South Africa",
-      "when": 2014,
+      "what": "Crash Course on Python",
+      "where": "Google (Coursera)",
+      "when": 2026,
+      "issuer": "Google",
+      "credentialId": "7T1219Q2JJVW",
       "courses": []
     },
     {
-      "what": "Try Hack Me",
+      "what": "TryHackMe",
       "where": "Beginner Learning Path",
       "when": 2021,
+      "courses": []
+    },
+    {
+      "what": "Microsoft Certified Developer (C#)",
+      "where": "Johannesburg, South Africa",
+      "when": 2014,
       "courses": []
     }
   ],
   "skills": [
     {
-      "Title": "Programming Languages",
-      "Items": ["C#", "VB.Net", "Javascript", "TypeScript", "MSSQL"]
-    },
-    {
-      "Title": "Frameworks",
-      "Items": ["React", "Svelte", "Next.js", "Node.js", ".Net"]
-    },
-    {
-      "Title": "IDEs & Tools",
+      "Title": "AI & LLM",
       "Items": [
-        "Visual Studio Professional",
-        "Visual Studio Code",
-        "Cursor",
-        "Antigravity",
-        "Jenkins"
+        "AI-Assisted Development (Claude Code, Cursor, Antigravity)",
+        "Prompt Engineering",
+        "Anthropic / Claude API",
+        "Local LLMs (Ollama, LM Studio)"
       ]
     },
     {
-      "Title": "Platforms",
-      "Items": ["Firebase", "Google Cloud", "Heroku", "Micrsoft Azure"]
+      "Title": "Languages",
+      "Items": ["TypeScript", "JavaScript (ES6+)", "Python", "C#", "SQL"]
+    },
+    {
+      "Title": "Frontend",
+      "Items": ["React", "Next.js", "Svelte", "Tailwind CSS", "HTML5", "CSS3", "SVG"]
+    },
+    {
+      "Title": "Backend & APIs",
+      "Items": ["Node.js", "REST APIs", ".NET", "Microservices", "Auth0", "Stripe"]
+    },
+    {
+      "Title": "Databases & Cloud",
+      "Items": ["MS SQL Server", "MongoDB", "Cosmos DB", "Azure", "AWS", "Google Cloud", "Firebase"]
+    },
+    {
+      "Title": "DevOps & Practices",
+      "Items": [
+        "CI/CD",
+        "GitHub Actions",
+        "Jenkins",
+        "Git",
+        "Agile / Scrum",
+        "System Design",
+        "Mentoring"
+      ]
     }
   ],
   "references": [

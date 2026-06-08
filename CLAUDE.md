@@ -36,7 +36,7 @@ Copy `.env` to `.env.local` and fill in values (`.env.local` takes precedence, f
 
 3. **HTML preview** — `src/app/resume-preview/page.tsx` compiles the **same** `template.hbs`, then extracts the `<style>` and `<body>`, scopes the global CSS to a `.resume-scope` wrapper, and overrides the page size to US Letter for on-screen viewing.
 
-**Critical: the PDF route and the preview page duplicate the template-setup logic** — both register the `replace` Handlebars helper and inject `ataruLogoBase64` (the `src/images/fav-sm.png` logo read as a base64 data URI). When changing how the template is fed data, update **both** files. Edits to resume *layout/styling* for the PDF go in `template.hbs`; edits to the *web* layout go in the React components — they do not share markup.
+**Critical: the PDF route and the preview page duplicate the template-setup logic** — both register the `replace` Handlebars helper and inject `ataruLogoBase64` (the `src/images/fav-sm.png` logo read as a base64 data URI). When changing how the template is fed data, update **both** files. Edits to resume _layout/styling_ for the PDF go in `template.hbs`; edits to the _web_ layout go in the React components — they do not share markup.
 
 The contact form posts to `POST /api/message`, which sends email via MailerSend (from `no-reply@ataru.it`). Also triggered from `Sidebar.tsx`.
 
@@ -52,3 +52,25 @@ The contact form posts to `POST /api/message`, which sends email via MailerSend 
 - Prettier: single quotes, semicolons, trailing commas, `printWidth` 100, `tabWidth` 2. Run `npm run prettier` before committing.
 - Import sorting is enforced (`eslint-plugin-simple-import-sort`).
 - TypeScript `strict` is **off** — be deliberate about null/undefined handling.
+
+## Working agreements (rules for Claude)
+
+These are durable rules for this repo — extend this list as new ones emerge.
+
+- **Never `git commit` or `git push` without Eben's explicit consent — every time.** This is his top rule. Make file edits freely; stop and ask before writing history or pushing.
+
+## Resume content & ATS
+
+The resume exists to pass **AI/ATS resume scoring** (the systems that parse and _rank_ an uploaded resume before a human reads it). The target is **US (Boston/remote) Senior/Staff Full-Stack, Senior Frontend, and Eng Lead roles**, with a deliberate **pivot toward AI-industry roles** (de-emphasizing .NET). Full playbook + keyword banks: **`docs/RESUME-ATS-STRATEGY.md`**.
+
+- **`resume.json` is the source of truth** for both the site and the PDF. Content edits flow to both.
+- **The PDF (`template.hbs`) is intentionally a single-column, ATS-safe document. Do NOT reintroduce** multi-column/sidebar layouts, layout tables, images/icons/logos as content, skill "pills", sub-10px fonts, or contact info in headers/footers — these break parsers (e.g. Lever silently drops sidebars). Tasteful flair (one accent color, the monospace heading accent, whitespace) is fine because it doesn't touch the text layer. The PDF is **US Letter** and may run to **2 pages**.
+- **The website may keep its rich design** — it has no ATS constraints (it's for humans who click the link).
+- **US resume hygiene:** no photo, date of birth, gender, or marital status in the resume _document_ (bias/ADEA risk). A photo on the _website_ is fine.
+- **Only claim AI skills Eben can defend in an interview.** Current honest set: AI-assisted development, prompt engineering, some Anthropic/Claude API integration, local LLMs (Ollama/LM Studio), Python. Expand after his AI course — don't overclaim ML expertise.
+
+### Refresh cadence
+
+- **Per application (highest ROI):** tailor the Skills section + 3–5 bullets to mirror the specific job description's keywords and title.
+- **Every ~6 months (or sooner if the search stalls):** light review of ATS trends + refresh wording.
+- **Annually:** re-run the deep research and update `docs/RESUME-ATS-STRATEGY.md`.
