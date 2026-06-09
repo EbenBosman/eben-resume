@@ -31,7 +31,7 @@ export interface WorkItem {
 export interface EducationItem {
   what: string;
   where: string;
-  when: number;
+  when?: number;
   courses: string[];
   issuer?: string;
   credentialId?: string;
