@@ -5,7 +5,6 @@ import React, { useState, ChangeEvent } from 'react';
 import Image from 'next/image';
 import { useTheme } from 'next-themes';
 
-import { saveAs } from 'file-saver';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faGithub, faStackOverflow, faLinkedin } from '@fortawesome/free-brands-svg-icons';
 import { faEnvelope, faFilePdf, faMoon, faSun, faBars } from '@fortawesome/free-solid-svg-icons';
@@ -26,8 +25,6 @@ interface SidebarProps {
 const Sidebar: React.FC<SidebarProps> = ({ basics }) => {
   const { theme, setTheme } = useTheme();
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  const [isPdfLoading, setPdfIsLoading] = useState<boolean>(false);
-  const [isPdfIsErrored, setPdfIsErrored] = useState<boolean>(false);
   const [showModal, setShowModal] = useState<boolean>(false);
 
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
@@ -42,45 +39,6 @@ const Sidebar: React.FC<SidebarProps> = ({ basics }) => {
   const [message, setMessage] = useState<string>('');
   const [isMessageValid, setMessageValid] = useState<boolean>(true);
   const [messageInvalidText, setMessageInvalidText] = useState<string>('');
-
-  const constructResumeFileName = (name: string): string => {
-    const date = new Date();
-    const formattedDate = date
-      .toLocaleDateString('en-GB', {
-        day: '2-digit',
-        month: 'short',
-        year: 'numeric',
-      })
-      .replace(/ /g, ' ');
-
-    return `Resume of ${name} (${formattedDate}).pdf`;
-  };
-
-  const createAndDownloadPdf = async (e: React.MouseEvent<HTMLAnchorElement>) => {
-    e.preventDefault();
-    setPdfIsLoading(true);
-
-    try {
-      const res = await fetch('/api/pdf-resume', {
-        method: 'POST',
-      });
-
-      if (!res.ok) {
-        throw new Error('Failed to generate PDF');
-      }
-
-      const blob = await res.blob();
-      saveAs(blob, constructResumeFileName('Eben Bosman'));
-      setPdfIsLoading(false);
-    } catch (error) {
-      console.error(error);
-      setPdfIsLoading(false);
-      setPdfIsErrored(true);
-      setTimeout(() => {
-        setPdfIsErrored(false);
-      }, 1000);
-    }
-  };
 
   const sendMessage = async (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
@@ -278,17 +236,13 @@ const Sidebar: React.FC<SidebarProps> = ({ basics }) => {
               </li>
               <li className="nav-item">
                 <a
-                  rel="noreferrer"
-                  href="#"
-                  className={`text-white hover:text-primary transition-colors cursor-pointer ${isPdfLoading ? 'animate-flicker' : ''} ${isPdfIsErrored ? 'shake' : ''}`}
-                  onClick={createAndDownloadPdf}
-                  title="PDF Resume"
+                  rel="noopener noreferrer"
+                  href="/api/pdf-resume"
+                  target="_blank"
+                  className="text-white hover:text-primary transition-colors cursor-pointer"
+                  title="Download PDF Resume"
                 >
-                  <FontAwesomeIcon
-                    icon={faFilePdf}
-                    className="fa-lg md:fa-2x"
-                    style={{ color: isPdfIsErrored ? 'red' : '' }}
-                  />
+                  <FontAwesomeIcon icon={faFilePdf} className="fa-lg md:fa-2x" />
                 </a>
               </li>
             </ul>
@@ -412,18 +366,14 @@ const Sidebar: React.FC<SidebarProps> = ({ basics }) => {
                 </li>
                 <li className="nav-item">
                   <a
-                    rel="noreferrer"
-                    href="#"
-                    className={`text-white hover:text-primary transition-colors ${isPdfLoading ? 'animate-flicker' : ''} ${isPdfIsErrored ? 'shake' : ''}`}
-                    onClick={createAndDownloadPdf}
-                    title="PDF Resume"
+                    rel="noopener noreferrer"
+                    href="/api/pdf-resume"
+                    target="_blank"
+                    className="text-white hover:text-primary transition-colors"
+                    title="Download PDF Resume"
                   >
                     <span className="hidden">PDF Resume</span>
-                    <FontAwesomeIcon
-                      icon={faFilePdf}
-                      className="fa-lg"
-                      style={{ color: isPdfIsErrored ? 'red' : '' }}
-                    />
+                    <FontAwesomeIcon icon={faFilePdf} className="fa-lg" />
                   </a>
                 </li>
               </ul>
