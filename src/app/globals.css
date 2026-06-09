@@ -1,163 +1,162 @@
-@import "tailwindcss";
+@import 'tailwindcss';
 
 :root {
-    --color-primary: #2158b0;
-    --color-primary-dark: #1a468c;
-    --color-background: #ffffff;
-    --color-foreground: #000000;
-    --color-surface: #ffffff;
-    --color-background-alt: #f9fafb;
-    /* gray-50 */
-    --color-border: #d1d5db;
-    /* gray-300 */
-    --color-muted: #4b5563;
-    /* gray-600 */
-    --color-sidebar: #111827;
-    /* gray-900 */
-    --color-sidebar-border: #374151;
-    /* gray-700 */
+  --color-primary: #2158b0;
+  --color-primary-dark: #1a468c;
+  --color-background: #ffffff;
+  --color-foreground: #000000;
+  --color-surface: #ffffff;
+  --color-background-alt: #f9fafb;
+  /* gray-50 */
+  --color-border: #d1d5db;
+  /* gray-300 */
+  --color-muted: #4b5563;
+  /* gray-600 */
+  --color-sidebar: #111827;
+  /* gray-900 */
+  --color-sidebar-border: #374151;
+  /* gray-700 */
 }
 
 /* Force dark mode class strategy */
 @custom-variant dark (&:where(.dark, .dark *));
 
 @variant dark {
-    --color-background: #1a1a1a;
-    --color-foreground: #ffffff;
-    --color-surface: #1f2937;
-    /* gray-800 */
-    --color-background-alt: #1f2937;
-    /* gray-800 */
-    --color-border: #374151;
-    /* gray-700 */
-    --color-muted: #9ca3af;
-    /* gray-400 */
-    --color-sidebar: #111827;
-    --color-sidebar-border: #374151;
+  --color-background: #1a1a1a;
+  --color-foreground: #ffffff;
+  --color-surface: #1f2937;
+  /* gray-800 */
+  --color-background-alt: #1f2937;
+  /* gray-800 */
+  --color-border: #374151;
+  /* gray-700 */
+  --color-muted: #9ca3af;
+  /* gray-400 */
+  --color-sidebar: #111827;
+  --color-sidebar-border: #374151;
 }
 
 @theme {
-    --color-primary: var(--color-primary);
-    --color-primary-dark: var(--color-primary-dark);
-    --color-background: var(--color-background);
-    --color-foreground: var(--color-foreground);
-    --color-surface: var(--color-surface);
-    --color-background-alt: var(--color-background-alt);
-    --color-border: var(--color-border);
-    --color-muted: var(--color-muted);
-    --color-sidebar: var(--color-sidebar);
-    --color-sidebar-border: var(--color-sidebar-border);
+  --color-primary: var(--color-primary);
+  --color-primary-dark: var(--color-primary-dark);
+  --color-background: var(--color-background);
+  --color-foreground: var(--color-foreground);
+  --color-surface: var(--color-surface);
+  --color-background-alt: var(--color-background-alt);
+  --color-border: var(--color-border);
+  --color-muted: var(--color-muted);
+  --color-sidebar: var(--color-sidebar);
+  --color-sidebar-border: var(--color-sidebar-border);
 }
 
 @layer base {
-
-    *,
-    ::after,
-    ::before,
-    ::backdrop,
-    ::file-selector-button {
-        border-color: var(--color-border, currentColor);
-    }
+  *,
+  ::after,
+  ::before,
+  ::backdrop,
+  ::file-selector-button {
+    border-color: var(--color-border, currentColor);
+  }
 }
 
 /* Animate Flicker for PDF Loading */
 @keyframes flicker {
-    0% {
-        opacity: 1;
-    }
+  0% {
+    opacity: 1;
+  }
 
-    50% {
-        opacity: 0;
-    }
+  50% {
+    opacity: 0;
+  }
 
-    100% {
-        opacity: 1;
-    }
+  100% {
+    opacity: 1;
+  }
 }
 
 .animate-flicker {
-    animation: flicker 1s infinite;
+  animation: flicker 1s infinite;
 }
 
 .shake {
-    animation: shake 0.5s;
+  animation: shake 0.5s;
 }
 
 @keyframes shake {
-    0% {
-        transform: translate(1px, 1px) rotate(0deg);
-    }
+  0% {
+    transform: translate(1px, 1px) rotate(0deg);
+  }
 
-    10% {
-        transform: translate(-1px, -2px) rotate(-1deg);
-    }
+  10% {
+    transform: translate(-1px, -2px) rotate(-1deg);
+  }
 
-    20% {
-        transform: translate(-3px, 0px) rotate(1deg);
-    }
+  20% {
+    transform: translate(-3px, 0px) rotate(1deg);
+  }
 
-    30% {
-        transform: translate(3px, 2px) rotate(0deg);
-    }
+  30% {
+    transform: translate(3px, 2px) rotate(0deg);
+  }
 
-    40% {
-        transform: translate(1px, -1px) rotate(1deg);
-    }
+  40% {
+    transform: translate(1px, -1px) rotate(1deg);
+  }
 
-    50% {
-        transform: translate(-1px, 2px) rotate(-1deg);
-    }
+  50% {
+    transform: translate(-1px, 2px) rotate(-1deg);
+  }
 
-    60% {
-        transform: translate(-3px, 1px) rotate(0deg);
-    }
+  60% {
+    transform: translate(-3px, 1px) rotate(0deg);
+  }
 
-    70% {
-        transform: translate(3px, 1px) rotate(-1deg);
-    }
+  70% {
+    transform: translate(3px, 1px) rotate(-1deg);
+  }
 
-    80% {
-        transform: translate(-1px, -1px) rotate(1deg);
-    }
+  80% {
+    transform: translate(-1px, -1px) rotate(1deg);
+  }
 
-    90% {
-        transform: translate(1px, 2px) rotate(0deg);
-    }
+  90% {
+    transform: translate(1px, 2px) rotate(0deg);
+  }
 
-    100% {
-        transform: translate(1px, -2px) rotate(-1deg);
-    }
+  100% {
+    transform: translate(1px, -2px) rotate(-1deg);
+  }
 }
 
 @keyframes progress {
-    0% {
-        width: 0%;
-    }
+  0% {
+    width: 0%;
+  }
 
-    100% {
-        width: 100%;
-    }
+  100% {
+    width: 100%;
+  }
 }
 
 .animate-progress {
-    animation: progress 5s linear forwards;
+  animation: progress 5s linear forwards;
 }
 
 /* Ataru logo float animation */
 @keyframes float {
-    0% {
-        transform: translateY(0px);
-    }
+  0% {
+    transform: translateY(0px);
+  }
 
-    50% {
-        transform: translateY(-6px);
-    }
+  50% {
+    transform: translateY(-6px);
+  }
 
-    100% {
-        transform: translateY(0px);
-    }
+  100% {
+    transform: translateY(0px);
+  }
 }
 
 .animate-float {
-    animation: float 3s ease-in-out infinite;
+  animation: float 3s ease-in-out infinite;
 }
