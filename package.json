@@ -5,11 +5,15 @@
   "main": "index.js",
   "author": "eben bosman",
   "license": "MIT",
+  "engines": {
+    "node": "24.x"
+  },
   "scripts": {
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint",
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix",
     "prettier": "prettier --write --ignore-unknown .",
     "prettier:check": "prettier --check --ignore-unknown ."
   },
@@ -23,7 +27,7 @@
     "dotenv": "^17.4.2",
     "file-saver": "^2.0.5",
     "handlebars": "^4.7.9",
-    "mailersend": "^2.8.0",
+    "mailersend": "^3.0.0",
     "next": "^16.2.7",
     "next-themes": "^0.4.6",
     "postcss": "^8.5.15",
@@ -36,15 +40,15 @@
   "devDependencies": {
     "@eslint/eslintrc": "^3.3.5",
     "@types/file-saver": "^2.0.7",
-    "@types/node": "^22.19.20",
+    "@types/node": "^24.13.1",
     "@types/react": "^19.2.17",
-    "@types/react-dom": "^19.0.1",
+    "@types/react-dom": "^19.2.3",
     "eslint": "^9.39.4",
     "eslint-config-next": "^16.2.7",
     "eslint-config-prettier": "^10.1.8",
     "eslint-plugin-prettier": "^5.5.6",
     "eslint-plugin-simple-import-sort": "^12.1.1",
     "prettier": "^3.8.3",
-    "typescript": "^5.7.2"
+    "typescript": "^6.0.3"
   }
 }
