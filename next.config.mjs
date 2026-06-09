@@ -4,9 +4,10 @@ const nextConfig = {
   // This reduces your slug size and memory usage significantly.
   output: 'standalone',
 
-  // 2. REQUIRED: Keeps Puppeteer/PDF binaries out of the bundler
-  // so they don't crash the build.
-  serverExternalPackages: ['html-pdf-node'],
+  // 2. REQUIRED: Keeps Puppeteer out of the bundler so it isn't traced/bundled
+  // (Chrome is supplied by the chrome-for-testing buildpack on Heroku via
+  // PUPPETEER_EXECUTABLE_PATH; locally Puppeteer uses its bundled Chromium).
+  serverExternalPackages: ['puppeteer', 'puppeteer-core'],
 
   // 3. Recommended for catching bugs early
   reactStrictMode: true,

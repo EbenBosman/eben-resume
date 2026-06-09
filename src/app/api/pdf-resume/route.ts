@@ -2,9 +2,10 @@ import { NextResponse } from 'next/server';
 import fs from 'fs';
 import path from 'path';
 import handlebars from 'handlebars';
-import pdf from 'html-pdf-node';
+import puppeteer from 'puppeteer';
 
 export async function POST(req: Request) {
+  let browser;
   try {
     // Read data and template
     const resumePath = path.join(process.cwd(), 'src', 'data', 'resume.json');
@@ -19,25 +20,23 @@ export async function POST(req: Request) {
     });
 
     const template = handlebars.compile(templateSource);
-
     const data = JSON.parse(resumeData);
-
     const htmlString = template(data);
 
-    const options = {
-      format: 'Letter',
-      printBackground: true,
-    };
+    // On Heroku, PUPPETEER_EXECUTABLE_PATH points at the chrome-for-testing
+    // buildpack's Chrome. Locally it is unset, so Puppeteer uses its own
+    // bundled Chromium. --no-sandbox is required on Heroku dynos.
+    browser = await puppeteer.launch({
+      headless: true,
+      args: ['--no-sandbox', '--disable-setuid-sandbox'],
+      executablePath: process.env.PUPPETEER_EXECUTABLE_PATH || undefined,
+    });
 
-    const file = {
-      content: htmlString,
-    };
+    const page = await browser.newPage();
+    await page.setContent(htmlString, { waitUntil: 'networkidle0' });
+    const pdfBuffer = await page.pdf({ format: 'letter', printBackground: true });
 
-    // Generate PDF
-    // html-pdf-node uses promises
-    const pdfBuffer = await pdf.generatePdf(file, options);
-
-    return new NextResponse(pdfBuffer, {
+    return new NextResponse(Buffer.from(pdfBuffer), {
       status: 200,
       headers: {
         'Content-Type': 'application/pdf',
@@ -47,5 +46,9 @@ export async function POST(req: Request) {
   } catch (error) {
     console.error('Error generating PDF:', error);
     return new NextResponse('Error generating PDF', { status: 500 });
+  } finally {
+    if (browser) {
+      await browser.close();
+    }
   }
 }
