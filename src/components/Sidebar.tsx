@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState, useEffect, ChangeEvent } from 'react';
+import React, { useState, useSyncExternalStore, ChangeEvent } from 'react';
 
 import Image from 'next/image';
 import { useTheme } from 'next-themes';
@@ -22,13 +22,18 @@ interface SidebarProps {
   basics: Basics;
 }
 
+const emptySubscribe = () => () => {};
+
 const Sidebar: React.FC<SidebarProps> = ({ basics }) => {
   const { resolvedTheme, setTheme } = useTheme();
   // The resolved theme ('system' → light/dark) is only known client-side; gate on
-  // mount so the SSR'd toggle label matches the first client render.
-  const [mounted, setMounted] = useState(false);
-  useEffect(() => setMounted(true), []);
-  const isDark = mounted && resolvedTheme === 'dark';
+  // hydration so the SSR'd toggle label matches the initial client render.
+  const hydrated = useSyncExternalStore(
+    emptySubscribe,
+    () => true,
+    () => false,
+  );
+  const isDark = hydrated && resolvedTheme === 'dark';
 
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [showModal, setShowModal] = useState<boolean>(false);
