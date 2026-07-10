@@ -2,7 +2,6 @@
   "name": "eben-resume",
   "version": "2.0.1",
   "description": "This is the Resume for Eben Bosman",
-  "main": "index.js",
   "author": "eben bosman",
   "license": "MIT",
   "engines": {
@@ -11,7 +10,8 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "start": "next start",
+    "postbuild": "node -e \"require('fs').cpSync('.next/static', '.next/standalone/.next/static', { recursive: true })\"",
+    "start": "node .next/standalone/server.js",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
     "prettier": "prettier --write --ignore-unknown .",
@@ -24,7 +24,6 @@
     "@fortawesome/free-solid-svg-icons": "^7.2.0",
     "@fortawesome/react-fontawesome": "^3.3.1",
     "@tailwindcss/postcss": "^4.3.0",
-    "dotenv": "^17.4.2",
     "handlebars": "^4.7.9",
     "mailersend": "^3.0.0",
     "next": "^16.2.7",
@@ -33,7 +32,6 @@
     "puppeteer": "^25.1.0",
     "react": "^19.2.7",
     "react-dom": "^19.2.7",
-    "sass": "^1.100.0",
     "tailwindcss": "^4.3.0"
   },
   "devDependencies": {
