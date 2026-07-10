@@ -27,8 +27,17 @@
         print-color-adjust: exact;
       }
 
+      /* Print margins must be @page margins (mirrored by the PDF route's
+         page.pdf `margin` option), NOT container padding — padding only
+         applies at the document's start/end, leaving text flush against
+         the paper edge on every page break. */
+      @page {
+        size: letter;
+        margin: 0.5in 0.55in;
+      }
+
       .page-container {
-        padding: 40px 46px;
+        padding: 0;
       }
 
       /* Header */

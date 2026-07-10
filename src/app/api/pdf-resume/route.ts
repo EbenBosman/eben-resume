@@ -34,7 +34,13 @@ async function generatePdf(): Promise<Uint8Array<ArrayBuffer>> {
     const page = await browser.newPage();
     // Template is fully self-contained (no external fonts/images), so 'load' is enough.
     await page.setContent(htmlString, { waitUntil: 'load' });
-    const pdfBuffer = await page.pdf({ format: 'letter', printBackground: true });
+    // Printer-safe margins on every page (Puppeteer otherwise prints with zero
+    // margins). Keep in sync with the template's @page rule.
+    const pdfBuffer = await page.pdf({
+      format: 'letter',
+      printBackground: true,
+      margin: { top: '0.5in', bottom: '0.5in', left: '0.55in', right: '0.55in' },
+    });
     // Copy into an ArrayBuffer-backed Uint8Array. `new Uint8Array(length)` is
     // unambiguously Uint8Array<ArrayBuffer>, a valid BodyInit — avoids the
     // Uint8Array<ArrayBufferLike> vs BodyInit mismatch under @types/node 24 / TS 6.
@@ -47,11 +53,16 @@ async function generatePdf(): Promise<Uint8Array<ArrayBuffer>> {
 }
 
 function pdfResponse(body: Uint8Array<ArrayBuffer>): NextResponse {
+  const formattedDate = new Date().toLocaleDateString('en-GB', {
+    day: '2-digit',
+    month: 'short',
+    year: 'numeric',
+  });
   return new NextResponse(body, {
     status: 200,
     headers: {
       'Content-Type': 'application/pdf',
-      'Content-Disposition': 'attachment; filename="Resume of Eben Bosman.pdf"',
+      'Content-Disposition': `attachment; filename="Resume of Eben Bosman (${formattedDate}).pdf"`,
     },
   });
 }

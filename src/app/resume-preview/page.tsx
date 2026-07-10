@@ -4,7 +4,7 @@ import handlebars from 'handlebars';
 import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: 'Resume - US Letter Preview',
+  title: 'Eben Bosman | Resume',
   robots: {
     index: false,
     follow: false,
@@ -59,7 +59,8 @@ export default async function ResumeLetterPage() {
 					.resume-scope .page-container {
 						width: 215.9mm !important; /* 8.5in */
 						min-height: 279.4mm !important; /* 11in */
-                        /* Container styling is already in HBS for screen, but we ensure overrides here */
+						/* Mirror the PDF's @page margins so the on-screen sheet matches print */
+						padding: 0.5in 0.55in !important;
 					}
 				}
 			`,

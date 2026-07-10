@@ -1,7 +1,7 @@
 import React from 'react';
 
 export const metadata = {
-  title: 'Resume - US Letter Preview',
+  title: 'Eben Bosman | Resume',
 };
 
 export default function ResumeLetterLayout({ children }: { children: React.ReactNode }) {
