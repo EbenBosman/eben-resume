@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState, ChangeEvent } from 'react';
+import React, { useState, useEffect, ChangeEvent } from 'react';
 
 import Image from 'next/image';
 import { useTheme } from 'next-themes';
@@ -23,7 +23,13 @@ interface SidebarProps {
 }
 
 const Sidebar: React.FC<SidebarProps> = ({ basics }) => {
-  const { theme, setTheme } = useTheme();
+  const { resolvedTheme, setTheme } = useTheme();
+  // The resolved theme ('system' → light/dark) is only known client-side; gate on
+  // mount so the SSR'd toggle label matches the first client render.
+  const [mounted, setMounted] = useState(false);
+  useEffect(() => setMounted(true), []);
+  const isDark = mounted && resolvedTheme === 'dark';
+
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [showModal, setShowModal] = useState<boolean>(false);
 
@@ -294,11 +300,11 @@ const Sidebar: React.FC<SidebarProps> = ({ basics }) => {
             {/* Mobile Dark Mode Toggle */}
             <div className="w-full mt-8 pt-4 border-t border-sidebar-border flex justify-center">
               <button
-                onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
+                onClick={() => setTheme(isDark ? 'light' : 'dark')}
                 className="flex items-center text-white hover:text-primary cursor-pointer"
               >
-                <span className="mr-2">{theme === 'dark' ? 'Light Mode' : 'Dark Mode'}</span>
-                <FontAwesomeIcon icon={theme === 'dark' ? faSun : faMoon} className="fa-lg" />
+                <span className="mr-2">{isDark ? 'Light Mode' : 'Dark Mode'}</span>
+                <FontAwesomeIcon icon={isDark ? faSun : faMoon} className="fa-lg" />
               </button>
             </div>
           </div>
@@ -427,12 +433,12 @@ const Sidebar: React.FC<SidebarProps> = ({ basics }) => {
           {/* Desktop Dark Mode Toggle */}
           <div className="w-full mt-auto mb-4 px-4 pt-4 border-sidebar-border">
             <button
-              onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
+              onClick={() => setTheme(isDark ? 'light' : 'dark')}
               className="flex items-center justify-center text-white hover:text-primary transition-colors cursor-pointer w-full py-2"
               title="Toggle Dark Mode"
             >
-              <span className="inline mr-2">{theme === 'dark' ? 'Light Mode' : 'Dark Mode'}</span>
-              <FontAwesomeIcon icon={theme === 'dark' ? faSun : faMoon} className="fa-lg" />
+              <span className="inline mr-2">{isDark ? 'Light Mode' : 'Dark Mode'}</span>
+              <FontAwesomeIcon icon={isDark ? faSun : faMoon} className="fa-lg" />
             </button>
           </div>
         </nav>
