@@ -5,7 +5,7 @@ import { Ataru } from '../../types/resume';
 
 import { Section } from '../ui/Section';
 
-import ataruLogo from '../../images/fav.png';
+import ataruLogo from '../../images/ataru-logo.png';
 
 // Ataru.io brand faces from the Cesium 455 design system, self-hosted via next/font.
 const ubuntu = Ubuntu({ weight: '700', subsets: ['latin'] });

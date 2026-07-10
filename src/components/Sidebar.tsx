@@ -33,7 +33,6 @@ const Sidebar: React.FC<SidebarProps> = ({ basics }) => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [showModal, setShowModal] = useState<boolean>(false);
 
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [isMessageSending, setMessageLoading] = useState<boolean>(false);
   const [isMessageSuccess, setMessageSuccess] = useState<boolean>(false);
   const [isMessageError, setMessageError] = useState<boolean>(false);
@@ -103,7 +102,6 @@ const Sidebar: React.FC<SidebarProps> = ({ basics }) => {
     const rawEmail = e.target.value;
     setEmail(rawEmail);
 
-    // eslint-disable-next-line no-useless-escape
     const re =
       /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 
@@ -146,7 +144,6 @@ const Sidebar: React.FC<SidebarProps> = ({ basics }) => {
   };
 
   const isValidEmail = (email: string): boolean => {
-    // eslint-disable-next-line no-useless-escape
     const re =
       /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
     return re.test(email);
