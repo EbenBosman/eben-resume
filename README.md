@@ -1,64 +1,41 @@
-## Setup
+# eben-resume
 
-git clone https://github.com/EbenBosman/eben-resume
-cd eben-resume
+The source for [ebenbosman.com](https://ebenbosman.com) — an interactive resume built with Next.js (App Router) and Tailwind CSS v4. One app serves the web resume, an ATS-safe PDF download, and a contact form. `src/data/resume.json` is the single source of truth for all resume content.
+
+## Development
+
+```sh
 npm install
-
-````
-
-## Development Workflow
-
-### 1. Web Development (Frontend Only)
-If you mainly want to edit the React components and styles:
-```sh
-npm run dev
-````
-
-- Opens the app at `http://localhost:3000`.
-- **Note**: Features requiring the backend (like **PDF Resume Download** and **Contact Form**) will generally fail or show errors if the backend is not running.
-
-### 2. Full Feature Testing (Frontend + Backend)
-
-To test the **PDF Generation** or **Email Sending**:
-
-1. Open a terminal and start the backend API:
-
-   ```sh
-   npm start
-   ```
-
-   _(Runs on `http://localhost:5000`)_
-
-2. Open a **second terminal** and start the frontend:
-   ```sh
-   npm run dev
-   ```
-   _(Runs on `http://localhost:3000`)_
-
-The frontend dev server is configured to proxy API requests (like `/pdf-resume`) to the backend on port 5000.
-
-### 3. Production Build & Preview
-
-To build the static assets and run the production server:
-
-```sh
-npm run server
+npm run dev          # http://localhost:3000
 ```
 
-- Builds the project for production.
-- Starts the server at `http://localhost:5000`.
+## Production build
 
-## Environment Variables
+```sh
+npm run build        # standalone output; postbuild copies static assets into it
+npm start            # runs node .next/standalone/server.js
+```
 
-This project uses environment variables for configuration (e.g., SendGrid API keys).
+## Surfaces
 
-1. The project includes a `.env` template file with the required keys but no values.
-2. **Create a local configuration file**:
-   ```sh
-   cp .env .env.local
-   ```
-3. **Edit `.env.local`** and fill in your actual values (e.g., API keys).
-4. **Note**: `.env.local` is git-ignored to prevent sensitive data from being committed. The application will load variables from `.env.local` first, falling back to `.env` for defaults.
+- `/` — the web resume
+- `/api/pdf-resume` — generates the PDF with Puppeteer from `src/templates/template.hbs`
+- `/resume-preview` — on-screen US Letter preview of the same template
+- `/api/message` — contact form, sends email via MailerSend
+
+## Environment variables
+
+Used only by the contact form:
+
+1. Copy the `.env` template to `.env.local` (git-ignored) and fill in the values:
+   - `MAILERSEND_API_KEY` — MailerSend API key
+   - `MAILBOX_TO_MONITOR` — recipient address for contact-form submissions
+
+`.env.local` takes precedence, falling back to `.env`.
+
+## Deployment
+
+Deployed to Heroku (`git push heroku master`). The `Procfile` runs the standalone server; the Node version comes from `engines` in `package.json` (24.x, Heroku's Active LTS default). Chrome for the PDF route is supplied by the chrome-for-testing buildpack via `PUPPETEER_EXECUTABLE_PATH`.
 
 ## License
 
