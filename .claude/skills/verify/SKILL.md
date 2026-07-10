@@ -10,6 +10,7 @@ description: Build, run, and drive ebenbosman.com (this repo) to verify a change
 ```sh
 npm install            # only if package.json changed (Puppeteer downloads Chrome, ~3 min)
 npm run dev            # Turbopack, ready in ~3 s at http://localhost:3000
+npm run build; npm start   # prod check: standalone server (what Heroku's Procfile runs)
 ```
 
 No test suite exists. `npm run lint` (`eslint .`, includes prettier) — expect 3 pre-existing
