@@ -16,6 +16,8 @@
   /* gray-900 */
   --color-sidebar-border: #374151;
   /* gray-700 */
+  --color-cesium455: #004cff;
+  /* Ataru brand: Cesium 455 (455 nm emission line) */
 }
 
 /* Force dark mode class strategy */
@@ -34,6 +36,8 @@
   /* gray-400 */
   --color-sidebar: #111827;
   --color-sidebar-border: #374151;
+  --color-cesium455: #3d6bff;
+  /* Ataru dark-mode accent (brighter for contrast on dark surfaces) */
 }
 
 @theme {
@@ -47,6 +51,7 @@
   --color-muted: var(--color-muted);
   --color-sidebar: var(--color-sidebar);
   --color-sidebar-border: var(--color-sidebar-border);
+  --color-cesium455: var(--color-cesium455);
 }
 
 @layer base {

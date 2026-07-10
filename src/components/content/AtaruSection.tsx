@@ -1,10 +1,15 @@
 import React from 'react';
+import { Electrolize, Ubuntu } from 'next/font/google';
 import Image from 'next/image';
 import { Ataru } from '../../types/resume';
 
 import { Section } from '../ui/Section';
 
 import ataruLogo from '../../images/fav.png';
+
+// Ataru.io brand faces from the Cesium 455 design system, self-hosted via next/font.
+const ubuntu = Ubuntu({ weight: '700', subsets: ['latin'] });
+const electrolize = Electrolize({ weight: '400', subsets: ['latin'] });
 
 interface AtaruSectionProps {
   content: Ataru;
@@ -35,12 +40,13 @@ const AtaruSection: React.FC<AtaruSectionProps> = ({ content }) => {
                 placeholder="blur"
               />
             </a>
-            <h3 className="text-3xl font-bold text-foreground mt-4 tracking-tight">
+            <h3
+              className={`${ubuntu.className} text-3xl font-bold text-foreground mt-4 tracking-tight`}
+            >
               {content.name}
             </h3>
             <span
-              className="text-sm font-semibold tracking-[0.25em] mt-1"
-              style={{ color: '#6d28d9' }}
+              className={`${electrolize.className} text-sm tracking-[0.32em] mt-1 text-cesium455`}
             >
               {content.subtitle}
             </span>

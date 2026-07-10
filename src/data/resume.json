@@ -176,7 +176,16 @@
     },
     {
       "Title": "Frontend",
-      "Items": ["React", "Next.js", "Svelte", "Tailwind CSS", "HTML5", "CSS3", "SVG"]
+      "Items": [
+        "React",
+        "Next.js",
+        "Svelte",
+        "Tailwind CSS",
+        "HTML5",
+        "CSS3",
+        "SVG",
+        "Claude Design"
+      ]
     },
     {
       "Title": "Backend & APIs",

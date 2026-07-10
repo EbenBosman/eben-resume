@@ -2,7 +2,6 @@ import './globals.css';
 import { Providers } from './providers';
 
 import type { Metadata } from 'next';
-import favIcon from '../images/fav-sm.png';
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://ebenbosman.com'),
@@ -51,9 +50,6 @@ export const metadata: Metadata = {
     title: 'Eben Bosman | Fullstack Developer',
     description:
       'Nearly two decades of experience building modern web applications with React, Next.js, TypeScript, C#, and .NET.',
-  },
-  icons: {
-    icon: favIcon.src,
   },
 };
 
