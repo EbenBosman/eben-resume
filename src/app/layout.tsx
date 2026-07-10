@@ -5,9 +5,9 @@ import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://ebenbosman.com'),
-  title: 'Eben Bosman | Fullstack Developer',
+  title: 'Eben Bosman | Senior Full-Stack Engineer',
   description:
-    'Eben Bosman is a driven Full-Stack Developer with nearly two decades of hands-on experience architecting and building modern web applications using React, Next.js, TypeScript, C#, and .NET.',
+    'Eben Bosman is a driven Senior Full-Stack Engineer with nearly two decades of hands-on experience architecting and building modern web applications using React, Next.js, TypeScript, C#, and .NET.',
   keywords: [
     'Eben Bosman',
     'Senior Full-Stack Engineer',
@@ -41,13 +41,13 @@ export const metadata: Metadata = {
     locale: 'en_US',
     url: 'https://ebenbosman.com',
     siteName: 'Eben Bosman Resume',
-    title: 'Eben Bosman | Fullstack Developer',
+    title: 'Eben Bosman | Senior Full-Stack Engineer',
     description:
       'Nearly two decades of experience building modern web applications with React, Next.js, TypeScript, C#, and .NET.',
   },
   twitter: {
     card: 'summary',
-    title: 'Eben Bosman | Fullstack Developer',
+    title: 'Eben Bosman | Senior Full-Stack Engineer',
     description:
       'Nearly two decades of experience building modern web applications with React, Next.js, TypeScript, C#, and .NET.',
   },
