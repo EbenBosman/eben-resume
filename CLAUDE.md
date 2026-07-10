@@ -32,11 +32,11 @@ Copy `.env` to `.env.local` and fill in values (`.env.local` takes precedence, f
 
 1. **Web UI** — `src/app/page.tsx` imports `resume.json`, casts it to `ResumeData`, and passes typed props to `Sidebar` and `Content`. `Content` composes the section components in `src/components/content/` (About, AtaruSection, Experience, Education, Skills). Shared primitives live in `src/components/ui/`.
 
-2. **PDF download** — `POST /api/pdf-resume` (`src/app/api/pdf-resume/route.ts`) compiles the Handlebars template `src/templates/template.hbs` against `resume.json` and renders it to a PDF with `html-pdf-node` (Puppeteer under the hood). Triggered from `Sidebar.tsx`.
+2. **PDF download** — `GET /api/pdf-resume` (`src/app/api/pdf-resume/route.ts`, POST kept for compatibility) compiles the Handlebars template `src/templates/template.hbs` against `resume.json` and renders it to a PDF with Puppeteer. Triggered from `Sidebar.tsx`.
 
 3. **HTML preview** — `src/app/resume-preview/page.tsx` compiles the **same** `template.hbs`, then extracts the `<style>` and `<body>`, scopes the global CSS to a `.resume-scope` wrapper, and overrides the page size to US Letter for on-screen viewing.
 
-**Critical: the PDF route and the preview page duplicate the template-setup logic** — both register the `replace` Handlebars helper and inject `ataruLogoBase64` (the `src/images/fav-sm.png` logo read as a base64 data URI). When changing how the template is fed data, update **both** files. Edits to resume _layout/styling_ for the PDF go in `template.hbs`; edits to the _web_ layout go in the React components — they do not share markup.
+**Critical: the PDF route and the preview page duplicate the template-setup logic** — both register the `replace` Handlebars helper. When changing how the template is fed data, update **both** files. The template is intentionally self-contained (no external fonts or images). Edits to resume _layout/styling_ for the PDF go in `template.hbs`; edits to the _web_ layout go in the React components — they do not share markup.
 
 The contact form posts to `POST /api/message`, which sends email via MailerSend (from `no-reply@ataru.it`). Also triggered from `Sidebar.tsx`.
 
@@ -44,7 +44,7 @@ The contact form posts to `POST /api/message`, which sends email via MailerSend 
 
 - `src/app/robots.ts` and `src/app/sitemap.ts` generate robots.txt/sitemap; `/resume-preview` and `/api/` are disallowed and `resume-preview` is set `index: false`.
 - `src/components/JsonLd.tsx` injects structured data on the home page.
-- Site metadata is centralized in `src/app/layout.tsx`.
+- Site metadata is centralized in `src/app/layout.tsx`; the favicon is the `src/app/favicon.ico` file convention.
 
 ## Conventions
 
