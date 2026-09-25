@@ -35,7 +35,7 @@ Used only by the contact form:
 
 ## Deployment
 
-Deployed to Heroku (`git push heroku master`). The `Procfile` runs the standalone server; the Node version comes from `engines` in `package.json` (24.x, Heroku's Active LTS default). Chrome for the PDF route is supplied by the chrome-for-testing buildpack via `PUPPETEER_EXECUTABLE_PATH`.
+Deployed to Heroku automatically on push to `master` on GitHub. The `Procfile` runs the standalone server; the Node version comes from `engines` in `package.json` (26.x). Chrome for the PDF route is supplied by the chrome-for-testing buildpack via `PUPPETEER_EXECUTABLE_PATH`.
 
 ## License
 
