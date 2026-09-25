@@ -25,13 +25,13 @@
     "@fortawesome/react-fontawesome": "^3.3.1",
     "@tailwindcss/postcss": "^4.3.0",
     "handlebars": "^4.7.9",
-    "mailersend": "^3.0.0",
     "next": "^16.2.7",
     "next-themes": "^0.4.6",
     "postcss": "^8.5.15",
     "puppeteer": "^25.1.0",
     "react": "^19.2.7",
     "react-dom": "^19.2.7",
+    "resend": "^6.29.0",
     "tailwindcss": "^4.3.0"
   },
   "devDependencies": {

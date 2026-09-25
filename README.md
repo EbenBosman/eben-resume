@@ -21,14 +21,14 @@ npm start            # runs node .next/standalone/server.js
 - `/` — the web resume
 - `/api/pdf-resume` — generates the PDF with Puppeteer from `src/templates/template.hbs`
 - `/resume-preview` — on-screen US Letter preview of the same template
-- `/api/message` — contact form, sends email via MailerSend
+- `/api/message` — contact form, sends email via Resend
 
 ## Environment variables
 
 Used only by the contact form:
 
 1. Copy the `.env` template to `.env.local` (git-ignored) and fill in the values:
-   - `MAILERSEND_API_KEY` — MailerSend API key
+   - `RESEND_API_KEY` — Resend API key
    - `MAILBOX_TO_MONITOR` — recipient address for contact-form submissions
 
 `.env.local` takes precedence, falling back to `.env`.

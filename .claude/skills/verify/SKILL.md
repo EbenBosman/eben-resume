@@ -36,4 +36,4 @@ Favicon is the `src/app/favicon.ico` file convention → check `GET /favicon.ico
   `Get-NetTCPConnection -LocalPort 3000 -State Listen` and `taskkill /PID <pid> /F`.
 - Local clone is often behind `origin/master` — `git fetch origin` before judging what exists.
 - `git fetch heroku` hangs; don't fetch that remote.
-- Contact form (`POST /api/message`) sends real email via MailerSend — don't drive it live.
+- Contact form (`POST /api/message`) sends real email via Resend — don't drive it live.

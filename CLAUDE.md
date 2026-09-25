@@ -23,7 +23,7 @@ There is no test suite.
 
 Copy `.env` to `.env.local` and fill in values (`.env.local` takes precedence, falls back to `.env`). Required keys, used only by the contact form (`/api/message`):
 
-- `MAILERSEND_API_KEY` — MailerSend API key
+- `RESEND_API_KEY` — Resend API key
 - `MAILBOX_TO_MONITOR` — recipient address for contact-form submissions
 
 ## Architecture
@@ -38,7 +38,7 @@ Copy `.env` to `.env.local` and fill in values (`.env.local` takes precedence, f
 
 **Critical: the PDF route and the preview page duplicate the template-setup logic** — both register the `replace` Handlebars helper. When changing how the template is fed data, update **both** files. The template is intentionally self-contained (no external fonts or images). Edits to resume _layout/styling_ for the PDF go in `template.hbs`; edits to the _web_ layout go in the React components — they do not share markup.
 
-The contact form posts to `POST /api/message`, which sends email via MailerSend (from `no-reply@ataru.it`). Also triggered from `Sidebar.tsx`.
+The contact form posts to `POST /api/message`, which sends email via Resend (from `no-reply@ebenbosman.com`). Also triggered from `Sidebar.tsx`.
 
 ## SEO & routing
 
