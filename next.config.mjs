@@ -12,7 +12,8 @@ const contentSecurityPolicy = [
   "script-src 'self' 'unsafe-inline'",
   "style-src 'self' 'unsafe-inline'",
   "img-src 'self' data: blob:",
-  "font-src 'self'",
+  // data: for the resume template's embedded @font-face fonts (/resume-preview).
+  "font-src 'self' data:",
   "connect-src 'self'",
   "object-src 'none'",
   "base-uri 'self'",
@@ -49,6 +50,9 @@ const nextConfig = {
 
   // Don't advertise the framework in an X-Powered-By header.
   poweredByHeader: false,
+
+  // Don't let `next dev` write a generic AGENTS.md; agent guidance lives in CLAUDE.md.
+  agentRules: false,
 
   // Production only: dev needs eval/websockets for HMR, and HSTS must never stick to localhost.
   async headers() {

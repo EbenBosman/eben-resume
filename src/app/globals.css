@@ -1,70 +1,95 @@
 @import 'tailwindcss';
 
-:root {
-  --color-primary: #2158b0;
-  --color-primary-dark: #1a468c;
-  --color-background: #ffffff;
-  --color-foreground: #000000;
-  --color-surface: #ffffff;
-  --color-background-alt: #f9fafb;
-  /* gray-50 */
-  --color-border: #d1d5db;
-  /* gray-300 */
-  --color-muted: #4b5563;
-  /* gray-600 */
-  --color-sidebar: #111827;
-  /* gray-900 */
-  --color-sidebar-border: #374151;
-  /* gray-700 */
-  --color-cesium455: #004cff;
-  /* Ataru brand: Cesium 455 (455 nm emission line) */
-  --color-cesium455-text: #004cff;
-  /* Cesium 455 for small text: the brand value passes AA on light surfaces */
-  --color-primary-solid: #2158b0;
-  --color-primary-solid-hover: #1a468c;
-  /* Filled buttons with white text: dark blue in both themes (6.8:1 with white) */
-}
+/* ============================================================
+   CESIUM 455 DESIGN SYSTEM — ported from ataru-cesium
+   (src/theme/tokens.css + the public "HUD" layer of src/app.css).
+   Light is the default; `.dark` on <html> (next-themes) switches.
+   Text-sized accents use --accent-text: Cesium's dark --accent
+   (#3d6bff) is only ~4.0:1 on dark cards, so dark text uses its
+   --accent-strong (#6685ff, >= 5.3:1). Filled buttons use
+   --accent-fill (#004cff, 6.0:1 with white) in both themes.
+   ============================================================ */
 
-/* Force dark mode class strategy */
 @custom-variant dark (&:where(.dark, .dark *));
 
-@variant dark {
-  --color-background: #1a1a1a;
-  --color-foreground: #ffffff;
-  --color-surface: #1f2937;
-  /* gray-800 */
-  --color-background-alt: #1f2937;
-  /* gray-800 */
-  --color-border: #374151;
-  /* gray-700 */
-  --color-muted: #9ca3af;
-  /* gray-400 */
-  --color-sidebar: #111827;
-  --color-sidebar-border: #374151;
-  --color-cesium455: #3d6bff;
-  /* Ataru dark-mode accent (brighter for contrast on dark surfaces) */
-  --color-cesium455-text: #7aa2ff;
-  /* Lighter tint for small text: #3d6bff is only 3.3:1 on gray-800, AA needs 4.5:1 */
-  --color-primary: #6b9bff;
-  --color-primary-dark: #8ab4ff;
-  /* Text/link blue on dark surfaces: 5.4:1 on gray-800 (#2158b0 was 2.2:1); hover goes lighter */
+:root {
+  /* Surfaces */
+  --bg-page: #ffffff;
+  --bg-card: #ffffff;
+  --bg-muted: #f9fafb;
+  --bg-subtle: #f3f4f6;
+  --bg-overlay: rgba(255, 255, 255, 0.85);
+  --border: #e5e7eb;
+  --border-strong: #d1d5db;
+  --border-hairline: rgba(17, 24, 39, 0.06);
+
+  /* Foregrounds */
+  --fg: #111827;
+  --fg-muted: #4b5563;
+  --fg-subtle: #6b7280;
+
+  /* Brand accent: Cesium 455 (#004CFF, the 455 nm cesium emission line) */
+  --accent: #004cff;
+  --accent-strong: #0033b8;
+  --accent-text: #004cff;
+  --accent-fill: #004cff;
+  --accent-fill-hover: #0033b8;
+  --accent-soft: #e0e8ff;
+
+  /* Futurist accents (Cesium 455 tinted) */
+  --grid-line: rgba(0, 76, 255, 0.07);
+  --grid-line-strong: rgba(0, 76, 255, 0.14);
+  --scanline: rgba(0, 76, 255, 0.04);
+
+  --nav-h: 56px;
+  --content-max: 1200px;
 }
 
-@theme {
-  --color-primary: var(--color-primary);
-  --color-primary-dark: var(--color-primary-dark);
-  --color-background: var(--color-background);
-  --color-foreground: var(--color-foreground);
-  --color-surface: var(--color-surface);
-  --color-background-alt: var(--color-background-alt);
-  --color-border: var(--color-border);
-  --color-muted: var(--color-muted);
-  --color-sidebar: var(--color-sidebar);
-  --color-sidebar-border: var(--color-sidebar-border);
-  --color-cesium455: var(--color-cesium455);
-  --color-cesium455-text: var(--color-cesium455-text);
-  --color-primary-solid: var(--color-primary-solid);
-  --color-primary-solid-hover: var(--color-primary-solid-hover);
+.dark {
+  --bg-page: #0a0d14;
+  --bg-card: #131826;
+  --bg-muted: #0f131e;
+  --bg-subtle: #171d2b;
+  --bg-overlay: rgba(10, 13, 20, 0.85);
+  --border: #232a3d;
+  --border-strong: #2f3854;
+  --border-hairline: rgba(255, 255, 255, 0.04);
+
+  --fg: #ffffff;
+  --fg-muted: #b9c0d4;
+  --fg-subtle: #8a92a8;
+
+  --accent: #3d6bff;
+  --accent-strong: #6685ff;
+  --accent-text: #6685ff;
+  --accent-soft: rgba(0, 76, 255, 0.14);
+
+  --grid-line: rgba(0, 76, 255, 0.1);
+  --grid-line-strong: rgba(0, 76, 255, 0.22);
+  --scanline: rgba(0, 76, 255, 0.06);
+}
+
+@theme inline {
+  --color-page: var(--bg-page);
+  --color-card: var(--bg-card);
+  --color-muted-bg: var(--bg-muted);
+  --color-border: var(--border);
+  --color-border-strong: var(--border-strong);
+  --color-fg: var(--fg);
+  --color-fg-muted: var(--fg-muted);
+  --color-fg-subtle: var(--fg-subtle);
+  --color-accent: var(--accent);
+  --color-accent-text: var(--accent-text);
+  --color-accent-fill: var(--accent-fill);
+
+  --font-sans: var(--font-ubuntu), ui-sans-serif, system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --font-accent: var(--font-electrolize), var(--font-ubuntu), sans-serif;
+  --font-mono: var(--font-ubuntu-mono), ui-monospace, monospace;
+
+  /* Lean flat: marketing HUD surfaces are square. */
+  --radius-sm: 2px;
+  --radius: 3px;
+  --radius-lg: 4px;
 }
 
 @layer base {
@@ -73,29 +98,779 @@
   ::before,
   ::backdrop,
   ::file-selector-button {
-    border-color: var(--color-border, currentColor);
+    border-color: var(--border, currentColor);
+  }
+
+  html,
+  body {
+    background: var(--bg-page);
+    color: var(--fg);
+    font-family: var(--font-sans);
+    min-height: 100%;
+  }
+
+  html {
+    scroll-padding-top: calc(var(--nav-h) + 8px);
+  }
+
+  /* Cursor contract (ported from ataru-cesium tokens.css): what acts shows the pointer, what is
+     switched off shows not-allowed, a control at work shows progress, read-only text keeps the
+     arrow. Tailwind v4's preflight leaves buttons on the arrow, so this sets it once. */
+  button:not(:disabled, [aria-disabled='true']),
+  :is([role='button'], [role='tab'], [role='option'], [role^='menuitem']):not(
+    [aria-disabled='true']
+  ),
+  summary,
+  select:not(:disabled),
+  input:is(
+      [type='checkbox'],
+      [type='radio'],
+      [type='file'],
+      [type='button'],
+      [type='submit'],
+      [type='reset']
+    ):not(:disabled) {
+    cursor: pointer;
+  }
+  :is(input, textarea)[readonly] {
+    cursor: default;
+  }
+  :is(button, input, select, textarea):disabled,
+  [aria-disabled='true'] {
+    cursor: not-allowed;
+  }
+  :is(button, [role='button'])[aria-busy='true'] {
+    cursor: progress;
   }
 }
 
+/* Focus + selection: Cesium 455 throughout. Focus lives in the base layer so component and
+   utility rules (e.g. .hud-input's own ring, rounded tiles) still win. */
+@layer base {
+  :focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 2px;
+  }
+}
+::selection {
+  background: var(--accent);
+  color: #fff;
+}
+
+@layer components {
+  /* ── Type primitives (Cesium tokens.css) ─────────────────── */
+  .t-h1 {
+    font-weight: 700;
+    font-size: clamp(36px, 6vw, 72px);
+    line-height: 1.04;
+    letter-spacing: -0.03em;
+    color: var(--fg);
+    text-wrap: balance;
+  }
+  .t-h2 {
+    font-weight: 700;
+    font-size: clamp(26px, 3.5vw, 40px);
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+    color: var(--fg);
+    text-wrap: balance;
+  }
+  .t-h3 {
+    font-weight: 700;
+    font-size: 17px;
+    line-height: 1.25;
+    letter-spacing: -0.015em;
+    color: var(--fg);
+  }
+  @media (min-width: 640px) {
+    .t-h3 {
+      font-size: 19px;
+    }
+  }
+  .t-body {
+    font-size: 16px;
+    line-height: 1.6;
+    color: var(--fg-muted);
+  }
+  .t-body-lg {
+    font-size: 18px;
+    line-height: 1.6;
+    color: var(--fg-muted);
+  }
+  .t-eyebrow {
+    font-family: var(--font-accent);
+    font-size: 12px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--accent-text);
+  }
+  .t-submark {
+    font-family: var(--font-accent);
+    font-size: 13px;
+    letter-spacing: 0.32em;
+    text-transform: uppercase;
+    color: var(--accent-text);
+  }
+  .t-chip {
+    font-family: var(--font-accent);
+    font-size: 11px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--fg-muted);
+  }
+  .t-num {
+    font-family: var(--font-accent);
+    font-weight: 400;
+    letter-spacing: -0.02em;
+    font-variant-numeric: tabular-nums;
+    color: var(--accent-text);
+  }
+  .t-mono {
+    font-family: var(--font-mono);
+  }
+
+  /* ── HUD button: squared, mono, swipe fill on hover ──────── */
+  .hud-btn {
+    position: relative;
+    isolation: isolate;
+    overflow: hidden;
+    display: inline-flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 14px;
+    min-width: 220px;
+    padding: 12px 16px;
+    font-family: var(--font-mono);
+    font-size: 15px;
+    letter-spacing: 0.05em;
+    border-radius: 0;
+    text-decoration: none;
+    cursor: pointer;
+    transition:
+      color 0.25s ease,
+      border-color 0.25s ease;
+  }
+  .hud-btn::before {
+    content: '';
+    position: absolute;
+    inset: 0 auto 0 0;
+    width: 0;
+    z-index: -1;
+    transition: width 0.35s cubic-bezier(0.65, 0, 0.35, 1);
+  }
+  .hud-btn:not(:disabled):hover::before {
+    width: 100%;
+  }
+  .hud-btn:disabled {
+    cursor: not-allowed;
+    opacity: 0.6;
+  }
+  /* Busy outranks switched off: a sending button is disabled too, but it is working. */
+  .hud-btn[aria-busy='true'] {
+    cursor: progress;
+    opacity: 1;
+  }
+  .hud-btn-sm {
+    min-width: 0;
+    padding: 8px 14px;
+    font-size: 14px;
+    gap: 10px;
+  }
+  .hud-btn-primary {
+    background: var(--accent-fill);
+    color: #fff;
+    border: 1px solid var(--accent-fill);
+  }
+  .hud-btn-primary::before {
+    background: var(--accent-fill-hover);
+  }
+  .hud-btn-primary:not(:disabled):hover {
+    border-color: var(--accent-fill-hover);
+  }
+  .hud-btn-outline {
+    background: transparent;
+    color: var(--fg);
+    border: 1px solid var(--border-strong);
+  }
+  .hud-btn-outline::before {
+    background: #c2d2ff;
+  }
+  .hud-btn-outline:not(:disabled):hover {
+    color: #001ab3;
+    border-color: #99b0ff;
+  }
+  .dark .hud-btn-outline::before {
+    background: rgba(0, 76, 255, 0.22);
+  }
+  .dark .hud-btn-outline:not(:disabled):hover {
+    color: #fff;
+    border-color: var(--accent);
+  }
+
+  /* ── Nav link: animated underline, no background ─────────── */
+  .nav-link {
+    position: relative;
+    padding: 8px 4px;
+    margin: 0 6px;
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--fg-muted);
+    text-decoration: none;
+    transition: color 0.15s ease;
+  }
+  .nav-link::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: 2px;
+    height: 2px;
+    width: 0;
+    background: var(--accent);
+    transition: width 0.25s cubic-bezier(0.65, 0, 0.35, 1);
+  }
+  .nav-link:hover {
+    color: var(--fg);
+  }
+  .nav-link:hover::after,
+  .nav-link[data-active='true']::after {
+    width: 100%;
+  }
+  .nav-link[data-active='true'] {
+    color: var(--accent-text);
+  }
+
+  /* Guillemet link affordance (» view …): accent at rest. */
+  .hud-link {
+    font-family: var(--font-mono);
+    font-size: 14px;
+    letter-spacing: 0.08em;
+    color: var(--accent-text);
+    text-decoration: none;
+    transition: color 0.12s;
+  }
+  .hud-link:hover {
+    color: var(--fg);
+  }
+
+  /* Terminal cursor at the end of HUD headlines. */
+  .cursor-blink {
+    display: inline-block;
+    color: var(--accent);
+    animation: cesium-blink 1s steps(1) infinite;
+  }
+
+  /* Nav wordmark cursor: a drawn bar (crisper and bolder than the "_" glyph). */
+  .nav-cursor {
+    display: inline-block;
+    width: 0.6em;
+    height: 3px;
+    margin-left: 2px;
+    background: var(--accent-text);
+    /* Sits just under the text's baseline, like a console underscore. */
+    vertical-align: -0.2em;
+  }
+
+  /* Corner ticks (the HUD frame) around any positioned box. */
+  .hud-ticks > .tick {
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    border-color: var(--accent);
+    pointer-events: none;
+  }
+
+  /* Contact modal corner ticks: drawn in (scale from their corner) once the glitch-in is done. */
+  .modal-tick {
+    position: absolute;
+    width: 16px;
+    height: 16px;
+    border-color: var(--accent);
+    transform: scale(0);
+    transition: transform 0.28s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+  .modal-dialog.is-open > .modal-tick {
+    transform: scale(1);
+    transition-delay: 0.36s;
+  }
+
+  /* Flat HUD form controls */
+  .hud-input {
+    width: 100%;
+    padding: 10px 12px;
+    background: var(--bg-card);
+    color: var(--fg);
+    border: 1px solid var(--border-strong);
+    border-radius: 0;
+    font-size: 15px;
+    transition: border-color 0.12s;
+  }
+  .hud-input:focus {
+    outline: none;
+    border-color: var(--accent);
+    box-shadow: 0 0 0 1px var(--accent);
+  }
+  .hud-input[aria-invalid='true'] {
+    border-color: #dc2626;
+  }
+}
+
+@layer utilities {
+  /* Futurist background FX (hero / HUD sections). */
+  .fx-grid {
+    background-image:
+      linear-gradient(var(--grid-line) 1px, transparent 1px),
+      linear-gradient(90deg, var(--grid-line) 1px, transparent 1px);
+    background-size: 48px 48px;
+  }
+  .fx-scanlines {
+    background-image: repeating-linear-gradient(
+      180deg,
+      transparent 0px,
+      transparent 3px,
+      var(--scanline) 3px,
+      var(--scanline) 4px
+    );
+  }
+  .fx-radial-glow {
+    background:
+      radial-gradient(700px 360px at 50% 0%, rgba(0, 76, 255, 0.1), transparent 60%),
+      radial-gradient(900px 500px at 80% 100%, rgba(0, 76, 255, 0.06), transparent 60%);
+  }
+  /* Pointer spotlight: a brighter grid revealed near the cursor (--mx/--my set by BackgroundFx). */
+  .fx-grid-spot {
+    background-image:
+      linear-gradient(var(--grid-line-strong) 1px, transparent 1px),
+      linear-gradient(90deg, var(--grid-line-strong) 1px, transparent 1px);
+    background-size: 48px 48px;
+    -webkit-mask-image: radial-gradient(
+      260px 260px at var(--mx, -200px) var(--my, -200px),
+      #000 0%,
+      rgba(0, 0, 0, 0.4) 55%,
+      transparent 100%
+    );
+    mask-image: radial-gradient(
+      260px 260px at var(--mx, -200px) var(--my, -200px),
+      #000 0%,
+      rgba(0, 0, 0, 0.4) 55%,
+      transparent 100%
+    );
+    transition: opacity 0.25s ease;
+  }
+  .fx-grid-spot.is-idle {
+    opacity: 0;
+  }
+
+  /* Hide a scroll container's scrollbar but keep it scrollable. */
+  .no-scrollbar {
+    scrollbar-width: none;
+  }
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+/* Slim Cesium scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: #99b0ff;
+  border-radius: 9999px;
+}
+.dark ::-webkit-scrollbar-thumb {
+  background: rgba(0, 26, 179, 0.5);
+}
+
+@keyframes cesium-blink {
+  0%,
+  49% {
+    opacity: 1;
+  }
+  50%,
+  100% {
+    opacity: 0;
+  }
+}
+
+/* Contact-form status bar (fills over the auto-hide delay). */
 @keyframes progress {
   0% {
     width: 0%;
   }
-
   100% {
     width: 100%;
   }
 }
-
 .animate-progress {
   animation: progress 5s linear forwards;
 }
 
-/* Hide a scroll container's scrollbar but keep it scrollable (desktop sidebar). */
-@utility no-scrollbar {
-  scrollbar-width: none;
+@media (prefers-reduced-motion: reduce) {
+  .modal-tick {
+    transition: none;
+  }
+  .cursor-blink,
+  .animate-progress {
+    animation: none;
+  }
+  .hud-btn::before,
+  .nav-link::after,
+  .fx-grid-spot {
+    transition: none;
+  }
+}
 
-  &::-webkit-scrollbar {
-    display: none;
+/* ============================================================
+   MOTION — subtle and Cesium-paced (ease-out curves, ~0.5s).
+   Rules:
+   - prefers-reduced-motion turns all of it off;
+   - nothing starts hidden unless the inline head script marked the
+     page `motion-ready` (no JS = everything simply visible);
+   - scroll-driven effects sit behind @supports, so browsers without
+     animation-timeline just show the final state.
+   ============================================================ */
+@keyframes line-in {
+  from {
+    opacity: 0;
+    clip-path: inset(0 100% 0 0);
+  }
+  to {
+    opacity: 1;
+    clip-path: inset(0 0 0 0);
+  }
+}
+@keyframes modal-glitch {
+  0% {
+    opacity: 0;
+  }
+  15% {
+    opacity: 1;
+    clip-path: inset(0 0 62% 0);
+    transform: translateX(-6px);
+    filter: hue-rotate(40deg);
+  }
+  30% {
+    clip-path: inset(40% 0 22% 0);
+    transform: translateX(5px);
+  }
+  45% {
+    clip-path: inset(70% 0 0 0);
+    transform: translateX(-3px);
+    filter: none;
+  }
+  60% {
+    clip-path: inset(0);
+    transform: translateX(2px);
+  }
+  75%,
+  100% {
+    clip-path: inset(0);
+    transform: none;
+    filter: none;
+  }
+}
+@keyframes lead-failsafe {
+  to {
+    opacity: 1;
+  }
+}
+@keyframes tick-in {
+  from {
+    opacity: 0;
+    transform: scale(0);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+@keyframes glitch-in {
+  0% {
+    opacity: 0;
+  }
+  8% {
+    opacity: 1;
+    clip-path: inset(12% 0 64% 0);
+    transform: translateX(-8px);
+    filter: hue-rotate(60deg) saturate(2.2);
+  }
+  18% {
+    clip-path: inset(58% 0 18% 0);
+    transform: translateX(6px);
+    filter: hue-rotate(-40deg) contrast(1.5);
+  }
+  28% {
+    opacity: 0.55;
+    clip-path: inset(32% 0 41% 0);
+    transform: translateX(-3px);
+    filter: none;
+  }
+  38% {
+    opacity: 1;
+    clip-path: inset(0 0 58% 0);
+    transform: translateX(4px);
+    filter: saturate(1.8);
+  }
+  52% {
+    clip-path: inset(44% 0 0 0);
+    transform: translateX(-2px);
+    filter: contrast(1.4);
+  }
+  66% {
+    clip-path: inset(0 0 0 0);
+    transform: translateX(1px);
+    filter: none;
+  }
+  78% {
+    opacity: 0.8;
+    transform: none;
+  }
+  100% {
+    opacity: 1;
+    clip-path: inset(0 0 0 0);
+    transform: none;
+    filter: none;
+  }
+}
+@keyframes type-char {
+  from {
+    max-width: 0;
+  }
+  to {
+    max-width: 2em;
+  }
+}
+@keyframes grow-x {
+  to {
+    transform: scaleX(1);
+  }
+}
+@keyframes hero-dim {
+  to {
+    filter: blur(18px);
+    opacity: 0.55;
+    transform: scale(0.97);
+  }
+}
+
+/* Scroll progress line under the nav (hidden where unsupported). */
+.scroll-progress {
+  transform: scaleX(0);
+  transform-origin: 0 50%;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  /* Hero load-in: each line fades in where it stands, wiping left to right like a console
+     printing it (no vertical movement), in reading order (--d = step). */
+  .hero-in > :not(.lead-fx, .glitch-in) {
+    /* backwards, not both: the final inset(0) clip would otherwise stay and cut focus rings. */
+    animation: line-in 0.7s cubic-bezier(0.22, 1, 0.36, 1) backwards;
+    animation-delay: calc(var(--d, 0) * 90ms + 60ms);
+  }
+  /* Hero lead, "decode": hidden until DecodeParagraph starts scrambling (no clean-text flash). */
+  .motion-ready .lead-decode:not(.is-live) {
+    opacity: 0;
+    /* Failsafe: shown as plain text after 0.7s if JS hasn't started the decode by then
+       (DecodeParagraph then skips the scramble), so a slow hydrate can't delay LCP. */
+    animation: lead-failsafe 0s 700ms forwards;
+  }
+
+  /* Contact modal: a quick glitch-in each time it opens (the class is re-added per open). */
+  .modal-dialog.is-open {
+    animation: modal-glitch 0.36s steps(1, end);
+  }
+
+  /* The photo's corner ticks snap in first (each from its own corner, ~180ms); the image then
+     glitches in inside them (.glitch-in on the clipped inner layer, delayed by --d). */
+  .photo-tick {
+    animation: tick-in 0.18s cubic-bezier(0.22, 1, 0.36, 1) both;
+    animation-delay: 80ms;
+  }
+
+  /* The photo glitches in: a few jittery, colour-shifted slices that snap to the clean image. */
+  .glitch-in {
+    animation: glitch-in 0.75s steps(1, end) both;
+    animation-delay: calc(var(--d, 0) * 90ms + 60ms);
+  }
+
+  /* Wordmark typing: each letter takes no width until its turn (--c = index), so the cursor
+     after the name follows the text. Without the animation the letters are simply there. */
+  .type-char {
+    display: inline-block;
+    overflow: hidden;
+    vertical-align: bottom;
+    animation: type-char 0s steps(1) both;
+    animation-delay: calc(var(--c, 0) * 75ms + 350ms);
+  }
+
+  /* Staggered list reveal: RevealObserver adds .is-revealed; --i = position in its list. */
+  .motion-ready [data-reveal] {
+    opacity: 0;
+    transform: translateY(12px);
+    transition:
+      opacity 0.5s cubic-bezier(0.22, 1, 0.36, 1),
+      transform 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+    transition-delay: calc(min(var(--i, 0), 12) * 60ms);
+  }
+  .motion-ready [data-reveal].is-revealed {
+    opacity: 1;
+    transform: none;
+  }
+
+  @supports (animation-timeline: scroll()) {
+    .scroll-progress {
+      animation: grow-x linear both;
+      animation-timeline: scroll(root);
+    }
+  }
+}
+
+/* Theme switch: the new theme is wiped in by a circle clip (TopNav), not a cross-fade. */
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation: none;
+  mix-blend-mode: normal;
+}
+
+/* Experience card deck (CardDeck sets .card-deck only on large, tall screens without reduced
+   motion; positions/clips are set inline per card from scroll). The frame is a stacking context
+   so the next section can slide over the released deck. */
+.card-deck > .card-deck-frame {
+  position: sticky;
+  top: var(--nav-h);
+  z-index: 0;
+  height: calc(100vh - var(--nav-h));
+  /* clip, not hidden: a hidden overflow is still scrollable by focus/scrollIntoView, which
+     displaced the transformed cards. */
+  overflow: clip;
+}
+.card-deck > .card-deck-frame > ol {
+  position: relative;
+  height: 100%;
+}
+.card-deck > .card-deck-frame > ol > li {
+  position: absolute;
+  inset-inline: 0;
+  top: 0;
+  margin: 0 !important;
+  will-change: transform;
+}
+/* The deck replaces the stagger reveal for these cards. */
+.motion-ready .card-deck [data-reveal] {
+  opacity: 1;
+  transition: none;
+}
+/* A keyboard-focused link inside a covered card comes to the front (not mouse focus, which
+   would leave a clicked card stuck on top). */
+.card-deck li:has(:focus-visible) {
+  clip-path: none !important;
+  z-index: 100 !important;
+}
+
+/* Large, tall screens only: the hero pins under the nav and the rest of the page slides over
+   it like a sheet. On phones these would cover content before it is
+   read, so the normal flow (with reveals) is kept there. */
+@media (min-width: 1024px) and (min-height: 760px) and (prefers-reduced-motion: no-preference) {
+  .hero-pin {
+    position: sticky;
+    top: var(--nav-h);
+  }
+  .over-hero {
+    position: relative;
+    z-index: 10;
+    background: var(--bg-page);
+    box-shadow: 0 -28px 56px -32px rgba(0, 0, 0, 0.45);
+  }
+  @supports (animation-timeline: scroll()) {
+    @media (prefers-reduced-motion: no-preference) {
+      .hero-dim {
+        animation: hero-dim linear both;
+        animation-timeline: scroll(root);
+        animation-range: 0 60vh;
+      }
+    }
+  }
+}
+
+/* Phones / small screens (where the hero doesn't pin and the cards don't stack): lighter paging.
+   - experience cards recede (scale + dim) as they scroll off the top, never covering unread text;
+   - the hero content eases away (sinks slightly and fades) as the profile comes up.
+   Exit-range only with `forwards`, so the staggered reveal on entry still owns opacity/transform. */
+@keyframes recede {
+  to {
+    transform: scale(0.96);
+    opacity: 0.45;
+  }
+}
+@keyframes hero-ease {
+  to {
+    filter: blur(12px);
+    transform: translateY(8%);
+    opacity: 0.6;
+  }
+}
+@supports (animation-timeline: view()) {
+  @media (prefers-reduced-motion: no-preference) {
+    @media not all and (min-width: 1024px) and (min-height: 760px) {
+      div:not(.card-deck) > .card-deck-frame > ol > li {
+        transform-origin: 50% 0;
+        animation: recede linear forwards;
+        animation-timeline: view();
+        animation-range: exit 0% exit 100%;
+      }
+      .hero-dim {
+        animation: hero-ease linear forwards;
+        animation-timeline: view();
+        /* Starts only once over half the hero has left, so the buttons stay sharp while usable. */
+        animation-range: exit 55% exit 100%;
+      }
+    }
+  }
+}
+
+/* Printing the web page (the designed print path is the PDF): show every revealed item, undo the
+   deck, pin and blur, and drop the fixed nav. */
+@media print {
+  .motion-ready [data-reveal],
+  .motion-ready .lead-decode {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+    animation: none !important;
+  }
+  header,
+  .scroll-progress {
+    display: none !important;
+  }
+  .hero-pin,
+  .over-hero {
+    position: static !important;
+  }
+  .hero-dim {
+    animation: none !important;
+    filter: none !important;
+  }
+  .card-deck {
+    height: auto !important;
+    margin-bottom: 0 !important;
+  }
+  .card-deck > .card-deck-frame {
+    position: static !important;
+    height: auto !important;
+    overflow: visible !important;
+  }
+  .card-deck > .card-deck-frame > ol > li {
+    position: static !important;
+    transform: none !important;
+    clip-path: none !important;
+    margin-top: 1.5rem !important;
   }
 }

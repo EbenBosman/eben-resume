@@ -1,55 +1,59 @@
 import React from 'react';
 
 import { EducationItem } from '../../types/resume';
-import { Badge } from '../ui/Badge';
-import { Card } from '../ui/Card';
-import { Section } from '../ui/Section';
-import { SectionTitle } from '../ui/SectionTitle';
+import { pad2, SectionHead } from '../hud/SectionHead';
 
 interface EducationProps {
   content: EducationItem[];
 }
 
-const generateCourses = (courses: string[]) => {
-  if (!courses) return null;
-
-  return (
-    <div className="mt-2 text-sm">
-      {courses.map((course, key) => {
-        return <Badge key={key}>{course}</Badge>;
-      })}
-    </div>
-  );
-};
-
+/** Certificates as Cesium "principles": a big Electrolize year over a hairline-ruled column. */
 const Education: React.FC<EducationProps> = ({ content }) => {
   if (!content) return null;
 
   return (
-    <Section id="certificates" className="bg-background-alt dark:bg-transparent">
-      <SectionTitle title="Certificates" />
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-        {content.map((education, key) => (
-          <div key={key}>
-            <Card>
-              <div className="flex flex-col h-full">
-                <h3 className="text-lg font-bold text-foreground mb-1">{education.what}</h3>
-                {education.when && (
-                  <p className="text-md font-medium text-muted mb-1">{education.when}</p>
-                )}
-                <div className="text-sm italic text-muted mb-2">{education.where}</div>
-                {education.credentialId && (
-                  <div className="text-xs text-muted mb-2">
-                    Credential ID: {education.credentialId}
-                  </div>
-                )}
-                {generateCourses(education.courses)}
+    <section
+      id="certificates"
+      aria-labelledby="certificates-title"
+      className="px-4 py-20 sm:px-6"
+      style={{ borderTop: '1px solid var(--border)' }}
+    >
+      <div className="mx-auto" style={{ maxWidth: 'var(--content-max)' }}>
+        <SectionHead
+          eyebrow={`CERTIFICATES.${pad2(content.length)}`}
+          title="Certificates"
+          id="certificates-title"
+        />
+        <div className="grid gap-8 lg:grid-cols-2 xl:grid-cols-3">
+          {content.map((education, key) => (
+            <div
+              key={key}
+              data-reveal
+              className="border-l pl-5"
+              style={{ borderColor: 'var(--border-strong)', '--i': key } as React.CSSProperties}
+            >
+              <div className="t-num text-[34px] leading-none">
+                {education.when || pad2(key + 1)}
               </div>
-            </Card>
-          </div>
-        ))}
+              <h3 className="t-h3 mt-4">{education.what}</h3>
+              <p className="mt-1.5 text-sm text-fg-muted">{education.where}</p>
+              {education.credentialId && (
+                <p className="t-mono mt-2 text-sm text-fg-subtle">ID {education.credentialId}</p>
+              )}
+              {education.courses?.length > 0 && (
+                <ul className="mt-3 flex flex-wrap gap-2">
+                  {education.courses.map((course, i) => (
+                    <li key={i} className="t-mono border px-2 py-0.5 text-xs text-fg-muted">
+                      {course}
+                    </li>
+                  ))}
+                </ul>
+              )}
+            </div>
+          ))}
+        </div>
       </div>
-    </Section>
+    </section>
   );
 };
 

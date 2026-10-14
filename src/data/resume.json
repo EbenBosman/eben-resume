@@ -23,18 +23,21 @@
   "ataru": {
     "name": "Ataru",
     "subtitle": "CESIUM",
-    "url": "https://www.ataru.io",
+    "url": "https://ataru.io",
     "tagline": "Personal Project • Built with AI-assisted development • Used daily",
     "summary": [
-      "Running an independent contracting business usually means juggling a pile of disconnected tools and spreadsheets.",
-      "So I built Cesium, a single platform (hosted at ataru.io) that handles my time tracking, client and project admin, invoicing, expense reporting, and PTO.",
-      "I built it almost entirely through AI-assisted, prompt-driven development, and I use it every day. It doubles as a real-world testing ground for how I work with AI."
+      "Running an independent contracting business usually means juggling a pile of disconnected tools and spreadsheets, so I built Cesium to replace them. It now runs at ataru.io and tracks time, invoices clients, follows payments and estimates tax.",
+      "It is a SvelteKit and TypeScript app on Firebase with Stripe subscriptions, and it bills by the hour, per unit, as a fixed fee or as a retainer. Native iPhone and Android apps built with Capacitor are in testing ahead of their store release.",
+      "I built it almost entirely through AI-assisted development with Claude Code, and I use it every day. It doubles as a real-world testing ground for how I work with AI."
     ],
     "features": [
-      "Time Tracking",
-      "Client/Projects Admin",
-      "Invoicing",
-      "Expense Reporting",
+      "Time Tracking & Timesheets",
+      "Hourly, Per-Unit, Fixed-Fee & Retainer Billing",
+      "Invoicing (PDF & Email)",
+      "Payment Tracking & Partial Payments",
+      "Estimated Tax Planning",
+      "Profit & Loss and Capacity Reports",
+      "Expense Tracking",
       "PTO & Leave Tracking"
     ]
   },
@@ -149,7 +152,7 @@
     },
     {
       "what": "K2 Blackpearl Core",
-      "where": "K2",
+      "where": "Johannesburg, South Africa",
       "when": 2014,
       "courses": []
     },

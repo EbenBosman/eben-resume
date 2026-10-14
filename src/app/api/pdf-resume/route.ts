@@ -21,8 +21,14 @@ async function generatePdf(): Promise<Uint8Array<ArrayBuffer>> {
 
   try {
     const page = await browser.newPage();
-    // Template is fully self-contained (no external fonts/images), so 'load' is enough.
+    // Template is fully self-contained (fonts are embedded data URLs, no network requests).
     await page.setContent(htmlString, { waitUntil: 'load', timeout: STEP_TIMEOUT_MS });
+    // The embedded @font-face data URLs decode asynchronously; print only once they are ready,
+    // but never wait longer than one step timeout.
+    await Promise.race([
+      page.evaluate(() => document.fonts.ready.then(() => true)),
+      new Promise((resolve) => setTimeout(resolve, STEP_TIMEOUT_MS)),
+    ]);
     // Printer-safe margins on every page (Puppeteer otherwise prints with zero
     // margins). Keep in sync with the template's @page rule.
     const pdfBuffer = await page.pdf({

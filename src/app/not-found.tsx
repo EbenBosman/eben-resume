@@ -1,25 +1,34 @@
 import Link from 'next/link';
 
+import { BackgroundFx } from '../components/hud/BackgroundFx';
+
 export default function NotFound() {
   return (
-    <main className="min-h-screen flex items-center justify-center bg-sidebar px-4 py-16">
-      <div className="w-full max-w-2xl rounded-lg border border-sidebar-border bg-black/40 p-8 font-mono text-gray-300 shadow-xl">
-        <h1 className="mb-6 text-3xl text-white">
-          Error <span className="text-primary">404</span>
+    <main
+      id="main"
+      className="relative flex min-h-screen items-center justify-center overflow-hidden px-4 py-16"
+    >
+      <BackgroundFx level="hud" />
+      <section className="relative w-full max-w-2xl" style={{ zIndex: 1 }}>
+        <div className="t-eyebrow">{'// SIGNAL.LOST · ERR 404'}</div>
+        <h1 className="t-h1 mt-4">
+          Page not found
+          <span className="cursor-blink" aria-hidden="true">
+            _
+          </span>
         </h1>
-        <p className="mb-4 before:mr-2 before:text-primary before:content-['>']">
-          The page you are looking for might have been removed, had its name changed or is
-          temporarily unavailable.
-        </p>
-        <p className="mb-4 before:mr-2 before:text-primary before:content-['>']">
-          Please try to{' '}
-          <Link href="/" className="text-white underline hover:text-primary">
-            return to the homepage
-          </Link>
-          .
-        </p>
-        <p className="before:mr-2 before:text-primary before:content-['>']">Good luck.</p>
-      </div>
+        <div
+          className="t-mono mt-8 space-y-2 border-l-2 pl-5 text-lg text-fg-muted"
+          style={{ borderColor: 'var(--accent)' }}
+        >
+          <p>&gt; The page you are looking for might have been removed or renamed.</p>
+          <p>&gt; Good luck.</p>
+        </div>
+        <Link href="/" className="hud-btn hud-btn-primary mt-10">
+          <span>$ return home</span>
+          <span aria-hidden="true">&rarr;</span>
+        </Link>
+      </section>
     </main>
   );
 }

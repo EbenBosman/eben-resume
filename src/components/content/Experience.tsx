@@ -1,101 +1,103 @@
 import React from 'react';
 
 import { WorkItem } from '../../types/resume';
-import { Card } from '../ui/Card';
-import { Section } from '../ui/Section';
-import { SectionTitle } from '../ui/SectionTitle';
+import { CardDeck } from '../hud/CardDeck';
+import { pad2, SectionHead } from '../hud/SectionHead';
 
 interface ExperienceProps {
   content: WorkItem[];
 }
 
-const generateSummaryParagraphs = (summary: string) => {
-  if (!summary || summary.length <= 0) return;
-
-  return <p className="mt-2 text-sm text-foreground">{summary}</p>;
-};
-
-const generateSummaryHighlights = (highlights: string[]) => {
-  if (!highlights || highlights.length <= 0) return null;
-
-  return (
-    <ul className="list-disc list-inside mt-2 text-sm text-foreground">
-      {highlights.map((highlight, key) => {
-        return (
-          <li key={key} className="mb-1">
-            <span>{highlight}</span>
-          </li>
-        );
-      })}
-    </ul>
-  );
-};
-
-const generateHeader = (website: string | null | undefined, company: string, position: string) => {
-  return (
-    <div className="flex flex-wrap items-baseline gap-2">
-      <h3 className="font-bold text-lg text-foreground">{position}</h3>
-      {generateCompany(website, company)}
-    </div>
-  );
-};
-
 // The company always shows: as "at <link>" when the job has a URL, otherwise as plain text
 // (entries like "Various positions held" don't read as "at ...").
-const generateCompany = (website: string | null | undefined, company: string) => {
+const Company: React.FC<{ website?: string | null; company: string }> = ({ website, company }) => {
   if (!company) return null;
-
   if (!website?.startsWith('http')) {
-    return (
-      <span className="text-sm text-muted">
-        <small>{company}</small>
-      </span>
-    );
+    return <span className="text-fg-muted">{company}</span>;
   }
-
   return (
-    <span className="text-sm text-muted">
-      <small> at </small>
+    <span className="text-fg-muted">
+      at{' '}
       <a
-        className="text-primary hover:underline hover:text-primary-dark"
+        className="text-accent-text underline-offset-4 hover:underline"
         rel="noreferrer"
         href={website}
         target="_blank"
       >
-        <small>{company}</small>
+        {company}
       </a>
     </span>
   );
 };
 
-const generateCard = (key: number, job: WorkItem) => {
-  return (
-    <div key={key} className="flex flex-wrap -mx-4 mb-4">
-      <div className="w-full px-4">
-        <Card>
-          <div className="flex flex-col h-full">
-            <div className="mb-1">{generateHeader(job.website, job.company, job.position)}</div>
-            <p className="text-md font-medium text-muted mb-2">
-              {job.startDate} - {job.endDate}
-            </p>
-            <div className="text-sm italic text-muted mb-2">{job.location}</div>
-            {generateSummaryParagraphs(job.summary)}
-            {generateSummaryHighlights(job.highlights)}
-          </div>
-        </Card>
-      </div>
-    </div>
-  );
-};
-
+/** Jobs as numbered HUD rows (01, 02, …) on hairline rules, like Cesium's manifesto rows. */
 const Experience: React.FC<ExperienceProps> = ({ content }) => {
   if (!content) return null;
 
   return (
-    <Section id="experience" className="bg-background-alt">
-      <SectionTitle title="Experience" />
-      {content.map((job, key) => generateCard(key, job))}
-    </Section>
+    <section
+      id="experience"
+      aria-labelledby="experience-title"
+      className="px-4 py-20 sm:px-6"
+      style={{ background: 'var(--bg-muted)', borderTop: '1px solid var(--border)' }}
+    >
+      <div className="mx-auto" style={{ maxWidth: 'var(--content-max)' }}>
+        <SectionHead
+          eyebrow={`EXPERIENCE.${pad2(content.length)}`}
+          title="Experience"
+          id="experience-title"
+        />
+        {/* Cards: on large screens CardDeck stacks them as you scroll; on phones they reveal one
+            by one as they scroll in (data-reveal). */}
+        <CardDeck className="space-y-6">
+          {content.map((job, key) => (
+            <li
+              key={key}
+              data-reveal
+              className="grid gap-x-6 gap-y-3 border bg-card p-6 shadow-[0_-16px_40px_-28px_rgba(0,0,0,0.45)] sm:p-8 md:grid-cols-[72px_minmax(0,1fr)]"
+            >
+              <div className="t-num text-[34px] leading-none" aria-hidden="true">
+                {pad2(key + 1)}
+              </div>
+              <div>
+                {/* Phones: the company always sits on its own line under the title (same rhythm for
+                    short and long names); from sm it follows the title inline. */}
+                <div className="flex flex-col gap-0.5 text-sm sm:flex-row sm:flex-wrap sm:items-baseline sm:gap-x-2 sm:text-base">
+                  <h3 className="t-h3">{job.position}</h3>
+                  <Company website={job.website} company={job.company} />
+                </div>
+                {/* Phones: dates and location on their own lines, so every job has the same rhythm. */}
+                <p className="t-chip mt-2">
+                  <span>
+                    {job.startDate} &ndash; {job.endDate}
+                  </span>
+                  <span aria-hidden="true" className="hidden sm:inline">
+                    {' '}
+                    &middot;{' '}
+                  </span>
+                  <span className="mt-1 block tracking-[0.12em] sm:mt-0 sm:inline sm:tracking-[0.18em]">
+                    {job.location}
+                  </span>
+                </p>
+                {job.summary && <p className="t-body mt-4">{job.summary}</p>}
+                {job.highlights?.length > 0 && (
+                  <ul className="mt-3 space-y-1.5">
+                    {job.highlights.map((highlight, i) => (
+                      <li key={i} className="t-body flex gap-3">
+                        <span aria-hidden="true" className="text-accent-text">
+                          &rsaquo;
+                        </span>
+                        <span>{highlight}</span>
+                      </li>
+                    ))}
+                  </ul>
+                )}
+              </div>
+            </li>
+          ))}
+        </CardDeck>
+      </div>
+    </section>
   );
 };
 
