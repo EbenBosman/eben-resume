@@ -18,6 +18,11 @@
   /* gray-700 */
   --color-cesium455: #004cff;
   /* Ataru brand: Cesium 455 (455 nm emission line) */
+  --color-cesium455-text: #004cff;
+  /* Cesium 455 for small text: the brand value passes AA on light surfaces */
+  --color-primary-solid: #2158b0;
+  --color-primary-solid-hover: #1a468c;
+  /* Filled buttons with white text: dark blue in both themes (6.8:1 with white) */
 }
 
 /* Force dark mode class strategy */
@@ -38,6 +43,11 @@
   --color-sidebar-border: #374151;
   --color-cesium455: #3d6bff;
   /* Ataru dark-mode accent (brighter for contrast on dark surfaces) */
+  --color-cesium455-text: #7aa2ff;
+  /* Lighter tint for small text: #3d6bff is only 3.3:1 on gray-800, AA needs 4.5:1 */
+  --color-primary: #6b9bff;
+  --color-primary-dark: #8ab4ff;
+  /* Text/link blue on dark surfaces: 5.4:1 on gray-800 (#2158b0 was 2.2:1); hover goes lighter */
 }
 
 @theme {
@@ -52,6 +62,9 @@
   --color-sidebar: var(--color-sidebar);
   --color-sidebar-border: var(--color-sidebar-border);
   --color-cesium455: var(--color-cesium455);
+  --color-cesium455-text: var(--color-cesium455-text);
+  --color-primary-solid: var(--color-primary-solid);
+  --color-primary-solid-hover: var(--color-primary-solid-hover);
 }
 
 @layer base {

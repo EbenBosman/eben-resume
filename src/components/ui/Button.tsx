@@ -15,7 +15,7 @@ export const Button: React.FC<ButtonProps> = ({
     'px-4 py-2 rounded transition-colors focus:outline-none focus:ring-2 focus:ring-primary disabled:opacity-50 disabled:cursor-not-allowed cursor-pointer';
 
   const variants = {
-    primary: 'bg-primary text-white hover:bg-primary-dark',
+    primary: 'bg-primary-solid text-white hover:bg-primary-solid-hover',
     secondary:
       'bg-gray-200 text-gray-800 hover:bg-gray-300 dark:bg-gray-700 dark:text-white dark:hover:bg-gray-600',
     ghost: 'bg-transparent text-foreground hover:text-primary p-1',

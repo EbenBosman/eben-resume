@@ -4,6 +4,9 @@ import React, { useEffect, useRef } from 'react';
 
 import { Button } from './ui/Button';
 
+const FOCUSABLE =
+  'a[href], button:not([disabled]), input:not([disabled]):not([type="hidden"]), textarea:not([disabled]), select:not([disabled]), [tabindex]:not([tabindex="-1"])';
+
 interface ModalProps {
   isOpen: boolean;
   onClose: () => void;
@@ -14,23 +17,51 @@ interface ModalProps {
 
 const Modal: React.FC<ModalProps> = ({ isOpen, onClose, title, children, footer }) => {
   const modalRef = useRef<HTMLDivElement>(null);
-
-  // Close on Escape key
+  // Latest onClose without re-running the open/close effect when the parent re-renders.
+  const onCloseRef = useRef(onClose);
   useEffect(() => {
+    onCloseRef.current = onClose;
+  }, [onClose]);
+
+  // While open: move focus into the dialog, keep Tab inside it, close on Escape, and hand focus
+  // back to whatever opened it when it closes.
+  useEffect(() => {
+    if (!isOpen) return;
+    const dialog = modalRef.current;
+    const opener = document.activeElement as HTMLElement | null;
+    const focusable = () =>
+      Array.from(dialog?.querySelectorAll<HTMLElement>(FOCUSABLE) ?? []).filter(
+        (el) => el.offsetParent !== null,
+      );
+
+    (focusable().find((el) => el.matches('input, textarea')) ?? dialog)?.focus();
+
     const handleKeyDown = (event: KeyboardEvent) => {
       if (event.key === 'Escape') {
-        onClose();
+        onCloseRef.current();
+        return;
+      }
+      if (event.key !== 'Tab') return;
+      const items = focusable();
+      if (items.length === 0) return;
+      const first = items[0];
+      const last = items[items.length - 1];
+      const active = document.activeElement;
+      if (event.shiftKey && (active === first || !dialog?.contains(active))) {
+        event.preventDefault();
+        last.focus();
+      } else if (!event.shiftKey && (active === last || !dialog?.contains(active))) {
+        event.preventDefault();
+        first.focus();
       }
     };
 
-    if (isOpen) {
-      document.addEventListener('keydown', handleKeyDown);
-    }
-
+    document.addEventListener('keydown', handleKeyDown);
     return () => {
       document.removeEventListener('keydown', handleKeyDown);
+      opener?.focus?.();
     };
-  }, [isOpen, onClose]);
+  }, [isOpen]);
 
   if (!isOpen) return null;
 
@@ -38,17 +69,18 @@ const Modal: React.FC<ModalProps> = ({ isOpen, onClose, title, children, footer 
     <div className="fixed inset-0 z-50 flex items-center justify-center overflow-auto bg-black/50 backdrop-blur-sm p-4">
       {/* Modal Dialog */}
       <div
-        className="relative w-full max-w-lg transform rounded-lg bg-surface border shadow-xl transition-all"
+        className="relative w-full max-w-lg transform rounded-lg bg-surface border shadow-xl transition-all focus:outline-none"
         ref={modalRef}
+        tabIndex={-1}
         role="dialog"
         aria-modal="true"
         aria-labelledby="modal-title"
       >
         {/* Header */}
         <div className="flex items-center justify-between border-b px-4 py-3">
-          <h3 className="text-lg font-medium leading-6 text-foreground" id="modal-title">
+          <h2 className="text-lg font-medium leading-6 text-foreground" id="modal-title">
             {title}
-          </h3>
+          </h2>
           <Button variant="ghost" onClick={onClose}>
             <span className="sr-only">Close</span>
             <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">

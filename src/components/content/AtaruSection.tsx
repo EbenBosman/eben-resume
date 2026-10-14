@@ -39,13 +39,13 @@ const AtaruSection: React.FC<AtaruSectionProps> = ({ content }) => {
                 placeholder="blur"
               />
             </a>
-            <h3
+            <h2
               className={`${ubuntu.className} text-3xl font-bold text-foreground mt-4 tracking-tight`}
             >
               {content.name}
-            </h3>
+            </h2>
             <span
-              className={`${electrolize.className} text-sm tracking-[0.32em] mt-1 text-cesium455`}
+              className={`${electrolize.className} text-sm tracking-[0.32em] mt-1 text-cesium455-text`}
             >
               {content.subtitle}
             </span>

@@ -34,7 +34,7 @@ const generateSummaryHighlights = (highlights: string[]) => {
 const generateHeader = (website: string | null | undefined, company: string, position: string) => {
   return (
     <div className="flex flex-wrap items-baseline gap-2">
-      <span className="font-bold text-lg text-foreground">{position}</span>
+      <h3 className="font-bold text-lg text-foreground">{position}</h3>
       {generateCompany(website, company)}
     </div>
   );
@@ -75,9 +75,9 @@ const generateCard = (key: number, job: WorkItem) => {
         <Card>
           <div className="flex flex-col h-full">
             <div className="mb-1">{generateHeader(job.website, job.company, job.position)}</div>
-            <h5 className="text-md font-medium text-muted mb-2">
+            <p className="text-md font-medium text-muted mb-2">
               {job.startDate} - {job.endDate}
-            </h5>
+            </p>
             <div className="text-sm italic text-muted mb-2">{job.location}</div>
             {generateSummaryParagraphs(job.summary)}
             {generateSummaryHighlights(job.highlights)}

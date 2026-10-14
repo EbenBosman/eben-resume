@@ -33,9 +33,9 @@ const Education: React.FC<EducationProps> = ({ content }) => {
           <div key={key}>
             <Card>
               <div className="flex flex-col h-full">
-                <h4 className="text-lg font-bold text-foreground mb-1">{education.what}</h4>
+                <h3 className="text-lg font-bold text-foreground mb-1">{education.what}</h3>
                 {education.when && (
-                  <h5 className="text-md font-medium text-muted mb-1">{education.when}</h5>
+                  <p className="text-md font-medium text-muted mb-1">{education.when}</p>
                 )}
                 <div className="text-sm italic text-muted mb-2">{education.where}</div>
                 {education.credentialId && (

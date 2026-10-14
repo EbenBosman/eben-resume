@@ -60,6 +60,12 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     <html lang="en" suppressHydrationWarning>
       <head></head>
       <body className="bg-background text-foreground transition-colors duration-300">
+        <a
+          href="#main"
+          className="sr-only focus:not-sr-only focus:fixed focus:top-2 focus:left-2 focus:z-[60] focus:rounded focus:bg-surface focus:px-4 focus:py-2 focus:text-foreground focus:shadow"
+        >
+          Skip to content
+        </a>
         <Providers>
           <div id="app" className="min-h-screen">
             {children}

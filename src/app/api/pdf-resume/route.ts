@@ -65,6 +65,8 @@ function pdfResponse(body: Uint8Array<ArrayBuffer>): NextResponse {
     status: 200,
     headers: {
       'Content-Type': 'application/pdf',
+      // Browsers/proxies must revalidate, so a new deploy's PDF is always what gets downloaded.
+      'Cache-Control': 'no-cache',
       'Content-Disposition': `attachment; filename="Resume of Eben Bosman (${formattedDate}).pdf"`,
     },
   });

@@ -47,6 +47,7 @@ The contact form posts to `POST /api/message`, which validates the payload serve
 - `src/app/robots.ts` and `src/app/sitemap.ts` generate robots.txt/sitemap; `/resume-preview` and `/api/` are disallowed and `resume-preview` is set `index: false`.
 - `src/components/JsonLd.tsx` injects structured data on the home page.
 - Site metadata is centralized in `src/app/layout.tsx`; the favicon is the `src/app/favicon.ico` file convention.
+- `next.config.mjs` (production only) redirects plain HTTP (Heroku's `X-Forwarded-Proto: http`) and the `eben-resume.herokuapp.com` host to `SITE_URL`, and sets security headers: HSTS, a CSP (`script-src` needs `'unsafe-inline'` for Next's inline bootstrap scripts; any new third-party script/font/API origin must be added to it), `X-Frame-Options`, `nosniff`, `Referrer-Policy`, `Permissions-Policy`. `X-Powered-By` is off.
 
 ## Conventions
 

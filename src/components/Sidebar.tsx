@@ -539,6 +539,8 @@ const Sidebar: React.FC<SidebarProps> = ({ basics }) => {
             onChange={changeEmail}
             error={!isEmailValid ? emailInvalidText : undefined}
             name="email"
+            type="email"
+            autoComplete="email"
             disabled={isMessageSending}
           />
           <TextArea

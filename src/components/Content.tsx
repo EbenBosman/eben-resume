@@ -18,13 +18,13 @@ interface ContentProps {
 
 const Content: React.FC<ContentProps> = ({ basics, about, ataru, work, education, skills }) => {
   return (
-    <div id="resume" className="flex-1 w-full px-0 pt-3 md:pt-0">
+    <main id="main" className="flex-1 w-full px-0 pt-3 md:pt-0">
       <About basics={basics} about={about} />
       <AtaruSection content={ataru} />
       <Education content={education} />
       <Experience content={work} />
       <Skills content={skills} />
-    </div>
+    </main>
   );
 };
 

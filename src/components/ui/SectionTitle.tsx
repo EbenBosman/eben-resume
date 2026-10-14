@@ -9,7 +9,7 @@ export const SectionTitle: React.FC<SectionTitleProps> = ({ title, className = '
   return (
     <div className="flex flex-wrap mb-4">
       <div className="w-full">
-        <h3 className={`text-2xl font-light text-foreground ${className}`}>{title}</h3>
+        <h2 className={`text-2xl font-light text-foreground ${className}`}>{title}</h2>
       </div>
     </div>
   );

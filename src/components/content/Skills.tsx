@@ -23,7 +23,7 @@ const generateSkillSection = (skills: SkillItem[]) => {
   return skills.map((skillset, key) => {
     return (
       <div key={key} className="w-full md:w-1/2 lg:w-1/4 px-4 py-3">
-        <h5 className="text-lg font-bold text-white mb-2 pb-1 inline-block">{skillset.Title}</h5>
+        <h3 className="text-lg font-bold text-white mb-2 pb-1 inline-block">{skillset.Title}</h3>
         <div className="text-white">{generateSkills(skillset.Items)}</div>
       </div>
     );
