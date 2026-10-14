@@ -1,11 +1,10 @@
-import React from 'react';
 import { Electrolize, Ubuntu } from 'next/font/google';
 import Image from 'next/image';
-import { Ataru } from '../../types/resume';
-
-import { Section } from '../ui/Section';
+import React from 'react';
 
 import ataruLogo from '../../images/ataru-logo.png';
+import { Ataru } from '../../types/resume';
+import { Section } from '../ui/Section';
 
 // Ataru.io brand faces from the Cesium 455 design system, self-hosted via next/font.
 const ubuntu = Ubuntu({ weight: '700', subsets: ['latin'] });

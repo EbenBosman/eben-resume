@@ -1,6 +1,6 @@
 import React from 'react';
-import { Basics, WorkItem, EducationItem, SkillItem, Ataru } from '../types/resume';
 
+import { Ataru, Basics, EducationItem, SkillItem, WorkItem } from '../types/resume';
 import About from './content/About';
 import AtaruSection from './content/AtaruSection';
 import Education from './content/Education';

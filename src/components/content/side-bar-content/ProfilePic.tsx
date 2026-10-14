@@ -1,5 +1,6 @@
-import React from 'react';
 import Image from 'next/image';
+import React from 'react';
+
 import fullResolutionProfilePicture from '../../../images/eben-profile.webp';
 
 interface ProfilePicProps {

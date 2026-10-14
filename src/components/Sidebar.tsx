@@ -1,17 +1,14 @@
 'use client';
 
-import React, { useState, useSyncExternalStore, ChangeEvent } from 'react';
-
+import { faGithub, faLinkedin, faStackOverflow } from '@fortawesome/free-brands-svg-icons';
+import { faBars, faEnvelope, faFilePdf, faMoon, faSun } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import Image from 'next/image';
 import { useTheme } from 'next-themes';
+import React, { ChangeEvent, useState, useSyncExternalStore } from 'react';
 
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faGithub, faStackOverflow, faLinkedin } from '@fortawesome/free-brands-svg-icons';
-import { faEnvelope, faFilePdf, faMoon, faSun, faBars } from '@fortawesome/free-solid-svg-icons';
-
-import { Basics } from '../types/resume';
 import fullResolutionProfilePicture from '../images/eben-profile.webp';
-
+import { Basics } from '../types/resume';
 import ProfilePic from './content/side-bar-content/ProfilePic';
 import Modal from './Modal';
 import { Button } from './ui/Button';

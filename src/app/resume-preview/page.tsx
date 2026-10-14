@@ -1,7 +1,7 @@
 import fs from 'fs';
-import path from 'path';
 import handlebars from 'handlebars';
 import type { Metadata } from 'next';
+import path from 'path';
 
 export const metadata: Metadata = {
   title: 'Eben Bosman | Resume',

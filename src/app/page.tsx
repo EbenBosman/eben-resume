@@ -1,9 +1,8 @@
-import resume from '../data/resume.json';
-import { ResumeData } from '../types/resume';
-
-import Sidebar from '../components/Sidebar';
 import Content from '../components/Content';
 import { JsonLd } from '../components/JsonLd';
+import Sidebar from '../components/Sidebar';
+import resume from '../data/resume.json';
+import { ResumeData } from '../types/resume';
 
 export default function Page() {
   // Cast strict type

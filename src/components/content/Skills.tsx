@@ -1,4 +1,5 @@
 import React from 'react';
+
 import { SkillItem } from '../../types/resume';
 
 interface SkillsProps {

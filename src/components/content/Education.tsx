@@ -1,12 +1,13 @@
 import React from 'react';
+
 import { EducationItem } from '../../types/resume';
 
 interface EducationProps {
   content: EducationItem[];
 }
 
-import { Card } from '../ui/Card';
 import { Badge } from '../ui/Badge';
+import { Card } from '../ui/Card';
 import { Section } from '../ui/Section';
 import { SectionTitle } from '../ui/SectionTitle';
 

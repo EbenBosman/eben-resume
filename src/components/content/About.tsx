@@ -1,4 +1,5 @@
 import React from 'react';
+
 import { Basics } from '../../types/resume';
 
 interface AboutProps {

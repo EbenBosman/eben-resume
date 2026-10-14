@@ -1,7 +1,7 @@
-import { NextResponse } from 'next/server';
 import fs from 'fs';
-import path from 'path';
 import handlebars from 'handlebars';
+import { NextResponse } from 'next/server';
+import path from 'path';
 import puppeteer from 'puppeteer';
 
 async function generatePdf(): Promise<Uint8Array<ArrayBuffer>> {
