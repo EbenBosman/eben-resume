@@ -1,8 +1,15 @@
+import type { Metadata } from 'next';
+
 import Content from '../components/Content';
 import { JsonLd } from '../components/JsonLd';
 import Sidebar from '../components/Sidebar';
 import resume from '../data/resume.json';
 import { ResumeData } from '../types/resume';
+
+// Resolved against metadataBase, so every host (herokuapp, bare domain) points at the www origin.
+export const metadata: Metadata = {
+  alternates: { canonical: '/' },
+};
 
 export default function Page() {
   // Cast strict type

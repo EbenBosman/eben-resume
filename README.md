@@ -1,6 +1,6 @@
 # eben-resume
 
-The source for [ebenbosman.com](https://ebenbosman.com) — an interactive resume built with Next.js (App Router) and Tailwind CSS v4. One app serves the web resume, an ATS-safe PDF download, and a contact form. `src/data/resume.json` is the single source of truth for all resume content.
+The source for [ebenbosman.com](https://www.ebenbosman.com) — an interactive resume built with Next.js (App Router) and Tailwind CSS v4. One app serves the web resume, an ATS-safe PDF download, and a contact form. `src/data/resume.json` is the single source of truth for all resume content.
 
 ## Development
 

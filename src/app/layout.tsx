@@ -2,10 +2,11 @@ import './globals.css';
 
 import type { Metadata } from 'next';
 
+import { SITE_URL } from '../lib/site';
 import { Providers } from './providers';
 
 export const metadata: Metadata = {
-  metadataBase: new URL('https://www.ebenbosman.com'),
+  metadataBase: new URL(SITE_URL),
   title: 'Eben Bosman | Senior Full-Stack Engineer',
   description:
     'Eben Bosman is a driven Senior Full-Stack Engineer with nearly two decades of hands-on experience architecting and building modern web applications using React, Next.js, TypeScript, C#, and .NET.',
@@ -35,12 +36,12 @@ export const metadata: Metadata = {
     'Freelance Software Engineer',
     'Resume',
   ],
-  authors: [{ name: 'Eben Bosman', url: 'https://www.ebenbosman.com' }],
+  authors: [{ name: 'Eben Bosman', url: SITE_URL }],
   creator: 'Eben Bosman',
   openGraph: {
     type: 'website',
     locale: 'en_US',
-    url: 'https://www.ebenbosman.com',
+    url: SITE_URL,
     siteName: 'Eben Bosman Resume',
     title: 'Eben Bosman | Senior Full-Stack Engineer',
     description:

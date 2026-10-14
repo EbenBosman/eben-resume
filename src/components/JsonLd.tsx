@@ -1,6 +1,7 @@
 import React from 'react';
 
 import resume from '../data/resume.json';
+import { SITE_URL } from '../lib/site';
 
 export const JsonLd: React.FC = () => {
   const data = resume;
@@ -10,7 +11,7 @@ export const JsonLd: React.FC = () => {
     '@type': 'Person',
     name: data.basics.name,
     jobTitle: data.basics.position,
-    url: `https://${data.basics.website}`,
+    url: SITE_URL,
     email: data.basics.business_email,
     telephone: data.basics.phone,
     address: {
