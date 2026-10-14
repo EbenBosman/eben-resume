@@ -1,12 +1,13 @@
 import React from 'react';
 
 import { SkillItem } from '../../types/resume';
+import { Badge } from '../ui/Badge';
+import { Section } from '../ui/Section';
+import { SectionTitle } from '../ui/SectionTitle';
 
 interface SkillsProps {
   content: SkillItem[];
 }
-
-import { Badge } from '../ui/Badge';
 
 const generateSkills = (skills: string[]) => {
   if (!skills) return null;
@@ -28,11 +29,6 @@ const generateSkillSection = (skills: SkillItem[]) => {
     );
   });
 };
-
-import { Section } from '../ui/Section';
-import { SectionTitle } from '../ui/SectionTitle';
-
-// ... (existing helper functions)
 
 const Skills: React.FC<SkillsProps> = ({ content }) => {
   if (!content) return null;

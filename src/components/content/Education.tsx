@@ -1,15 +1,14 @@
 import React from 'react';
 
 import { EducationItem } from '../../types/resume';
-
-interface EducationProps {
-  content: EducationItem[];
-}
-
 import { Badge } from '../ui/Badge';
 import { Card } from '../ui/Card';
 import { Section } from '../ui/Section';
 import { SectionTitle } from '../ui/SectionTitle';
+
+interface EducationProps {
+  content: EducationItem[];
+}
 
 const generateCourses = (courses: string[]) => {
   if (!courses) return null;
@@ -31,7 +30,7 @@ const Education: React.FC<EducationProps> = ({ content }) => {
       <SectionTitle title="Certificates" />
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
         {content.map((education, key) => (
-          <div key={key} data-aos="zoom-in">
+          <div key={key}>
             <Card>
               <div className="flex flex-col h-full">
                 <h4 className="text-lg font-bold text-foreground mb-1">{education.what}</h4>

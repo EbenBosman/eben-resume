@@ -5,7 +5,7 @@ import { faBars, faEnvelope, faFilePdf, faMoon, faSun } from '@fortawesome/free-
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import Image from 'next/image';
 import { useTheme } from 'next-themes';
-import React, { ChangeEvent, useState, useSyncExternalStore } from 'react';
+import React, { ChangeEvent, useEffect, useRef, useState, useSyncExternalStore } from 'react';
 
 import fullResolutionProfilePicture from '../images/eben-profile.webp';
 import { Basics } from '../types/resume';
@@ -20,6 +20,15 @@ interface SidebarProps {
 }
 
 const emptySubscribe = () => () => {};
+
+const EMAIL_RE =
+  /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+const MAX_MESSAGE_LENGTH = 5000; // matches the server limit in /api/message
+const STATUS_DISPLAY_MS = 5000;
+
+const isTextEmpty = (text: string): boolean => text.length === 0;
+const isTextLessThan50 = (text: string): boolean => text.length <= 49 && text !== '';
+const isValidEmail = (email: string): boolean => EMAIL_RE.test(email);
 
 const Sidebar: React.FC<SidebarProps> = ({ basics }) => {
   const { resolvedTheme, setTheme } = useTheme();
@@ -46,9 +55,33 @@ const Sidebar: React.FC<SidebarProps> = ({ basics }) => {
   const [message, setMessage] = useState<string>('');
   const [isMessageValid, setMessageValid] = useState<boolean>(true);
   const [messageInvalidText, setMessageInvalidText] = useState<string>('');
+  // Hidden honeypot field (see the form); people never see it, so only bots fill it in.
+  const honeypotRef = useRef<HTMLInputElement>(null);
+
+  // The success/error banner auto-hides after a delay. Keep the timer so a new send, closing
+  // the modal, or unmounting cancels it instead of it firing into a later interaction.
+  const statusTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const clearStatusTimer = () => {
+    if (statusTimer.current) clearTimeout(statusTimer.current);
+    statusTimer.current = null;
+  };
+  const scheduleStatusReset = (reset: () => void) => {
+    clearStatusTimer();
+    statusTimer.current = setTimeout(reset, STATUS_DISPLAY_MS);
+  };
+  useEffect(() => clearStatusTimer, []);
+
+  const closeModal = () => {
+    clearStatusTimer();
+    setMessageSuccess(false);
+    setMessageError(false);
+    setMessageErrorText('');
+    setShowModal(false);
+  };
 
   const sendMessage = async (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
+    clearStatusTimer();
     setMessageLoading(true);
     setMessageSuccess(false);
     setMessageError(false);
@@ -62,6 +95,7 @@ const Sidebar: React.FC<SidebarProps> = ({ basics }) => {
     const messageDetails = {
       message,
       email,
+      company: honeypotRef.current?.value ?? '',
     };
 
     try {
@@ -83,29 +117,23 @@ const Sidebar: React.FC<SidebarProps> = ({ basics }) => {
       setEmail('');
       setMessage('');
 
-      setTimeout(() => {
-        setMessageSuccess(false);
-        setShowModal(false);
-      }, 5000);
+      scheduleStatusReset(closeModal);
     } catch (error: any) {
       console.error(error);
       setMessageLoading(false);
       setMessageError(true);
       setMessageErrorText(error.message || 'Something went wrong. Please try again later.');
 
-      setTimeout(() => {
+      scheduleStatusReset(() => {
         setMessageError(false);
         setMessageErrorText('');
-      }, 5000);
+      });
     }
   };
 
   const changeEmail = (e: ChangeEvent<HTMLInputElement>) => {
     const rawEmail = e.target.value;
     setEmail(rawEmail);
-
-    const re =
-      /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 
     if (isTextEmpty(rawEmail)) {
       setEmailValid(false);
@@ -137,20 +165,6 @@ const Sidebar: React.FC<SidebarProps> = ({ basics }) => {
     }
   };
 
-  const isTextEmpty = (text: string): boolean => {
-    return text.length === 0 && text === '';
-  };
-
-  const isTextLessThan50 = (text: string): boolean => {
-    return text.length <= 49 && text !== '';
-  };
-
-  const isValidEmail = (email: string): boolean => {
-    const re =
-      /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-    return re.test(email);
-  };
-
   const clearMessageFields = () => {
     setEmail('');
     setEmailValid(true);
@@ -160,8 +174,10 @@ const Sidebar: React.FC<SidebarProps> = ({ basics }) => {
     setMessageValid(true);
     setMessageInvalidText('');
 
-    setShowModal(false);
+    closeModal();
   };
+
+  const closeMobileMenu = () => setIsMobileMenuOpen(false);
 
   return (
     <React.Fragment>
@@ -185,6 +201,8 @@ const Sidebar: React.FC<SidebarProps> = ({ basics }) => {
               type="button"
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
               aria-label="Toggle navigation"
+              aria-expanded={isMobileMenuOpen}
+              aria-controls="mobile-menu"
             >
               <FontAwesomeIcon icon={faBars} className="fa-lg md:fa-lg md:fa-2x" />
             </button>
@@ -192,6 +210,8 @@ const Sidebar: React.FC<SidebarProps> = ({ basics }) => {
 
           {/* Mobile Dropdown Menu */}
           <div
+            id="mobile-menu"
+            inert={!isMobileMenuOpen}
             className={`flex flex-col w-full bg-sidebar border-b border-sidebar-border px-4 transition-all duration-300 ease-in-out overflow-hidden ${isMobileMenuOpen ? 'max-h-screen opacity-100 pb-6' : 'max-h-0 opacity-0 pb-0'}`}
           >
             {/* 1. Social Icons (Row) */}
@@ -203,6 +223,7 @@ const Sidebar: React.FC<SidebarProps> = ({ basics }) => {
                   className="text-white hover:text-primary transition-colors cursor-pointer"
                   target="_blank"
                   title="Github"
+                  aria-label="GitHub profile"
                 >
                   <FontAwesomeIcon icon={faGithub} className="fa-lg md:fa-2x" />
                 </a>
@@ -214,6 +235,7 @@ const Sidebar: React.FC<SidebarProps> = ({ basics }) => {
                   className="text-white hover:text-primary transition-colors cursor-pointer"
                   target="_blank"
                   title="Stack Overflow"
+                  aria-label="Stack Overflow profile"
                 >
                   <FontAwesomeIcon icon={faStackOverflow} className="fa-lg md:fa-2x" />
                 </a>
@@ -222,8 +244,12 @@ const Sidebar: React.FC<SidebarProps> = ({ basics }) => {
                 <button
                   type="button"
                   className="text-white hover:text-primary transition-colors bg-transparent border-0 cursor-pointer"
-                  onClick={() => setShowModal(true)}
+                  onClick={() => {
+                    closeMobileMenu();
+                    setShowModal(true);
+                  }}
                   title="Mail Me"
+                  aria-label="Mail me"
                 >
                   <FontAwesomeIcon icon={faEnvelope} className="fa-lg md:fa-2x" />
                 </button>
@@ -235,6 +261,7 @@ const Sidebar: React.FC<SidebarProps> = ({ basics }) => {
                   className="text-white hover:text-primary transition-colors cursor-pointer"
                   target="_blank"
                   title="LinkedIn"
+                  aria-label="LinkedIn profile"
                 >
                   <FontAwesomeIcon icon={faLinkedin} className="fa-lg md:fa-2x" />
                 </a>
@@ -246,6 +273,7 @@ const Sidebar: React.FC<SidebarProps> = ({ basics }) => {
                   target="_blank"
                   className="text-white hover:text-primary transition-colors cursor-pointer"
                   title="Download PDF Resume"
+                  aria-label="Download PDF resume"
                 >
                   <FontAwesomeIcon icon={faFilePdf} className="fa-lg md:fa-2x" />
                 </a>
@@ -257,6 +285,7 @@ const Sidebar: React.FC<SidebarProps> = ({ basics }) => {
               <li className="w-full text-center">
                 <a
                   className="block py-2 text-white text-lg font-medium hover:text-primary"
+                  onClick={closeMobileMenu}
                   href="#about"
                 >
                   About
@@ -265,6 +294,7 @@ const Sidebar: React.FC<SidebarProps> = ({ basics }) => {
               <li className="w-full text-center">
                 <a
                   className="block py-2 text-white text-lg font-medium hover:text-primary"
+                  onClick={closeMobileMenu}
                   href="#ataru"
                 >
                   Ataru.io
@@ -273,6 +303,7 @@ const Sidebar: React.FC<SidebarProps> = ({ basics }) => {
               <li className="w-full text-center">
                 <a
                   className="block py-2 text-white text-lg font-medium hover:text-primary"
+                  onClick={closeMobileMenu}
                   href="#certificates"
                 >
                   Certificates
@@ -281,6 +312,7 @@ const Sidebar: React.FC<SidebarProps> = ({ basics }) => {
               <li className="w-full text-center">
                 <a
                   className="block py-2 text-white text-lg font-medium hover:text-primary"
+                  onClick={closeMobileMenu}
                   href="#experience"
                 >
                   Experience
@@ -289,6 +321,7 @@ const Sidebar: React.FC<SidebarProps> = ({ basics }) => {
               <li className="w-full text-center">
                 <a
                   className="block py-2 text-white text-lg font-medium hover:text-primary"
+                  onClick={closeMobileMenu}
                   href="#skills"
                 >
                   Skills
@@ -330,7 +363,7 @@ const Sidebar: React.FC<SidebarProps> = ({ basics }) => {
                     target="_blank"
                     title="Github"
                   >
-                    <span className="hidden">Github Profile</span>
+                    <span className="sr-only">Github Profile</span>
                     <FontAwesomeIcon icon={faGithub} className="fa-lg" />
                   </a>
                 </li>
@@ -342,7 +375,7 @@ const Sidebar: React.FC<SidebarProps> = ({ basics }) => {
                     target="_blank"
                     title="Stack Overflow"
                   >
-                    <span className="hidden">Stack Overflow Profile</span>
+                    <span className="sr-only">Stack Overflow Profile</span>
                     <FontAwesomeIcon icon={faStackOverflow} className="fa-lg" />
                   </a>
                 </li>
@@ -353,7 +386,7 @@ const Sidebar: React.FC<SidebarProps> = ({ basics }) => {
                     onClick={() => setShowModal(true)}
                     title="Mail Me"
                   >
-                    <span className="hidden">Mail Me</span>
+                    <span className="sr-only">Mail Me</span>
                     <FontAwesomeIcon icon={faEnvelope} className="fa-lg" />
                   </button>
                 </li>
@@ -365,7 +398,7 @@ const Sidebar: React.FC<SidebarProps> = ({ basics }) => {
                     target="_blank"
                     title="LinkedIn"
                   >
-                    <span className="hidden">LinkedIn Profile</span>
+                    <span className="sr-only">LinkedIn Profile</span>
                     <FontAwesomeIcon icon={faLinkedin} className="fa-lg" />
                   </a>
                 </li>
@@ -377,7 +410,7 @@ const Sidebar: React.FC<SidebarProps> = ({ basics }) => {
                     className="text-white hover:text-primary transition-colors"
                     title="Download PDF Resume"
                   >
-                    <span className="hidden">PDF Resume</span>
+                    <span className="sr-only">PDF Resume</span>
                     <FontAwesomeIcon icon={faFilePdf} className="fa-lg" />
                   </a>
                 </li>
@@ -445,7 +478,7 @@ const Sidebar: React.FC<SidebarProps> = ({ basics }) => {
 
       <Modal
         isOpen={showModal}
-        onClose={() => !isMessageSending && setShowModal(false)}
+        onClose={() => !isMessageSending && closeModal()}
         title="Contact Me"
         footer={
           <>
@@ -469,6 +502,16 @@ const Sidebar: React.FC<SidebarProps> = ({ basics }) => {
         }
       >
         <form noValidate>
+          {/* Honeypot: hidden from people and assistive tech; bots that fill it are ignored. */}
+          <input
+            ref={honeypotRef}
+            type="text"
+            name="company"
+            tabIndex={-1}
+            autoComplete="off"
+            aria-hidden="true"
+            className="hidden"
+          />
           {isMessageSuccess && (
             <div
               className="mb-4 p-3 bg-green-100 border border-green-400 text-green-700 rounded relative overflow-hidden"
@@ -506,6 +549,7 @@ const Sidebar: React.FC<SidebarProps> = ({ basics }) => {
             error={!isMessageValid ? messageInvalidText : undefined}
             name="message-text"
             rows={5}
+            maxLength={MAX_MESSAGE_LENGTH}
             disabled={isMessageSending}
           />
         </form>

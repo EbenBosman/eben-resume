@@ -1,7 +1,6 @@
-import fs from 'fs';
-import handlebars from 'handlebars';
 import type { Metadata } from 'next';
-import path from 'path';
+
+import { renderResumeHtml } from '../../lib/resume-html';
 
 export const metadata: Metadata = {
   title: 'Eben Bosman | Resume',
@@ -12,21 +11,7 @@ export const metadata: Metadata = {
 };
 
 async function getResumeContent() {
-  const resumePath = path.join(process.cwd(), 'src', 'data', 'resume.json');
-  const templatePath = path.join(process.cwd(), 'src', 'templates', 'template.hbs');
-
-  const resumeData = await fs.promises.readFile(resumePath, 'utf8');
-  const templateSource = await fs.promises.readFile(templatePath, 'utf8');
-
-  handlebars.registerHelper('replace', (str, toReplace, replaceWith) => {
-    return str ? str.replace(new RegExp(toReplace, 'g'), replaceWith) : '';
-  });
-
-  const template = handlebars.compile(templateSource);
-
-  const data = JSON.parse(resumeData);
-
-  const html = template(data);
+  const html = await renderResumeHtml();
 
   // Extract Styles
   const styleMatch = html.match(/<style>([\s\S]*?)<\/style>/);

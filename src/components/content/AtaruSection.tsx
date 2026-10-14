@@ -23,7 +23,7 @@ const AtaruSection: React.FC<AtaruSectionProps> = ({ content }) => {
         {/* Main layout: logo + content side by side on desktop, stacked on mobile */}
         <div className="flex flex-col md:flex-row items-center md:items-start gap-8">
           {/* Left: Logo + Branding */}
-          <div className="flex flex-col items-center flex-shrink-0" data-aos="fade-right">
+          <div className="flex flex-col items-center flex-shrink-0">
             <a
               href={content.url}
               target="_blank"
@@ -52,7 +52,7 @@ const AtaruSection: React.FC<AtaruSectionProps> = ({ content }) => {
           </div>
 
           {/* Right: Description */}
-          <div className="flex-1 text-center md:text-left" data-aos="fade-left">
+          <div className="flex-1 text-center md:text-left">
             {/* Tagline */}
             <p className="text-sm italic text-muted mb-4">{content.tagline}</p>
 

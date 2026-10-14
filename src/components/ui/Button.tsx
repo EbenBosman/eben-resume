@@ -18,7 +18,7 @@ export const Button: React.FC<ButtonProps> = ({
     primary: 'bg-primary text-white hover:bg-primary-dark',
     secondary:
       'bg-gray-200 text-gray-800 hover:bg-gray-300 dark:bg-gray-700 dark:text-white dark:hover:bg-gray-600',
-    ghost: 'bg-transparent text-white hover:text-primary p-1',
+    ghost: 'bg-transparent text-foreground hover:text-primary p-1',
     icon: 'text-white hover:text-primary bg-transparent p-0 border-0 flex items-center justify-center h-10 w-10', // Specific for icon buttons
   };
 

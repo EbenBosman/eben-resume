@@ -1,6 +1,9 @@
 import React from 'react';
 
 import { WorkItem } from '../../types/resume';
+import { Card } from '../ui/Card';
+import { Section } from '../ui/Section';
+import { SectionTitle } from '../ui/SectionTitle';
 
 interface ExperienceProps {
   content: WorkItem[];
@@ -28,44 +31,47 @@ const generateSummaryHighlights = (highlights: string[]) => {
   );
 };
 
-const generateHeader = (website: string, company: string, position: string) => {
+const generateHeader = (website: string | null | undefined, company: string, position: string) => {
   return (
     <div className="flex flex-wrap items-baseline gap-2">
       <span className="font-bold text-lg text-foreground">{position}</span>
-      {generateLink(website, company)}
+      {generateCompany(website, company)}
     </div>
   );
 };
 
-const generateLink = (website: string, company: string) => {
-  if (typeof website !== 'undefined' && website.includes('http'))
+// The company always shows: as "at <link>" when the job has a URL, otherwise as plain text
+// (entries like "Various positions held" don't read as "at ...").
+const generateCompany = (website: string | null | undefined, company: string) => {
+  if (!company) return null;
+
+  if (!website?.startsWith('http')) {
     return (
       <span className="text-sm text-muted">
-        <small> at </small>
-        <a
-          className="text-primary hover:underline hover:text-primary-dark"
-          rel="noreferrer"
-          href={website}
-          target="_blank"
-        >
-          <small>{company}</small>
-        </a>
+        <small>{company}</small>
       </span>
     );
+  }
 
-  return null;
+  return (
+    <span className="text-sm text-muted">
+      <small> at </small>
+      <a
+        className="text-primary hover:underline hover:text-primary-dark"
+        rel="noreferrer"
+        href={website}
+        target="_blank"
+      >
+        <small>{company}</small>
+      </a>
+    </span>
+  );
 };
-
-import { Card } from '../ui/Card';
-import { Section } from '../ui/Section';
-import { SectionTitle } from '../ui/SectionTitle';
-
-// ... (existing helper functions: generateSummaryParagraphs, generateSummaryHighlights, generateHeader, generateLink)
 
 const generateCard = (key: number, job: WorkItem) => {
   return (
     <div key={key} className="flex flex-wrap -mx-4 mb-4">
-      <div className="w-full px-4" data-aos="zoom-in">
+      <div className="w-full px-4">
         <Card>
           <div className="flex flex-col h-full">
             <div className="mb-1">{generateHeader(job.website, job.company, job.position)}</div>

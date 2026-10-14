@@ -32,13 +32,15 @@ Copy `.env` to `.env.local` and fill in values (`.env.local` takes precedence, f
 
 1. **Web UI** — `src/app/page.tsx` imports `resume.json`, casts it to `ResumeData`, and passes typed props to `Sidebar` and `Content`. `Content` composes the section components in `src/components/content/` (About, AtaruSection, Experience, Education, Skills). Shared primitives live in `src/components/ui/`.
 
-2. **PDF download** — `GET /api/pdf-resume` (`src/app/api/pdf-resume/route.ts`, POST kept for compatibility) compiles the Handlebars template `src/templates/template.hbs` against `resume.json` and renders it to a PDF with Puppeteer. Triggered from `Sidebar.tsx`.
+2. **PDF download** — `GET /api/pdf-resume` (`src/app/api/pdf-resume/route.ts`, POST kept for compatibility) renders the resume HTML and prints it to a PDF with Puppeteer. Triggered from `Sidebar.tsx`. In production the PDF is generated once per process and cached (concurrent requests share one Chrome run); in development it is regenerated on every request.
 
-3. **HTML preview** — `src/app/resume-preview/page.tsx` compiles the **same** `template.hbs`, then extracts the `<style>` and `<body>`, scopes the global CSS to a `.resume-scope` wrapper, and overrides the page size to US Letter for on-screen viewing.
+3. **HTML preview** — `src/app/resume-preview/page.tsx` renders the **same** HTML, then extracts the `<style>` and `<body>`, scopes the global CSS to a `.resume-scope` wrapper, and overrides the page size to US Letter for on-screen viewing.
 
-**Critical: the PDF route and the preview page duplicate the template-setup logic** — both register the `replace` Handlebars helper. When changing how the template is fed data, update **both** files. The template is intentionally self-contained (no external fonts or images). Edits to resume _layout/styling_ for the PDF go in `template.hbs`; edits to the _web_ layout go in the React components — they do not share markup.
+Both use `renderResumeHtml()` in `src/lib/resume-html.ts`, the single place that registers the `replace` Handlebars helper and compiles `src/templates/template.hbs` against `resume.json`. Change how the template is fed data there. The template is intentionally self-contained (no external fonts or images). Edits to resume _layout/styling_ for the PDF go in `template.hbs`; edits to the _web_ layout go in the React components — they do not share markup.
 
-The contact form posts to `POST /api/message`, which sends email via Resend (from `no-reply@ebenbosman.com`). Also triggered from `Sidebar.tsx`.
+The site's public origin is `SITE_URL` in `src/lib/site.ts`, derived from `basics.website` in `resume.json` (`www.ebenbosman.com`); metadata, robots, sitemap, JSON-LD and the PDF link all follow it.
+
+The contact form posts to `POST /api/message`, which validates the payload server-side (email format, 50–5000 character message), drops submissions that fill the hidden `company` honeypot, rate-limits per IP in memory, and sends email via Resend (from `no-reply@ebenbosman.com`). Also triggered from `Sidebar.tsx`.
 
 ## SEO & routing
 

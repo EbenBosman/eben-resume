@@ -64,75 +64,6 @@
   }
 }
 
-/* Animate Flicker for PDF Loading */
-@keyframes flicker {
-  0% {
-    opacity: 1;
-  }
-
-  50% {
-    opacity: 0;
-  }
-
-  100% {
-    opacity: 1;
-  }
-}
-
-.animate-flicker {
-  animation: flicker 1s infinite;
-}
-
-.shake {
-  animation: shake 0.5s;
-}
-
-@keyframes shake {
-  0% {
-    transform: translate(1px, 1px) rotate(0deg);
-  }
-
-  10% {
-    transform: translate(-1px, -2px) rotate(-1deg);
-  }
-
-  20% {
-    transform: translate(-3px, 0px) rotate(1deg);
-  }
-
-  30% {
-    transform: translate(3px, 2px) rotate(0deg);
-  }
-
-  40% {
-    transform: translate(1px, -1px) rotate(1deg);
-  }
-
-  50% {
-    transform: translate(-1px, 2px) rotate(-1deg);
-  }
-
-  60% {
-    transform: translate(-3px, 1px) rotate(0deg);
-  }
-
-  70% {
-    transform: translate(3px, 1px) rotate(-1deg);
-  }
-
-  80% {
-    transform: translate(-1px, -1px) rotate(1deg);
-  }
-
-  90% {
-    transform: translate(1px, 2px) rotate(0deg);
-  }
-
-  100% {
-    transform: translate(1px, -2px) rotate(-1deg);
-  }
-}
-
 @keyframes progress {
   0% {
     width: 0%;
@@ -147,21 +78,11 @@
   animation: progress 5s linear forwards;
 }
 
-/* Ataru logo float animation */
-@keyframes float {
-  0% {
-    transform: translateY(0px);
-  }
+/* Hide a scroll container's scrollbar but keep it scrollable (desktop sidebar). */
+@utility no-scrollbar {
+  scrollbar-width: none;
 
-  50% {
-    transform: translateY(-6px);
+  &::-webkit-scrollbar {
+    display: none;
   }
-
-  100% {
-    transform: translateY(0px);
-  }
-}
-
-.animate-float {
-  animation: float 3s ease-in-out infinite;
 }
