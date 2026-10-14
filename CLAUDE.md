@@ -4,7 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Overview
 
-Personal resume site for Eben Bosman (ebenbosman.com). A single Next.js (App Router) application — the interactive web resume, the PDF generator, and the contact form all live in one app. There is **no separate backend**; ignore the README's references to `npm run server` and a port-5000 backend (those scripts/config no longer exist).
+Personal resume site for Eben Bosman (ebenbosman.com). A single Next.js (App Router) application — the interactive web resume, the PDF generator, and the contact form all live in one app. There is **no separate backend**. Deploys go to Heroku automatically on push to `master` on GitHub; Node is pinned to 26.x (`engines` + `.nvmrc`).
 
 ## Commands
 
